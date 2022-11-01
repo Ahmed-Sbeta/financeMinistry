@@ -30,6 +30,7 @@ Route::get('/login',[HomeController::class, 'login']); //login view
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::POST('/additem/{id}', [HomeController::class,'addItem'])->name('additem');
+Route::get('/add-data', [MinistrieController::class,'add_data']);
 
 Route::resource('ministries', MinistrieController::class);
 Route::resource('reports', ReportController::class);
