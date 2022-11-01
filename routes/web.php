@@ -30,6 +30,7 @@ Route::get('/login',[HomeController::class, 'login']); //login view
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
 Route::resource('ministries', MinistrieController::class);
 Route::resource('reports', ReportController::class);
 Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
