@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMinistriesTable extends Migration
+class CreateMonthllyPayedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateMinistriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ministries', function (Blueprint $table) {
+        Schema::create('monthlly_payeds', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string('image')->nullable()->default('ministry.png');
-            $table->integer("parent_id")->nullable();
-            $table->float("total")->nullable();
+            $table->integer("ministry_id");
+            $table->integer("item_id");
+            $table->float("total");
+            $table->date("date");
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateMinistriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ministries');
+        Schema::dropIfExists('monthlly_payeds');
     }
 }

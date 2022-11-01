@@ -142,7 +142,8 @@ class UserController extends Controller
             }
             $user->update();
     
-            return redirect()->route('users.index')->with('success','تــم تـعـديـل بـيـانـات المـسـتـخـدم بــنــجــاح');    }
+            return redirect()->route('users.index')->with('success','تــم تـعـديـل بـيـانـات المـسـتـخـدم بــنــجــاح');
+    }
 
     /**
      * Remove the specified resource from storage.

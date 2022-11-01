@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Ministrie;
 use Illuminate\Database\Seeder;
 
 class allMinistrySeeder extends Seeder
@@ -15,19 +16,19 @@ class allMinistrySeeder extends Seeder
     {
         Ministrie::create([
             'name' => 'مجلس النواب',
-            'image' => 'blue.png',
+            'image' => 'blue.png'
           ]);
         Ministrie::create([
             'name' => 'المجلس الاعلى للدولة',
-            'image' => 'blue.png',
+            'image' => 'blue.png'
           ]);
           Ministrie::create([
               'name' => 'المجلس الرئاسي',
-              'image' => 'blue.png',
+              'image' => 'blue.png'
             ]);
             Ministrie::create([
                 'name' => 'مجلس الوزراء',
-                'image' => 'blue.png',
+                'image' => 'blue.png'
               ]);
               Ministrie::create([
                   'name' => 'وزارة الداخلية',

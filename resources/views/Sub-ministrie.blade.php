@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">الجهات التابعة  <span>{{$ministry->name}}</span></h4>
+                                    <h4 class="mb-sm-0 font-size-18"> <span>{{$ministry->name}}</span> الجهات التابعة لها </h4>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضـــافــة جهة تابعة جديدة</button>
+                                                    <a href="{{route('ministries.create',[$ministry->id])}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضـــافــة جهة تابعة جديدة</a>
                                                 </div>
                                             </div><!-- end col-->
                                             @include('includes.messages')
@@ -70,13 +70,13 @@
                                             <table class="table align-middle table-nowrap table-check">
                                                 <thead class="table-light">
                                                     <tr>
-                                                        <th style="width: 20px;" class="align-middle">
 
-                                                        </th>
-                                                        <th scope="align-middle" style="width: 70px;">#</th>
-                                                        <th scope="align-middle">الإســـم</th>
-                                                        <th scope="align-middle">تفاصيل</th>
-                                                        <th class="align-middle">تـعـديـل</th>
+                                                        <th scope="col" style="width: 70px;">#</th>
+                                                        <th scope="col">الإســـم</th>
+                                                        <th scope="col">القيمة الشهرية</th>
+                                                        <th scope="col">تفاصيل</th>
+                                                        <th scope="col">تعبئة</th>
+                                                        <th class="col">تـعـديـل</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -89,8 +89,13 @@
                                                                 </a>
                                                             </div>
                                                         </td>
+
                                                         <td>
                                                             <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">{{$mini->name}}</a></h5>
+                                                        </td>
+
+                                                        <td>
+                                                            {{$mini->total}}
                                                         </td>
 
                                                         <td>
@@ -98,6 +103,12 @@
                                                             <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
                                                                 عــرض الـتـفـاصيل
                                                             </button>
+                                                        </td>
+
+                                                        <td>
+                                                            <a href="{{route('monthPayeds.create',[$mini->id])}}" type="button" class="btn btn-success btn-sm btn-rounded">
+                                                                تعبئة <i class="mdi mdi-calendar-month"></i> 
+                                                            </a>
                                                         </td>
 
                                                         <td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use File;
 use App\Models\Ministrie;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class MinistrieController extends Controller
      */
     public function index()
     {
-        $all = Ministrie::where('parent_id', NULL)->paginate(15);
+        $all = Ministrie::where('parent_id', NULL)->get();
         return view('all-Ministries',compact('all'));
     }
 
@@ -35,9 +36,25 @@ class MinistrieController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-        //
+        request()->validate(
+            [
+                'name'  => "required|string",
+            ],
+            [ 
+                'name.required' => 'يجب إدخال الاسم',
+            ]);
+        $mini = new Ministrie;
+        $mini->name = request('name');
+        $mini->total = request('total');
+        if(request()->file('image')){
+            $mini->image = request()->file('image')->store('public');
+            $mini->image = str_replace('public', '', $mini->image);
+        }
+        $mini->parent_id = $id;            
+        $mini->save();
+        return redirect()->back()->with('success','تــمــت إضــافــة الـجـهـة الـتـابـعـة بــنــجــاح');
     }
 
     /**
@@ -61,7 +78,8 @@ class MinistrieController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ministry = Ministrie::find($id);
+        return view('edit-Ministrie',compact('ministry'));
     }
 
     /**
@@ -73,7 +91,26 @@ class MinistrieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        request()->validate(
+            [
+                'name'  => "required|string",
+            ],
+            [ 
+                'name.required' => 'يجب إدخال الاسم',
+            ]);
+            $ministry = Ministrie::find($id);
+
+            $ministry->name = request('name');
+            $mini->total = request('total');
+            if(request()->file('image')){
+                if($ministry->image != "ministry.png"){
+                    File::delete(public_path('storage/'.$ministry->image));
+                }
+                $ministry->image = request()->file('image')->store('public');
+                $ministry->image = str_replace('public', '', $ministry->image);
+            }
+        $ministry->update();
+        return redirect()->route('ministries.show',[$ministry->parent_id])->with('success','تــم تـعـديـل بـيـانـات الـجـهـة بــنــجــاح');
     }
 
     /**

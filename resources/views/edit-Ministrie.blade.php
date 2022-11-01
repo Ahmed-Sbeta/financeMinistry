@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>إضافة جهة تابعة <span>{{$ministry->name}}</span></title>
+        <title>تعديل الجهة التابعة <span>{{$ministry->name}}</span></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">إضــائــة جهة تابعة <a href="{{route('ministries.show',[$ministry->id])}}"><span>{{$ministry->name}}</span></a></h4>
+                                    <h4 class="mb-sm-0 font-size-18">تعديل الجهة التابعة </h4>
 
                                 </div>
                             </div>
@@ -63,26 +63,35 @@
                                         <h4 class="card-title mb-4"></h4>
                                         @include('includes.messages')
 
-                                        <form action="{{route('ministries.store',[$ministry->id])}}" method="post" enctype="multipart/form-data">
-                                          @csrf
+                                        <form action="{{route('ministries.update',[$ministry->id])}}" method="post" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PATCH') }}
                                             <div class="row mb-4">
 
                                                 <div class="col-sm-6">
-                                                    <div class="mb-3">
+                                                    <div>
                                                         <label for="fullname">اسم الجهة التابعة</label>
-                                                        <input id="worktitle" name="name" type="text" class="form-control" placeholder="الرجاء ادخال اسم الجهة التابعة..." required oninvalid="this.setCustomValidity('الرجاء ادخال البند')" oninput="this.setCustomValidity('')">
+                                                        <input id="worktitle" name="name" type="text" value="{{$ministry->name}}" class="form-control" placeholder="الرجاء ادخال اسم الجهة التابعة..." required oninvalid="this.setCustomValidity('الرجاء ادخال البند')" oninput="this.setCustomValidity('')">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
-                                                    <div class="mb-3">
+                                                    <div>
                                                         <label for="fullname">القيمة الشهرية</label>
-                                                        <input id="worktitle" name="total" type="number" min="0" step="0.01" class="form-control" placeholder="الرجاء ادخال القيمة الشهرية..." required oninvalid="this.setCustomValidity('الرجاء ادخال القيمة الشهرية')" oninput="this.setCustomValidity('')">
+                                                        <input id="worktitle" name="total" value="{{$ministry->total}}" type="number" min="0" step="0.01" class="form-control" placeholder="الرجاء ادخال القيمة الشهرية..." required oninvalid="this.setCustomValidity('الرجاء ادخال القيمة الشهرية')" oninput="this.setCustomValidity('')">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12">
+                                                <div class="col-sm-12 mt-3">
                                                     <div>
+
+                                                        <div class="avatar-xs mb-2">
+                                                            <a href="javascript: void(0);" class="d-inline-block">
+                                                                <img src="{{ asset(Storage::url($ministry->image)) }}" alt="" class="rounded-circle avatar-xs">
+                                                              </a>
+                                                          </div>
+    
+
                                                         <label for="formFile" class="form-label">شعار الجهة المعنية (إختياري)</label>
                                                         <input class="form-control" type="file" id="formFile" name="image">
                                                     </div>
@@ -93,7 +102,7 @@
 
 
                                             <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضـــافـــة</button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">حفظ التعديلات</button>
                                                 <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
                                             </div>
                                     </form>
