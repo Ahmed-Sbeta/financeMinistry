@@ -101,7 +101,7 @@ class MinistrieController extends Controller
             $ministry = Ministrie::find($id);
 
             $ministry->name = request('name');
-            $mini->total = request('total');
+            $ministry->total = request('total');
             if(request()->file('image')){
                 if($ministry->image != "ministry.png"){
                     File::delete(public_path('storage/'.$ministry->image));

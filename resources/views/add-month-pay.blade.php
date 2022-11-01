@@ -1,21 +1,21 @@
-
-
-
-
-
-    <!doctype html>
-<html lang="en" dir="rtl" >
+<!doctype html>
+<html lang="en" dir="rtl">
 
     <head>
 
         <meta charset="utf-8" />
-        @yield('title')
-
+        <title>اضافة مستخدم</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+
+        <!-- select2 css -->
+        <link href="{{asset('assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+
+        <!-- dropzone css -->
+        <link href="{{asset('assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- Bootstrap Css -->
         <link href="{{asset('assets/css/bootstrap-rtl.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -204,7 +204,7 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="assets/images/users/user.png"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{Auth::user()->name}}</span>
+                                <span class="d-none d-xl-inline-block ms-1" key="t-henry">محمود محمد</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
@@ -372,8 +372,7 @@
                     <!-- Sidebar -->
                 </div>
             </div>
-            <!-- Left Sidebar End -->
-
+<!-- Left Sidebar End -->
 
 
 
@@ -382,24 +381,198 @@
             <!-- ============================================================== -->
             <div class="main-content">
 
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0 font-size-18">تــعبــئــة بـــيــانــات  </h4>
 
 
 
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">الـــبـــاب الأول</h4>
+                                        <!-- <p class="card-title-desc">Fill all information below</p> -->
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">الإســم بـالـكـامـل</label>
+                                                        <input id="fullname" name="fullname" type="text" class="form-control" placeholder="الإسم">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br>
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضـــافـــة</button>
+                                                <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">الـــبـــاب الثاني</h4>
+                                        <!-- <p class="card-title-desc">Fill all information below</p> -->
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">الإســم بـالـكـامـل</label>
+                                                        <input id="fullname" name="fullname" type="text" class="form-control" placeholder="الإسم">
+                                                    </div>
+                                                </div>
 
 
-                @yield('content')
+                                            </div>
+
+                                            <br>
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضـــافـــة</button>
+                                                <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">الـــبـــاب الــثــالــث</h4>
+                                        <!-- <p class="card-title-desc">Fill all information below</p> -->
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">الإســم بـالـكـامـل</label>
+                                                        <input id="fullname" name="fullname" type="text" class="form-control" placeholder="الإسم">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <br>
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضـــافـــة</button>
+                                                <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">الـــبـــاب الــرابــع</h4>
+                                        <!-- <p class="card-title-desc">Fill all information below</p> -->
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">الإســم بـالـكـامـل</label>
+                                                        <input id="fullname" name="fullname" type="text" class="form-control" placeholder="الإسم">
+                                                    </div>
+                                                </div>
 
 
 
+                                            </div>
+
+                                            <br>
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضـــافـــة</button>
+                                                <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <h4 class="card-title">الـــبـــاب الخــامــس</h4>
+                                        <!-- <p class="card-title-desc">Fill all information below</p> -->
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">الإســم بـالـكـامـل</label>
+                                                        <input id="fullname" name="fullname" type="text" class="form-control" placeholder="الإسم">
+                                                    </div>
+                                                </div>
 
 
+                                            </div>
+
+                                            <br>
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضـــافـــة</button>
+                                                <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
 
 
+                                <!-- <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mb-3">Product Images</h4>
+
+                                        <form action="/" method="post" class="dropzone">
+                                            <div class="fallback">
+                                                <input name="file" type="file" multiple />
+                                            </div>
+
+                                            <div class="dz-message needsclick">
+                                                <div class="mb-3">
+                                                    <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                                </div>
+
+                                                <h4>Drop files here or click to upload.</h4>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>  -->
+                                <!-- end card-->
 
 
+                            </div>
+                        </div>
+                        <!-- end row -->
 
-
-
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
 
 
                 <footer class="footer">
@@ -410,7 +583,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-end d-none d-sm-block">
-                                    Design & Develop by Fahres
+                                    Design & Develop by fahres
                                 </div>
                             </div>
                         </div>
@@ -460,6 +633,7 @@
 
             </div> <!-- end slimscroll-menu-->
         </div>
+
         <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
@@ -472,17 +646,16 @@
         <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
         <script src="{{asset('assets/libs/node-waves/waves.min.js')}}"></script>
 
-        <!-- apexcharts -->
-        <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
+        <!-- select 2 plugin -->
+        <script src="{{asset('assets/libs/select2/js/select2.min.js')}}"></script>
 
-        <!-- Saas dashboard init -->
-        <script src="{{asset('assets/js/pages/saas-dashboard.init.js')}}"></script>
+        <!-- dropzone plugin -->
+        <script src="{{asset('assets/libs/dropzone/min/dropzone.min.js')}}"></script>
 
-        <script>
-            $( document ).ready(function() {
-                document.getElementById("rtl-mode-switch").trigger('click');
-        });
-        </script>
+        <!-- init js -->
+        <script src="{{asset('assets/js/pages/ecommerce-select2.init.js')}}"></script>
+
+        <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
 
     </body>

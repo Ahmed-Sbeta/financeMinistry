@@ -62,7 +62,7 @@
                                         <h4 class="card-title">بــيــانـات الــقــرار</h4>
                                         @include('includes.messages')
 
-                                        <form>
+                                        <form action="" method="post" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
@@ -123,7 +123,6 @@
                                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
                                                 <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button>
                                             </div> -->
-                                        </form>
 
                                     </div>
                                 </div>
@@ -132,7 +131,6 @@
                                     <div class="card-body">
                                         <h4 class="card-title mb-3">الـــقــرار</h4>
 
-                                        <form action="/" method="post" class="dropzone">
                                             <div class="fallback">
                                                 <input name="file" type="file" multiple />
                                             </div>
@@ -144,7 +142,6 @@
 
                                                 <h4>قم بإدخال ملف هنا.</h4>
                                             </div>
-                                        </form>
                                     </div>
 
 
@@ -162,6 +159,8 @@
 
                                     </div>
                                 </div>
+                              </form>
+
                             </div>
                         </div>
                         <!-- end row -->
@@ -173,7 +172,7 @@
 
                 @include('includes.footer')
 
-                
+
             </div>
             <!-- end main content-->
 

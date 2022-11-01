@@ -58,13 +58,17 @@
                                             <div class="col-lg-4">
                                                 <div class="d-flex">
                                                     <div class="flex-shrink-0 me-3">
-                                                        <img src="assets/images/users/user.png" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                                      @if(Auth::user()->image == "user.png")
+                                                        <img src="{{asset('assets/images/users/user.png')}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                                        @else
+                                                        <img src="{{asset(Storage::url(Auth::user()->image))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                                        @endif
                                                     </div>
                                                     <div class="flex-grow-1 align-self-center">
                                                         <div class="text-muted">
                                                             <p class="mb-2">مــرحــبا بــك</p>
-                                                            <h5 class="mb-1 font-weight-bold">محمود محمد</h5>
-                                                            <p class="mb-0">مـديــر شــؤون المـراقبــيــن</p>
+                                                            <h5 class="mb-1 font-weight-bold">{{Auth::user()->name}}</h5>
+                                                            <p class="mb-0">{{Auth::user()->role->role}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
