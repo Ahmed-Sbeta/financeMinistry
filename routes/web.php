@@ -20,20 +20,23 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 //Auth
-Route::post('/logout',[LoginController::class, 'logout'])->name('logout'); //logout button
 
+Route::post('/logout',[LoginController::class, 'logout'])->name('logout'); //logout button
 Route::post('/login',[LoginController::class, 'login'])->name('login'); //login button
 Route::get('/login',[HomeController::class, 'login']); //login view
 
 //
+// Route::middleware('auth')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::POST('/additem/{id}', [HomeController::class,'addItem'])->name('additem');
-
 Route::resource('ministries', MinistrieController::class);
 Route::resource('reports', ReportController::class);
-Route::resource('items', ItemController::class);
+Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
+Route::post('items/store/{id}', [ItemController::class, 'store'])->name('items.store');
+Route::resource('items', ItemController::class)->except(['create','store']);
 Route::resource('decisions', DecisionController::class);
 Route::resource('notifications', NotificationController::class);
 Route::resource('users', UserController::class);
+
+// });

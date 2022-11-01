@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -22,20 +22,32 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return view('add-Item'.$id);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
-
+        request()->validate(
+        [
+            'worktitle'  => "required|string",
+        ],
+        [ 
+            'worktitle.required' => 'الرجاء كتابة البند الجديد',
+        ]);
+        $item = new Items;
+        $item->name = request('worktitle');
+        $item->door=$id;
+        $item->save();
+        return redirect()->back()->with('success','تــمــت إضــافــة البــنــد بــنــجــاح');
     }
 
     /**
@@ -46,7 +58,7 @@ class ItemController extends Controller
      */
     public function show($id)
     {
-        $items = items::where('door','=',$id)->get();
+        $items = items::where('door','=',$id)->paginate(15);
         return view('Door'.$id,compact('items'));
     }
 
@@ -58,11 +70,8 @@ class ItemController extends Controller
      */
     public function edit($id)
     {
-        $idd = $id;
-        // dd($idd);
-
-        return view('add-Item1',compact('idd'));
-
+        $item = Items::find($id);
+        return view('edit-Item',compact('item'));
     }
 
     /**
@@ -74,7 +83,18 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        request()->validate(
+            [
+                'worktitle'  => "required|string",
+            ],
+            [ 
+                'worktitle.required' => 'الرجاء كتابة البند الجديد',
+            ]);
+        $item = Items::find($id);
+        $item->name = $request->worktitle;
+        $item->update();
 
+        return redirect()->route('items.show',[$item->door])->with('success','تــم تـعـديـل البــنــد بــنــجــاح');
     }
 
     /**
@@ -85,7 +105,8 @@ class ItemController extends Controller
      */
     public function destroy($id)
     {
-
+        Items::find($id)->delete();
+        return redirect()->back()->with('success','تــم حـــذف البــنــد بــنــجــاح');
     }
 
 

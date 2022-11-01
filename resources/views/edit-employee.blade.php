@@ -4,14 +4,15 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>اضافة قرار</title>
+        <title>تعديل المستخدم</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('assets/images/Fahres22.png')}}">
+        <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
 
-        <link href="{{asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
+        <!-- select2 css -->
+        <link href="{{asset('assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
 
         <!-- dropzone css -->
         <link href="{{asset('assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
@@ -35,6 +36,7 @@
             @include('includes.menu')
 
 
+
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -47,7 +49,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">إضــافــة قــرار جـديـد</h4>
+                                    <h4 class="mb-sm-0 font-size-18">تعديل بـيـانـات المـسـتـخـدم {{$user->name}}</h4>
+
+
 
                                 </div>
                             </div>
@@ -59,78 +63,77 @@
                                 <div class="card">
                                     <div class="card-body">
 
-                                        <h4 class="card-title">بــيــانـات الــقــرار</h4>
+                                        <h4 class="card-title">بـيـانـات</h4>
+
                                         @include('includes.messages')
 
-                                        <form>
+                                        <!-- <p class="card-title-desc">Fill all information below</p> -->
+
+                                        <form action="{{route('users.update',[$user->id])}}" method="post" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PATCH') }}
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
-                                                        <label for="fullname" style="font-size: 130%;">عــنــوان القــرار</label>
-                                                        <input id="fullname" name="fullname" type="text" class="form-control" placeholder="عنوان القرار" required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار')" oninput="this.setCustomValidity('')">
+                                                        <label for="fullname">الإســم بـالـكـامـل</label>
+                                                        <input id="fullname" name="name" type="text" value="{{$user->name}}" class="form-control" placeholder="اسم الموظف" required oninvalid="this.setCustomValidity('الرجاء ادخال اسم الموظف')" oninput="this.setCustomValidity('')">
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label class="control-label">جهة صادرة</label>
-                                                        <select class="form-control select">
-                                                            <option>الجهه</option>
-                                                            <option  >Visual Identity Design </option>
-                                                            <option value="EL">Content Writing</option>
-                                                            <option  >Graphic Design </option>
-                                                            <option  >Web Desgin </option>
-                                                            <option  >Billboard Design </option>
-                                                            <option  >Animation </option>
-                                                            <option  > product photography  </option>
+                                                        <label for="phonenumber">رقـم الهــاتـف</label>
+                                                        <input id="phonenumber" name="phoneNumber" value="{{$user->phoneNumber}}" type="text" class="form-control" placeholder=" *** ** ** *09" required oninvalid="this.setCustomValidity('الرجاء ادخال رقم الهاتف')" oninput="this.setCustomValidity('')">
+                                                    </div>
 
-                                                        </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="manufacturerbrand">تاريخ الاصدار</label>
-                                                        <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
-                                                            <input type="date" class="form-control" placeholder="تاريخ الاصدار" name="start" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
-                                                        </div>                                                    </div>
 
                                                 </div>
 
                                                 <div class="col-sm-6">
+                                                  <div class="mb-3">
+                                                      <label for="email">رقم الوظيفي</label>
+                                                      <input id="email" name="work_id" type="text" value="{{$user->work_id}}" class="form-control" required oninvalid="this.setCustomValidity('الرجاء ادخال الرقم الوظيفي')" oninput="this.setCustomValidity('')">
+                                                  </div>
                                                     <div class="mb-3">
-                                                        <label for="phonenumber" style="font-size: 130%;">رقــم القــرار</label>
-                                                        <input id="phonenumber" name="phonenumber" type="text" class="form-control" placeholder="00000" required oninvalid="this.setCustomValidity('الرجاء ادخال رقم القرار')" oninput="this.setCustomValidity('')">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label class="control-label">جهة المستلمة</label>
-                                                        <select class="form-control select">
-                                                            <option>الجهه</option>
-                                                            <option  >Visual Identity Design </option>
-                                                            <option value="EL">Content Writing</option>
-                                                            <option  >Graphic Design </option>
-                                                            <option  >Web Desgin </option>
-                                                            <option  >Billboard Design </option>
-                                                            <option  >Animation </option>
-                                                            <option  > product photography  </option>
-
+                                                        <label class="control-label">الــوظــيفــة</label>
+                                                        <select class="form-control select" name="role">
+                                                            <option value="{{$user->role->id}}" selected>{{$user->role->role}}</option>
+                                                            @foreach ($roles as $role)
+                                                                @if($role->id != $user->role->id)
+                                                                    <option value="{{$role->id}}">{{$role->role}}</option>
+                                                                @endif
+                                                            @endforeach
                                                         </select>
                                                     </div>
 
-                                                    <div class="mb-3">
-                                                        <label for="productdesc">الــقــرار بإختصار</label>
-                                                        <textarea class="form-control" id="productdesc" rows="6" placeholder="نبذه عن القرار"></textarea>
-                                                    </div>
-
                                                 </div>
+
+
+                                                <div class="mt-3">
+
+                                                    <div class="avatar-xs">
+                                                        <a href="javascript: void(0);" class="d-inline-block">
+                                                            <img src="{{ asset(Storage::url($user->image)) }}" alt="" class="rounded-circle avatar-xs">
+                                                          </a>
+                                                      </div>
+
+                                                    <label for="formFile" class="form-label">صــورة شــخــصــيـة</label>
+                                                    <input class="form-control" type="file" id="formFile" name="image">
+                                                </div>
+
                                             </div>
 
-                                            <!-- <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save Changes</button>
-                                                <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button>
-                                            </div> -->
+                                            <br>
+
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">حفظ التعديلات</button>
+                                                <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
+                                            </div>
                                         </form>
 
                                     </div>
                                 </div>
 
-                                <div class="card">
+                                <!-- <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-3">الـــقــرار</h4>
+                                        <h4 class="card-title mb-3">Product Images</h4>
 
                                         <form action="/" method="post" class="dropzone">
                                             <div class="fallback">
@@ -142,26 +145,15 @@
                                                     <i class="display-4 text-muted bx bxs-cloud-upload"></i>
                                                 </div>
 
-                                                <h4>قم بإدخال ملف هنا.</h4>
+                                                <h4>Drop files here or click to upload.</h4>
                                             </div>
                                         </form>
                                     </div>
 
-
-                                </div> <!-- end card-->
-
-                                <div class="card">
-                                    <div class="card-body">
+                                </div>  -->
+                                <!-- end card-->
 
 
-
-                                            <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضافة</button>
-                                            </div>
-
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <!-- end row -->
@@ -172,8 +164,6 @@
 
 
                 @include('includes.footer')
-
-                
             </div>
             <!-- end main content-->
 
@@ -217,7 +207,9 @@
                 </div>
 
             </div> <!-- end slimscroll-menu-->
-        </div><!-- /Right-bar -->
+        </div>
+
+        <!-- /Right-bar -->
 
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>

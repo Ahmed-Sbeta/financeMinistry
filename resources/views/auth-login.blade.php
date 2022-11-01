@@ -9,7 +9,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('assets/images/mawja22.png')}}">
+        <link rel="shortcut icon" href="{{asset('assets/images/Fahres22.png')}}">
 
         <!-- Bootstrap Css -->
         <link href="{{asset('assets/css/bootstrap-rtl.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -58,17 +58,18 @@
                                     </a>
                                 </div>
                                 <div class="p-2">
+                                    @include('includes.messages')
                                     <form class="form-horizontal" action="{{route('login')}}" method="post" enctype="multipart/form-data">
                                       @csrf
                                         <div class="mb-3">
                                             <label for="username" class="form-label" style="font-size: 130%;">إســم الـمـسـتـخـدم*</label>
-                                            <input type="text" class="form-control" name="name" id="username" placeholder="يرجي ادخال اسم المستخدم">
+                                            <input type="text" class="form-control" name="name" id="username" placeholder="اسم المستخدم" required oninvalid="this.setCustomValidity('الرجاء ادخال اسم المستخدم')" oninput="this.setCustomValidity('')">
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label" style="font-size: 130%;">كــلــمـة الــمـرور*</label>
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input type="password" class="form-control" name="password" placeholder="الرمز السري" aria-label="Password" aria-describedby="password-addon">
+                                                <input type="password" class="form-control" name="password" placeholder="كلمة المرور" aria-label="Password" aria-describedby="password-addon" required oninvalid="this.setCustomValidity('الرجاء ادخال كلمة المرور')" oninput="this.setCustomValidity('')">
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             </div>
                                         </div>
@@ -111,10 +112,11 @@
                         <div class="mt-5 text-center">
 
                             <div>
-                                <p>© <script>document.write(new Date().getFullYear())</script> fahres. </p>
+                                <p>Design & Develop by fahres © {{now()->year}} </p>
                             </div>
                         </div>
 
+                        
                     </div>
                 </div>
             </div>

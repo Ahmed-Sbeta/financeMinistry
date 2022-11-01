@@ -17,13 +17,4 @@ class HomeController extends Controller
         return view('auth-login');
       }
 
-      public function addItem($id){
-
-        $item = new Items;
-        $item->name = request('worktitle');
-        $item->door=$id;
-        $item->save();
-        return redirect()->back()->with('success','تــمــت إضــافــة البــنــد بــنــجــاح');
-      }
-
 }

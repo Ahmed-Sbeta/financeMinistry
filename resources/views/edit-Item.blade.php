@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>إضــافــة بند (الباب الثالث)</title>
+        <title>تعديل بند</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -32,7 +32,9 @@
         <!-- Begin page -->
         <div id="layout-wrapper">
 
+
             @include('includes.menu')
+
 
 
             <!-- ============================================================== -->
@@ -47,9 +49,19 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">إضــائــة بــنــد جديد <a href="{{route('items.show',[3])}}">(الباب الثالث)</a></h4>
-
-
+                                    <h4 class="mb-sm-0 font-size-18">تـعـديـل الـبــنــد  
+                                        @if($item->door == 1)
+                                        <a href="{{route('items.show',[1])}}">(الباب الاول)</a>
+                                        @elseif($item->door == 2)
+                                        <a href="{{route('items.show',[2])}}">(الباب الثاني)</a>
+                                        @elseif($item->door == 3)
+                                        <a href="{{route('items.show',[3])}}">(الباب الثالث)</a>
+                                        @elseif($item->door == 4)
+                                        <a href="{{route('items.show',[4])}}">(الباب الرابع)</a>
+                                        @elseif($item->door == 5)
+                                        <a href="{{route('items.show',[5])}}">(الباب الخامس)</a>
+                                        @endif
+                                    </h4>
 
                                 </div>
                             </div>
@@ -63,11 +75,13 @@
                                         <h4 class="card-title mb-4"></h4>
                                         @include('includes.messages')
 
-                                        <form action="{{route('items.store',[3])}}" method="post" enctype="multipart/form-data">
-                                            @csrf                                            <div class="row mb-4">
+                                        <form action="{{route('items.update',[$item->id])}}" method="post" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PATCH') }}
+                                            <div class="row mb-4">
                                                 <label for="worktitle" class="col-form-label col-lg-2" style="font-size:140%;">أســم الــبــنــد</label>
                                                 <div class="col-lg-10">
-                                                    <input id="worktitle" name="worktitle" type="text" class="form-control" placeholder="الرجاء ادخال بند الباب الثالث..." required oninvalid="this.setCustomValidity('الرجاء ادخال البند')" oninput="this.setCustomValidity('')">
+                                                    <input id="worktitle" name="worktitle" type="text" value="{{$item->name}}" class="form-control" placeholder="الرجاء ادخال بند الباب الاول..." required oninvalid="this.setCustomValidity('الرجاء ادخال البند')" oninput="this.setCustomValidity('')">
                                                 </div>
                                             </div>
 
@@ -103,7 +117,7 @@
                                         <div class="row justify-content-end">
                                             <div class="col-lg-10">
 
-                                                <button type="submit" class="btn btn-info"> <i class="mdi mdi-plus me-1"></i>إضـــافـــة</button>
+                                                <button type="submit" class="btn btn-info"> <i class="mdi mdi-plus me-1"></i>حفظ التعديلات</button>
 
                                                 <!-- <button type="submit" class="btn btn-success"> Upload </button> -->
 
@@ -122,8 +136,8 @@
                 </div>
                 <!-- End Page-content -->
 
-
                 @include('includes.footer')
+
             </div>
             <!-- end main content-->
 
