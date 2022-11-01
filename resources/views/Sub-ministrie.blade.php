@@ -4,12 +4,12 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Editable Table | Skote - Admin & Dashboard Template</title>
+        <title>الجهات التابعة</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+        <link rel="shortcut icon" href="{{asset('assets/images/Fahres22.png')}}">
 
         <!-- Bootstrap Css -->
         <link href="{{asset('assets/css/bootstrap-rtl.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -43,549 +43,173 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">قــائــمــة الإدخــال</h4>
-
-                                    <div class="page-title-right">
-
-                                    </div>
-
+                                    <h4 class="mb-sm-0 font-size-18">الجهات التابعة  <span>{{$ministry->name}}</span></h4>
                                 </div>
                             </div>
-                            
                         </div>
                         <!-- end page title -->
 
                         <div class="row">
-                            @include('includes.messages')
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
+                                        <div class="row mb-2">
+                                            <div class="col-sm-4">
 
-                                        <h4 class="card-title">الــبــاب الأول</h4>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="text-sm-end">
+                                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضـــافــة جهة تابعة جديدة</button>
+                                                </div>
+                                            </div><!-- end col-->
+                                            @include('includes.messages')
+
+                                        </div>
 
                                         <div class="table-responsive">
-                                            <table class="table table-editable table-nowrap align-middle table-edits">
-                                                <thead>
+                                            <table class="table align-middle table-nowrap table-check">
+                                                <thead class="table-light">
                                                     <tr>
-                                                        <th>إســـم الــجــهــة</th>
-                                                        <th>Name</th>
-                                                        <th>Age</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Edit</th>
+                                                        <th style="width: 20px;" class="align-middle">
+
+                                                        </th>
+                                                        <th scope="align-middle" style="width: 70px;">#</th>
+                                                        <th scope="align-middle">الإســـم</th>
+                                                        <th scope="align-middle">تفاصيل</th>
+                                                        <th class="align-middle">تـعـديـل</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr data-id="1">
-                                                        <td style="width: 80px">1</td>
-                                                        <td data-field="name">David McHenry</td>
-                                                        <td data-field="age">24</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td style="width: 100px">
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="2">
-                                                        <td>2</td>
-                                                        <td data-field="name">Frank Kirk</td>
-                                                        <td data-field="age">22</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="3">
-                                                        <td >3</td>
-                                                        <td data-field="name">Rafael Morales</td>
-                                                        <td data-field="age">26</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="4">
-                                                        <td >4</td>
-                                                        <td data-field="name">Mark Ellison</td>
-                                                        <td data-field="age">32</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="5">
-                                                        <td >5</td>
-                                                        <td data-field="name">Minnie Walter</td>
-                                                        <td data-field="age">27</td>
-                                                        <td data-field="gender">Female</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                </table>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div> <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <h4 class="card-title">الــبــاب الـــثانــي</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-editable table-nowrap align-middle table-edits">
-                                                <thead>
+                                                    @foreach($all as $mini)
                                                     <tr>
-                                                        <th>إســـم الــجــهــة</th>
-                                                        <th>Name</th>
-                                                        <th>Age</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr data-id="1">
-                                                        <td style="width: 80px">1</td>
-                                                        <td data-field="name">David McHenry</td>
-                                                        <td data-field="age">24</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td style="width: 100px">
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
+                                                        <td>
+                                                            <div class="avatar-xs">
+                                                              <a href="javascript: void(0);" class="d-inline-block">
+                                                                  <img src="{{ asset(Storage::url($mini->image)) }}" alt="" class="rounded-circle avatar-xs">
+                                                                </a>
+                                                            </div>
                                                         </td>
-                                                    </tr>
-                                                    <tr data-id="2">
-                                                        <td>2</td>
-                                                        <td data-field="name">Frank Kirk</td>
-                                                        <td data-field="age">22</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
+                                                        <td>
+                                                            <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">{{$mini->name}}</a></h5>
+                                                        </td>
 
                                                         <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
+                                                                عــرض الـتـفـاصيل
+                                                            </button>
                                                         </td>
-                                                    </tr>
-                                                    <tr data-id="3">
-                                                        <td >3</td>
-                                                        <td data-field="name">Rafael Morales</td>
-                                                        <td data-field="age">26</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
 
                                                         <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
+                                                            <ul class="list-inline font-size-20 contact-links mb-0">
+                                                                <li class="list-inline-item px-2">
+                                                                    <a href="{{route('ministries.edit',[$mini->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                                </li>
+                                                            </ul>
                                                         </td>
                                                     </tr>
-                                                    <tr data-id="4">
-                                                        <td >4</td>
-                                                        <td data-field="name">Mark Ellison</td>
-                                                        <td data-field="age">32</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
+                                                    @endforeach
 
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="5">
-                                                        <td >5</td>
-                                                        <td data-field="name">Minnie Walter</td>
-                                                        <td data-field="age">27</td>
-                                                        <td data-field="gender">Female</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
-                                                </table>
+                                            </table>
                                         </div>
-
+                                        <ul class="pagination pagination-rounded justify-content-center mb-2">
+                                            {{ $all->links('pagination::bootstrap-4') }}
+                                        </ul>
                                     </div>
                                 </div>
-                            </div> <!-- end col -->
+                            </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <h4 class="card-title">الــبــاب الــثالــث</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-editable table-nowrap align-middle table-edits">
-                                                <thead>
-                                                    <tr>
-                                                        <th>إســـم الــجــهــة</th>
-                                                        <th>Name</th>
-                                                        <th>Age</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr data-id="1">
-                                                        <td style="width: 80px">1</td>
-                                                        <td data-field="name">David McHenry</td>
-                                                        <td data-field="age">24</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td style="width: 100px">
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="2">
-                                                        <td>2</td>
-                                                        <td data-field="name">Frank Kirk</td>
-                                                        <td data-field="age">22</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="3">
-                                                        <td >3</td>
-                                                        <td data-field="name">Rafael Morales</td>
-                                                        <td data-field="age">26</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="4">
-                                                        <td >4</td>
-                                                        <td data-field="name">Mark Ellison</td>
-                                                        <td data-field="age">32</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="5">
-                                                        <td >5</td>
-                                                        <td data-field="name">Minnie Walter</td>
-                                                        <td data-field="age">27</td>
-                                                        <td data-field="gender">Female</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                </table>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <h4 class="card-title">الــبــاب الــرابــع</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-editable table-nowrap align-middle table-edits">
-                                                <thead>
-                                                    <tr>
-                                                        <th>إســـم الــجــهــة</th>
-                                                        <th>Name</th>
-                                                        <th>Age</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr data-id="1">
-                                                        <td style="width: 80px">1</td>
-                                                        <td data-field="name">David McHenry</td>
-                                                        <td data-field="age">24</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td style="width: 100px">
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="2">
-                                                        <td>2</td>
-                                                        <td data-field="name">Frank Kirk</td>
-                                                        <td data-field="age">22</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="3">
-                                                        <td >3</td>
-                                                        <td data-field="name">Rafael Morales</td>
-                                                        <td data-field="age">26</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="4">
-                                                        <td >4</td>
-                                                        <td data-field="name">Mark Ellison</td>
-                                                        <td data-field="age">32</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="5">
-                                                        <td >5</td>
-                                                        <td data-field="name">Minnie Walter</td>
-                                                        <td data-field="age">27</td>
-                                                        <td data-field="gender">Female</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                </table>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <h4 class="card-title">الــبــاب الــخــامــس</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-editable table-nowrap align-middle table-edits">
-                                                <thead>
-                                                    <tr>
-                                                        <th>إســـم الــجــهــة</th>
-                                                        <th>Name</th>
-                                                        <th>Age</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Gender</th>
-                                                        <th>Edit</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr data-id="1">
-                                                        <td style="width: 80px">1</td>
-                                                        <td data-field="name">David McHenry</td>
-                                                        <td data-field="age">24</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td style="width: 100px">
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="2">
-                                                        <td>2</td>
-                                                        <td data-field="name">Frank Kirk</td>
-                                                        <td data-field="age">22</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="3">
-                                                        <td >3</td>
-                                                        <td data-field="name">Rafael Morales</td>
-                                                        <td data-field="age">26</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="4">
-                                                        <td >4</td>
-                                                        <td data-field="name">Mark Ellison</td>
-                                                        <td data-field="age">32</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr data-id="5">
-                                                        <td >5</td>
-                                                        <td data-field="name">Minnie Walter</td>
-                                                        <td data-field="age">27</td>
-                                                        <td data-field="gender">Female</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-                                                        <td data-field="gender">Male</td>
-
-                                                        <td>
-                                                            <a class="btn btn-outline-secondary btn-sm edit" title="Edit">
-                                                                <i class="fas fa-pencil-alt"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                </table>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div> <!-- end col -->
-                        </div>
+                        <!-- end row -->
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+
+                <!-- Modal -->
+                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby=orderdetailsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id=orderdetailsModalLabel">Order Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
+                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
+
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                                        <p class="text-muted mb-0">$ 225 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 255</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">
+                                                    <div>
+                                                        <img src="assets/images/product/img-4.png" alt="" class="avatar-sm">
+                                                    </div>
+                                                </th>
+                                                <td>
+                                                    <div>
+                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
+                                                        <p class="text-muted mb-0">$ 145 x 1</p>
+                                                    </div>
+                                                </td>
+                                                <td>$ 145</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Sub Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Shipping:</h6>
+                                                </td>
+                                                <td>
+                                                    Free
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h6 class="m-0 text-right">Total:</h6>
+                                                </td>
+                                                <td>
+                                                    $ 400
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end modal -->
 
 
                 @include('includes.footer')
@@ -601,7 +225,7 @@
             <div data-simplebar class="h-100">
                 <div class="rightbar-title d-flex align-items-center px-3 py-4">
 
-                    <h5 class="m-0 me-2">Settings</h5>
+                    <h5 class="m-0 me-2">مـــظــهـــر</h5>
 
                     <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
                         <i class="mdi mdi-close noti-icon"></i>
@@ -610,17 +234,15 @@
 
                 <!-- Settings -->
                 <hr class="mt-0" />
-                <h6 class="text-center mb-0">Choose Layouts</h6>
+                <h6 class="text-center mb-0">أخــتــيــار مــظــهــر</h6>
 
                 <div class="p-4">
-
-
                     <div class="mb-2">
                         <img src="assets/images/layouts/layout-3.jpg" class="img-thumbnail" alt="layout images">
                     </div>
                     <div class="form-check form-switch mb-3">
-                        <input class="form-check-input theme-choice" type="checkbox" id="rtl-mode-switch">
-                        <label class="form-check-label" for="rtl-mode-switch">RTL Mode</label>
+                        <input class="form-check-input theme-choice active" type="checkbox" id="rtl-mode-switch" checked>
+                        <label class="form-check-label" for="rtl-mode-switch">إضــائــة</label>
                     </div>
 
                     <div class="mb-2">
@@ -628,7 +250,7 @@
                     </div>
                     <div class="form-check form-switch mb-5">
                         <input class="form-check-input theme-choice" type="checkbox" id="dark-rtl-mode-switch">
-                        <label class="form-check-label" for="dark-rtl-mode-switch">Dark RTL Mode</label>
+                        <label class="form-check-label" for="dark-rtl-mode-switch">مــعــتــم</label>
                     </div>
 
 
@@ -648,11 +270,7 @@
         <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
         <script src="{{asset('assets/libs/node-waves/waves.min.js')}}"></script>
 
-         <!-- Table Editable plugin -->
-         <script src="{{asset('assets/libs/table-edits/build/table-edits.min.js')}}"></script>
-
-        <script src="{{asset('assets/js/pages/table-editable.int.js')}}"></script>
-
+        <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
 
     </body>

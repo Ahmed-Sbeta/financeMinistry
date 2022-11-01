@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ministrie;
 use Illuminate\Http\Request;
 
 class MinistrieController extends Controller
@@ -13,7 +14,8 @@ class MinistrieController extends Controller
      */
     public function index()
     {
-        return view('all-Ministries');
+        $all = Ministrie::where('parent_id', NULL)->paginate(15);
+        return view('all-Ministries',compact('all'));
     }
 
     /**
@@ -21,9 +23,10 @@ class MinistrieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('Sub-ministrie');
+        $ministry = Ministrie::find($id);
+        return view('add-Ministrie',compact('ministry'));
     }
 
     /**
@@ -45,7 +48,9 @@ class MinistrieController extends Controller
      */
     public function show($id)
     {
-        return view('Sub-ministrie');
+        $ministry = Ministrie::find($id);
+        $all = Ministrie::where('parent_id', $id)->paginate(15);
+        return view('Sub-ministrie',compact('all','ministry'));
     }
 
     /**

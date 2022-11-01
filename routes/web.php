@@ -31,7 +31,8 @@ Route::get('/login',[HomeController::class, 'login']); //login view
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
-Route::resource('ministries', MinistrieController::class);
+Route::get('ministries/create/{id}', [ItemController::class, 'create'])->name('ministries.create');
+Route::resource('ministries', MinistrieController::class)->except(['create']);
 Route::resource('reports', ReportController::class);
 Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
 Route::post('items/store/{id}', [ItemController::class, 'store'])->name('items.store');
