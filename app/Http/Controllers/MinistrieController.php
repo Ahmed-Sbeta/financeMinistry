@@ -23,7 +23,7 @@ class MinistrieController extends Controller
      */
     public function create()
     {
-        return view('add-data');
+        return view('Sub-ministrie');
     }
 
     /**
@@ -45,7 +45,7 @@ class MinistrieController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('Sub-ministrie');
     }
 
     /**
