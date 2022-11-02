@@ -16,5 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesSeeder::class);
         $this->call(AdminUserSeeder::class);
         $this->call(allMinistrySeeder::class);
+        $this->call(subMinistrySeeder::class);
+        $this->call(sub2MinistrySeeder::class);
+        $this->call(ItemsSeeder::class);
+
+
     }
 }

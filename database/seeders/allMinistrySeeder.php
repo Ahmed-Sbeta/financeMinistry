@@ -17,6 +17,7 @@ class allMinistrySeeder extends Seeder
         Ministrie::create([
             'name' => 'مجلس النواب',
             'image' => 'blue.png'
+            
           ]);
         Ministrie::create([
             'name' => 'المجلس الاعلى للدولة',
