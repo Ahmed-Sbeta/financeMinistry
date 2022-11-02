@@ -7,7 +7,6 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -18,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(15);
+        $users = User::where('role_id', '<', auth()->user()->id)->paginate(15);
         return view('employees',compact('users'));
     }
 
@@ -29,7 +28,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::get();
+        if(auth()->user()->role_id != 1){
+            return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
+        $roles = Role::where('id','!=',1)->get();
         return view('add-employee',compact('roles'));
     }
 
@@ -41,6 +43,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->role_id != 1){
+            return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
         request()->validate(
         [
             'name'  => "required|string",

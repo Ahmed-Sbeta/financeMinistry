@@ -20,6 +20,7 @@ class CreateMonthllyPayedsTable extends Migration
             $table->integer("door_id");
             $table->float("total");
             $table->date("date");
+            $table->integer("created_id");
             $table->timestamps();
         });
     }

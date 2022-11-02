@@ -61,7 +61,9 @@
                                         </div>
                                     </div>
 
+                                    @if(auth()->user()->role_id == 1)
                                     <button id="one" onclick="editState()" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-pencil me-1"></i> تعديل</button>
+                                    @endif
 
                                 </div>
                             </div>

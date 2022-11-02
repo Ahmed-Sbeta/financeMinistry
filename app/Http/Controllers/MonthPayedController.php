@@ -65,14 +65,16 @@ class MonthPayedController extends Controller
             $date = request('date').'-1';
             for ($i=0; $i < count($items); $i++) {
                 if($itemP[$i] != NULL){
-                    $found = MonthllyPayed::where('item_id', $items[$i])->whereDate('date', $date)->first();
+                    $found = MonthllyPayed::where([['ministry_id', $id],['item_id', $items[$i]]])->whereDate('date', $date)->first();
                     if(!$found){
                         array_push($finalArray, array(
                             'ministry_id'=>$id,
                             'item_id'=>$items[$i],
                             'door_id'=>$itemd[$i],
                             'total'=>$itemP[$i],
-                            'date'=>$date)
+                            'date'=>$date,
+                            'created_id'=> auth()->user()->id
+                            )
                         );
                         $counter2++;
                     }else{
@@ -135,6 +137,9 @@ class MonthPayedController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(auth()->user()->role_id != 1){
+            return redirect()->route('home')->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
         request()->validate(
             [
                 'item_id'  => "required|array|min:1",
@@ -162,17 +167,24 @@ class MonthPayedController extends Controller
             $date = request('date').'-1';
             for ($i=0; $i < count($items); $i++) {
                 if($itemP[$i] != NULL){
-                    $found = MonthllyPayed::where('item_id', $items[$i])->whereDate('date', $date)->first();
+                    $found = MonthllyPayed::where(([['ministry_id', $id],['item_id', $items[$i]]]))->whereDate('date', $date)->first();
                     if(!$found){
                         array_push($finalArray, array(
                             'ministry_id'=>$id,
                             'item_id'=>$items[$i],
                             'door_id'=>$itemd[$i],
                             'total'=>$itemP[$i],
-                            'date'=>$date)
+                            'date'=>$date,
+                            'created_id'=> auth()->user()->id
+                            )
                         );
                         $counter2++;
                     }else{
+                        if($found->total != $itemP[$i]){
+                            $found->total = $itemP[$i];
+                            $found->created_id = auth()->user()->id;
+                            $found->update();
+                        }
                         $counter++;
                     }
                 }

@@ -50,6 +50,9 @@
                         </div>
                         <!-- end page title -->
 
+                        @include('includes.messages')
+
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card">

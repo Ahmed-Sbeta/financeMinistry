@@ -304,7 +304,9 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{route('users.index')}}">كــل المـستـخـدمـيـن</a></li>
+                                    @if(auth()->user()->role_id == 1)
                                     <li><a href="{{route('users.create')}}" key="t-user-list">إضـافـة مـسـتـخـدم جـديـد</a></li>
+                                    @endif
                                     <!-- <li><a href="contacts-profile.html" key="t-profile">Profile</a></li> -->
                                 </ul>
                             </li>
