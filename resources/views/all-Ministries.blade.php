@@ -58,7 +58,7 @@
                             <div class="col-xl-12">
 
                                 <div class="row">
-                                    @foreach ($all as $mini)                                        
+                                    @foreach ($all as $mini)
                                     <div class="col-md-3">
                                         <a href="{{route('ministries.show',[$mini->id])}}">
                                         <div class="card mini-stats-wid">
@@ -70,7 +70,7 @@
                                                     <div class="flex-shrink-0 align-self-center">
                                                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
                                                             <span class="avatar-title">
-                                                                <i class="bx bx-check-circle font-size-24"></i>
+                                                              <img src="{{asset('assets/images/white.png')}}" alt="" height="50">
                                                             </span>
                                                         </div>
                                                     </div>

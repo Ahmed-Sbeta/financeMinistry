@@ -62,18 +62,19 @@
                                         <h4 class="card-title">بــيــانـات الــقــرار</h4>
                                         @include('includes.messages')
 
-                                        <form action="{{route('decisions.store')}}" method="post" enctype="multipart/form-data">
+                                        <form action="{{route('decisions.update',[$decision->id])}}" method="Post" enctype="multipart/form-data">
                                           @csrf
+                                          @METHOD('Patch')
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
                                                         <label for="fullname" style="font-size: 130%;">عــنــوان القــرار</label>
-                                                        <input id="fullname" name="title" type="text" class="form-control" placeholder="عنوان القرار" required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار')" oninput="this.setCustomValidity('')">
+                                                        <input id="fullname" value="{{$decision->title}}" name="title" type="text" class="form-control" placeholder="عنوان القرار" required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار')" oninput="this.setCustomValidity('')">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة صادرة</label>
                                                         <select class="form-control select" name="issuer">
-                                                            <option>الجهه</option>
+                                                            <option value="{{$decision->issuer}}" selected>{{$decision->issuer}}</option>
                                                             <option  >Visual Identity Design </option>
                                                             <option value="EL">Content Writing</option>
                                                             <option  >Graphic Design </option>
@@ -87,7 +88,7 @@
                                                     <div class="mb-3">
                                                         <label for="manufacturerbrand">تاريخ الاصدار</label>
                                                         <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
-                                                            <input type="date" class="form-control" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
+                                                            <input type="date" class="form-control" value="{{$decision->date}}" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
                                                         </div>                                                    </div>
 
                                                 </div>
@@ -95,12 +96,12 @@
                                                 <div class="col-sm-6">
                                                     <div class="mb-3">
                                                         <label for="phonenumber" style="font-size: 130%;">رقــم القــرار</label>
-                                                        <input id="phonenumber" name="decisionNumber" type="text" class="form-control" placeholder="00000" required oninvalid="this.setCustomValidity('الرجاء ادخال رقم القرار')" oninput="this.setCustomValidity('')">
+                                                        <input id="phonenumber" name="decisionNumber" value="{{$decision->decisionsNumber}}" type="text" class="form-control" placeholder="00000" required oninvalid="this.setCustomValidity('الرجاء ادخال رقم القرار')" oninput="this.setCustomValidity('')">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة المستلمة</label>
                                                         <select class="form-control select" name="receiving">
-                                                            <option>الجهه</option>
+                                                          <option value="{{$decision->receiver}}" selected>{{$decision->receiver}}</option>
                                                             <option  >Visual Identity Design </option>
                                                             <option value="EL">Content Writing</option>
                                                             <option  >Graphic Design </option>
@@ -114,7 +115,7 @@
 
                                                     <div class="mb-3">
                                                         <label for="productdesc">الــقــرار بإختصار</label>
-                                                        <textarea class="form-control" id="productdesc" rows="6" name="description" placeholder="نبذه عن القرار"></textarea>
+                                                        <textarea class="form-control" id="productdesc" rows="6" name="description" placeholder="نبذه عن القرار">{{$decision->description}}</textarea>
                                                     </div>
 
                                                 </div>
@@ -133,7 +134,7 @@
                                         <h4 class="card-title mb-3">الـــقــرار</h4>
 
                                             <div class="fallback">
-                                                <input name="file" type="file" multiple />
+                                                <input name="file" type="file" multiple value="{{$decision->file}}">
                                             </div>
 
                                             <div class="dz-message needsclick">
@@ -141,7 +142,7 @@
                                                     <i class="display-4 text-muted bx bxs-cloud-upload"></i>
                                                 </div>
 
-                                                <h4>قم بإدخال ملف هنا.</h4>
+                                                <h4>{{$decision->file}}</h4>
                                             </div>
                                     </div>
 
@@ -151,7 +152,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                             <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light">إضافة</button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light">مـــوافــق</button>
                                             </div>
                                     </div>
                                 </div>

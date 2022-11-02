@@ -31,7 +31,7 @@ Route::get('/login',[HomeController::class, 'login']); //login view
 Route::middleware('auth')->group(function () {
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    
+
     Route::get('ministries/create/{id}', [MinistrieController::class, 'create'])->name('ministries.create');
     Route::post('ministries/store/{id}', [MinistrieController::class, 'store'])->name('ministries.store');
     Route::resource('ministries', MinistrieController::class)->except(['create','store']);
