@@ -15,6 +15,12 @@
 </div>
 @endif
 
+@if(session()->has('error'))
+<div class="alert alert-danger" id="message">
+  <a type="button" onclick="hide()" style="float: left; font-size: 18px;"> x </a>
+  {{ session()->get('error') }}
+</div>
+@endif
 
 <script>
 function hide(){

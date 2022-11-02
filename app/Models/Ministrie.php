@@ -13,4 +13,8 @@ class Ministrie extends Model
         return $this->hasOne(Ministrie::class, 'id', 'parent_id');
     }
 
+    public function payeds(){
+        return $this->hasMany(MonthllyPayed::class, 'ministry_id', 'id');
+    }
+
 }

@@ -78,7 +78,7 @@
                                                 <div class="col-sm-6">
                                                     <div>
                                                         <label for="fullname">القيمة الشهرية</label>
-                                                        <input id="worktitle" name="total" value="{{$ministry->total}}" type="number" min="0" step="0.01" class="form-control" placeholder="الرجاء ادخال القيمة الشهرية..." required oninvalid="this.setCustomValidity('الرجاء ادخال القيمة الشهرية')" oninput="this.setCustomValidity('')">
+                                                        <input id="worktitle" name="total" style="direction: rtl;"  value="{{$ministry->total}}" type="number" min="0" step="0.01" class="form-control" placeholder="الرجاء ادخال القيمة الشهرية..." required oninvalid="this.setCustomValidity('الرجاء ادخال القيمة الشهرية')" oninput="this.setCustomValidity('')">
                                                     </div>
                                                 </div>
 

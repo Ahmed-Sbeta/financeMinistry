@@ -7,8 +7,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\DecisionController;
 use App\Http\Controllers\MinistrieController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MonthPayedController;
+use App\Http\Controllers\NotificationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +27,7 @@ Route::post('/login',[LoginController::class, 'login'])->name('login'); //login 
 Route::get('/login',[HomeController::class, 'login']); //login view
 
 //
-// Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -42,6 +43,8 @@ Route::resource('decisions', DecisionController::class);
 Route::resource('notifications', NotificationController::class);
 Route::resource('users', UserController::class);
 Route::get('monthPayeds/create/{id}', [MonthPayedController::class, 'create'])->name('monthPayeds.create');
-Route::resource('monthPayeds', MonthPayedController::class)->except(['create','store']);
+Route::post('monthPayeds/store/{id}', [MonthPayedController::class, 'store'])->name('monthPayeds.store');
+Route::post('monthPayeds/edit/{id}', [MonthPayedController::class, 'edit'])->name('monthPayeds.edit');
+Route::resource('monthPayeds', MonthPayedController::class)->except(['create','store','edit']);
 
-// });
+});
