@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(allMinistrySeeder::class);
         $this->call(subMinistrySeeder::class);
         $this->call(sub2MinistrySeeder::class);
+        $this->call(ItemsSeeder::class);
+
+
 
     }
 }

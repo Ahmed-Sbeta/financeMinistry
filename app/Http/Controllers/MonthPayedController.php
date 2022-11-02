@@ -25,11 +25,13 @@ class MonthPayedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create(Request $request, $id)
     {
+        $date = request('date');
+        $ministry = Ministrie::find(request('id'));
         $items = Items::get();
-        $ministry = Ministrie::find($id);
-        return view('add-month-pay',compact('ministry','items'));
+        $payeds = MonthllyPayed::where('ministry_id', request('id'))->whereDate('date', request('date').'-1')->get();
+        return view('add-month-pay',compact('ministry','payeds','date','items'));
     }
 
     /**
@@ -56,23 +58,23 @@ class MonthPayedController extends Controller
 
             DB::beginTransaction();
         try {
-            $finalArray = array();
+             $finalArray = array();
             $items = request('item_id');
             $itemP = request('price');
             $itemd = request('door_id');
             $counter = 0;
             $counter2 = 0;
-            $date = request('date').'-1';
+            $date = request('date');
             for ($i=0; $i < count($items); $i++) {
                 if($itemP[$i] != NULL){
-                    $found = MonthllyPayed::where([['ministry_id', $id],['item_id', $items[$i]]])->whereDate('date', $date)->first();
+                    $found = MonthllyPayed::where([['ministry_id', $id],['item_id', $items[$i]]])->whereDate('date', request('date').'-1')->first();
                     if(!$found){
                         array_push($finalArray, array(
                             'ministry_id'=>$id,
                             'item_id'=>$items[$i],
                             'door_id'=>$itemd[$i],
                             'total'=>$itemP[$i],
-                            'date'=>$date,
+                            'date'=>request('date').'-1',
                             'created_id'=> auth()->user()->id
                             )
                         );
@@ -87,17 +89,27 @@ class MonthPayedController extends Controller
 
             DB::commit(); 
             if($counter > 0 && $counter2 > 0){
-                return redirect()->back()->with('success','تمت اضافة بعض المدخلات الشهرية بنجاح والبعض من المدخلات موجودة مسبقآ');    
+                return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>1])->with('success','تمت اضافة بعض المدخلات الشهرية بنجاح والبعض من المدخلات موجودة مسبقآ');
             }elseif($counter > 0 && $counter2 == 0){
-                return redirect()->back()->with('error','عذرآ ولكن قيمة البنود المدخلة قد تم إدخالها لهذا الشهر');    
+                return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>2])->with('error','عذرآ ولكن قيمة البنود المدخلة قد تم إدخالها لهذا الشهر');
             }else{
-                return redirect()->back()->with('success','تمت اضافة كل المدخلات الشهرية بنجاح');    
+                return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>3])->with('success','تمت اضافة كل المدخلات الشهرية بنجاح');
             }
             // all good
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with('error','للاسف حدث خطأ ما الرجاء اعادة المحاولة');
         }
+    }
+
+
+    public function backTo($date, $id,$num)
+    {
+        $date = request('date');
+        $ministry = Ministrie::find(request('id'));
+        $items = Items::get();
+        $payeds = MonthllyPayed::where('ministry_id', request('id'))->whereDate('date', request('date').'-1')->get();
+        return view('add-month-pay',['ministry'=>$ministry, 'payeds'=>$payeds, 'date'=>$date, 'items'=>$items]);
     }
 
     /**
@@ -182,7 +194,6 @@ class MonthPayedController extends Controller
                     }else{
                         if($found->total != $itemP[$i]){
                             $found->total = $itemP[$i];
-                            $found->created_id = auth()->user()->id;
                             $found->update();
                         }
                         $counter++;

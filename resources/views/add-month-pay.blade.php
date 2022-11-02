@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>اضافة مستخدم</title>
+        <title>{{$ministry->name}}  ({{$date}})</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -49,18 +49,19 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">تــعبــئــة بـــيــانــات  </h4>
-
-                                    <form action="{{route('monthPayeds.store',[$ministry->id])}}" method="post" enctype="multipart/form-data">
-                                    @csrf
+                                    <h4 class="mb-sm-0 font-size-18"> تــعبــئــة بـــيــانــات  </h4>
                                     
-                                    <div class="mb-3">
-                                        <label for="manufacturerbrand">تحديد التاريخ</label>
-                                        <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
-                                            <input type="month" class="form-control" style="direction: rtl;" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد التاريخ')" oninput="this.setCustomValidity('')" />
-                                        </div>
-                                    </div>
+                                    <h5 class="mb-sm-0 font-size-18">{{$ministry->name}}  ({{$date}}) </h5>
 
+                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" onclick="searchBy({{$ministry->id}})" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
+                                        تحديد التاريخ <i class="mdi mdi-calendar-month me-1"></i> 
+                                    </button>
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <b><a href="{{route('ministries.show',[$ministry->parent->id])}}" style="font-size: 14px;">{{$ministry->parent->name}}</a></b>
                                 </div>
                             </div>
 
@@ -68,6 +69,13 @@
 
                         </div>
                         <!-- end page title -->
+
+
+                        <form action="{{route('monthPayeds.store',[$ministry->id])}}" method="post" enctype="multipart/form-data">
+                        @csrf
+
+                        <input type="hidden" value="{{$date}}" name="date" />
+
 
                         <div class="row">
                             <div class="col-12">
@@ -80,6 +88,15 @@
                                             <div class="row">
 
                                                 @foreach ($items->where('door', 1) as $item)
+
+                                                    @if($payeds->where('item_id', $item->id)->first())
+                                                    <div class="col-sm-2">
+                                                        <div class="mb-3">
+                                                            <label for="fullname">{{$item->name}}</label>
+                                                            <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                        </div>
+                                                    </div>
+                                                    @else
                                                     <div class="col-sm-2">
                                                         <div class="mb-3">
                                                             <label for="fullname">{{$item->name}}</label>
@@ -88,6 +105,9 @@
                                                             <input id="fullname" style="direction: rtl;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
                                                         </div>
                                                     </div>
+                                                    @endif
+
+
                                                 @endforeach
 
                                             </div>
@@ -105,14 +125,24 @@
 
                                         <div class="row">
                                             @foreach ($items->where('door', 2) as $item)
+                                            @if($payeds->where('item_id', $item->id)->first())
+                                            <div class="col-sm-2">
+                                                <div class="mb-3">
+                                                    <label for="fullname">{{$item->name}}</label>
+                                                    <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                </div>
+                                            </div>
+                                            @else
                                             <div class="col-sm-2">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
                                                     <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                     <input type="hidden" value="2" name="door_id[]">
-                                                    <input id="fullname" name="price[]" style="direction: rtl;" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    <input id="fullname" style="direction: rtl;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
                                                 </div>
                                             </div>
+                                            @endif
+
                                         @endforeach
 
                                             </div>
@@ -131,14 +161,23 @@
 
                                             <div class="row">
                                                 @foreach ($items->where('door', 3) as $item)
-                                                    <div class="col-sm-2">
-                                                        <div class="mb-3">
-                                                            <label for="fullname">{{$item->name}}</label>
-                                                            <input type="hidden" value="{{$item->id}}" name="item_id[]">
-                                                            <input type="hidden" value="3" name="door_id[]">
-                                                            <input id="fullname" name="price[]" style="direction: rtl;" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
-                                                        </div>
+                                                @if($payeds->where('item_id', $item->id)->first())
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
                                                     </div>
+                                                </div>
+                                                @else
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <input type="hidden" value="{{$item->id}}" name="item_id[]">
+                                                        <input type="hidden" value="3" name="door_id[]">
+                                                        <input id="fullname" style="direction: rtl;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    </div>
+                                                </div>
+                                                @endif
                                                 @endforeach
 
 
@@ -160,14 +199,23 @@
 
                                         <div class="row">
                                             @foreach ($items->where('door', 4) as $item)
+                                            @if($payeds->where('item_id', $item->id)->first())
+                                            <div class="col-sm-2">
+                                                <div class="mb-3">
+                                                    <label for="fullname">{{$item->name}}</label>
+                                                    <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                </div>
+                                            </div>
+                                            @else
                                             <div class="col-sm-2">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
                                                     <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                     <input type="hidden" value="4" name="door_id[]">
-                                                    <input id="fullname" name="price[]" style="direction: rtl;" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    <input id="fullname" style="direction: rtl;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
                                                 </div>
                                             </div>
+                                            @endif
                                         @endforeach
 
 
@@ -188,14 +236,23 @@
 
                                             <div class="row">
                                                 @foreach ($items->where('door', 5) as $item)
-                                                    <div class="col-sm-2">
-                                                        <div class="mb-3">
-                                                            <label for="fullname">{{$item->name}}</label>
-                                                            <input type="hidden" value="{{$item->id}}" name="item_id[]">
-                                                            <input type="hidden" value="5" name="door_id[]">
-                                                            <input id="fullname" name="price[]" style="direction: rtl;" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
-                                                        </div>
+                                                @if($payeds->where('item_id', $item->id)->first())
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
                                                     </div>
+                                                </div>
+                                                @else
+                                                <div class="col-sm-2">
+                                                    <div class="mb-3">
+                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <input type="hidden" value="{{$item->id}}" name="item_id[]">
+                                                        <input type="hidden" value="5" name="door_id[]">
+                                                        <input id="fullname" style="direction: rtl;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    </div>
+                                                </div>
+                                                @endif
                                                 @endforeach
 
 
@@ -245,6 +302,47 @@
                     </div> <!-- container-fluid -->
                 </div>
                 <!-- End Page-content -->
+
+
+
+                <!-- Modal -->
+                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="orderdetailsModalLabel">البحث بتاريخ معين</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {{-- <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
+                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p> --}}
+
+                                <form action="{{route('monthPayeds.create',[$ministry->id])}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" value="" id="mini_id" name="id">
+                                    <div class="mb-3">
+                                        <label for="manufacturerbrand">تحديد التاريخ</label>
+                                        <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
+                                            <input type="month" class="form-control" style="direction: rtl;" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد التاريخ')" oninput="this.setCustomValidity('')" >
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">البحث</button>
+
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                                        
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end modal -->
+
 
 
                 @include('includes.footer')
@@ -319,5 +417,10 @@
         <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
 
+        <script>
+                        function searchBy(id){ 
+    document.getElementById("mini_id").value = id;
+}
+        </script>
     </body>
 </html>

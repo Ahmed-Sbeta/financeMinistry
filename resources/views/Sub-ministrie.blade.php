@@ -100,21 +100,35 @@
 
                                                         <td>
                                                             <!-- Button trigger modal -->
+                                                            @if(auth()->user()->role_id == 1)
                                                             <a href="{{route('monthPayeds.show',[$mini->id])}}" class="btn btn-primary btn-sm btn-rounded">
                                                                 عــرض الـتـفـاصيل
                                                             </a>
+                                                            @else
+                                                            -
+                                                            @endif
                                                         </td>
 
                                                         <td>
-                                                            <a href="{{route('monthPayeds.create',[$mini->id])}}" type="button" class="btn btn-success btn-sm btn-rounded">
-                                                                تعبئة <i class="mdi mdi-calendar-month"></i> 
+                                                            @if($mini->chilldren->count() > 0)
+                                                            <a href="{{route('ministries.show',[$mini->id])}}" class="btn btn-primary btn-sm btn-rounded">
+                                                                الجـهات الفرعية
                                                             </a>
+                                                            @else
+                                                            <button type="button" class="btn btn-success btn-sm btn-rounded" onclick="searchBy({{$mini->id}})" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
+                                                                تعبئة <i class="mdi mdi-calendar-month me-1"></i> 
+                                                            </button>
+                                                            @endif
+
                                                         </td>
 
                                                         <td>
                                                             <ul class="list-inline font-size-20 contact-links mb-0">
                                                                 <li class="list-inline-item px-2">
                                                                     <a href="{{route('ministries.edit',[$mini->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                                </li>
+                                                                <li class="list-inline-item px-2">
+                                                                    <a href="{{route('ministries.create',[$mini->id])}}" class="text-success"><i class="mdi mdi-plus font-size-18"></i></a>
                                                                 </li>
                                                             </ul>
                                                         </td>
@@ -137,47 +151,38 @@
                 <!-- End Page-content -->
 
                 <!-- Modal -->
-                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby=orderdetailsModalLabel" aria-hidden="true">
+                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="orderdetailsModalLabel">إجمالي السنة</h5>
+                                <h5 class="modal-title" id="orderdetailsModalLabel">البحث بتاريخ معين</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 {{-- <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
                                 <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p> --}}
 
-                                <div class="table-responsive">
-                                    <table class="table align-middle table-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">الباب الاول</th>
-                                                <th scope="col">الباب الثاني</th>
-                                                <th scope="col">الباب الثالث</th>
-                                                <th scope="col">الباب الرابع</th>
-                                                <th scope="col">الباب الخامس</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @for($i=1;$i<13;$i++)
-                                            <tr>
-                                                <th scope="row">{{$i}}</th>
-                                                <td>255</td>
-                                                <td>255</td>
-                                                <td>255</td>
-                                                <td>255</td>
-                                                <td>255</td>
-                                            </tr>
-                                            @endfor
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <form action="{{route('monthPayeds.create',[$ministry->id])}}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" value="" id="mini_id" name="id">
+                                    <div class="mb-3">
+                                        <label for="manufacturerbrand">تحديد التاريخ</label>
+                                        <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
+                                            <input type="month" class="form-control" style="direction: rtl;" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد التاريخ')" oninput="this.setCustomValidity('')" >
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light">البحث</button>
+
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                                        
+                                    </div>
+
+                                </form>
+
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -244,6 +249,10 @@
 
         <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
-
+<script>
+            function searchBy(id){ 
+    document.getElementById("mini_id").value = id;
+}
+</script>
     </body>
 </html>

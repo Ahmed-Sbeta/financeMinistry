@@ -17,4 +17,7 @@ class Ministrie extends Model
         return $this->hasMany(MonthllyPayed::class, 'ministry_id', 'id');
     }
 
+    public function chilldren(){
+        return $this->hasMany(Ministrie::class, 'parent_id', 'id');
+    }
 }
