@@ -144,18 +144,17 @@
                                             <input type="month" class="form-control" style="direction: rtl;" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد التاريخ')" oninput="this.setCustomValidity('')" >
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-wrap gap-2 pb-3 text-center">
+                                    <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">البحث</button>
-                                        <!-- <button type="button" class="btn btn-secondary waves-effect waves-light">Cancel</button> -->
+
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                                        
                                     </div>
 
                                 </form>
 
                             </div>
-                            <div class="modal-footer">
 
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
                         </div>
                     </div>
                 </div>
