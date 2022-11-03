@@ -21,7 +21,7 @@ class AdminUserSeeder extends Seeder
             'role_id' => 1,
             'phoneNumber' => '0911111111',
             'image' => 'user.png',
-            'password' => bcrypt('11111111'),
+            'password' => bcrypt('20222022'),
         ]);
     }
 }
