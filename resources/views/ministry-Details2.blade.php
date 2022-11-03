@@ -51,6 +51,10 @@
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                     <h4 class="mb-sm-0 font-size-18"> بنود <span>{{$ministry->name}}</span> بتاريخ <span>{{$date}}</span> </h4>
 
+                                    @if($payeds->first())
+                                        <h4 class="mb-sm-0 font-size-18"> الموظف <span>{{$payeds->first()->user->name}}</span> </h4>
+                                    @endif
+
                                     <form action="{{route('monthPayeds.update',[$ministry->id])}}" method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         {{ method_field('PATCH') }}

@@ -62,8 +62,8 @@
                                     <form class="form-horizontal" action="{{route('login')}}" method="post" enctype="multipart/form-data">
                                       @csrf
                                         <div class="mb-3">
-                                            <label for="username" class="form-label" style="font-size: 130%;">إســم الـمـسـتـخـدم*</label>
-                                            <input type="text" class="form-control" name="name" id="username" placeholder="اسم المستخدم" required oninvalid="this.setCustomValidity('الرجاء ادخال اسم المستخدم')" oninput="this.setCustomValidity('')">
+                                            <label for="username" class="form-label" style="font-size: 130%;">إســم المستخدم / البريد الالكتروني*</label>
+                                            <input type="text" class="form-control" name="name" id="username" placeholder="اسم المستخدم او البريد الالكتروني" required oninvalid="this.setCustomValidity('الرجاء ادخال اسم المستخدم او كلمة المرور')" oninput="this.setCustomValidity('')">
                                         </div>
 
                                         <div class="mb-3">

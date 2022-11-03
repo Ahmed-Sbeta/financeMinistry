@@ -68,7 +68,35 @@
                                                 </thead>
                                                 <tbody>
 
-
+                                                    <tr>
+                                                        <td>
+                                                            <div class="avatar-xs">
+                                                              <a href="javascript: void(0);" class="d-inline-block">
+                                                                  <img src="{{ asset(Storage::url(auth()->user()->image)) }}" alt="" class="rounded-circle avatar-xs">
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">{{auth()->user()->name}}</a></h5>
+                                                            <p class="text-muted mb-0">{{auth()->user()->work_id}}</p>
+                                                        </td>
+                                                        <td>{{auth()->user()->email}}</td>
+                                                        <td> {{auth()->user()->phoneNumber}}
+                                                            <!-- <div>
+                                                                <a href="javascript: void(0);" class="badge badge-soft-primary font-size-11 m-1">Photoshop</a>
+                                                             </div> -->
+                                                        </td>
+                                                        <td>
+                                                            {{auth()->user()->role->role}}
+                                                        </td>
+                                                        <td>
+                                                            <ul class="list-inline font-size-20 contact-links mb-0">
+                                                                <li class="list-inline-item px-2">
+                                                                    <a href="{{route('users.edit',[auth()->user()->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
                                                     
                                                     @foreach($users as $user)
                                                     <tr>
