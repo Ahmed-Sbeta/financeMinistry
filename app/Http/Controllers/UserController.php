@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id', '<', auth()->user()->id)->paginate(15);
+        $users = User::where('role_id', '>', auth()->user()->id)->paginate(15);
         return view('employees',compact('users'));
     }
 
@@ -55,7 +55,7 @@ class UserController extends Controller
             'phoneNumber'  => "required|numeric",
             'role'  => "required",
         ],
-        [ 
+        [
             'name.required' => 'يجب إدخال الاسم',
             'email.required' => 'يجب اضافة البريد الالكتروني',
             'email.email' => 'يجب اضافة البريد الالكتروني',
@@ -125,7 +125,7 @@ class UserController extends Controller
                 'phoneNumber'  => "required|numeric",
                 'role'  => "required",
             ],
-            [ 
+            [
                 'name.required' => 'يجب إدخال الاسم',
                 'work_id.required' => 'يجب اضافة الرقم الوظيفي',
                 'work_id.numeric' => 'يجب ان يحتوي الرقم الوظيفي علي ارقام فقط',
@@ -146,7 +146,7 @@ class UserController extends Controller
                 $user->image = str_replace('public', '', $user->image);
             }
             $user->update();
-    
+
             return redirect()->route('users.index')->with('success','تــم تـعـديـل بـيـانـات المـسـتـخـدم بــنــجــاح');
     }
 

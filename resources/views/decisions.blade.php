@@ -59,8 +59,10 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
+                                                  @if(Auth::user()->role->role == "مدير")
                                                     <a href="{{route('decisions.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضــافــة قــرار جــديــد</a>
-                                                </div>
+                                                    @endif
+                                                  </div>
                                             </div><!-- end col-->
                                             @include('includes.messages')
 

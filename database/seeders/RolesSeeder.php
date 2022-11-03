@@ -16,7 +16,7 @@ class RolesSeeder extends Seeder
     {
         Role::insert([
             ['role' => 'مدير'],
-            ['role' => 'مسؤول'],
+            // ['role' => 'مسؤول'],
             ['role' => 'موظف']
         ]
     );
