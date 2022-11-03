@@ -20,6 +20,5 @@ class DatabaseSeeder extends Seeder
         $this->call(sub2MinistrySeeder::class);
         $this->call(ItemsSeeder::class);
 
-
     }
 }

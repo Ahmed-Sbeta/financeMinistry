@@ -66,7 +66,7 @@
                                                     <a href="{{route('items.create',[1])}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-calendar-month me-1"></i> البحث بتاريخ</a>
                                                     </a> --}}
                                                     <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" onclick="searchBy({{$ministry->id}})" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
-                                                        البحث بتاريخ <i class="mdi mdi-calendar-month me-1"></i> 
+                                                        البحث بتاريخ <i class="mdi mdi-calendar-month me-1"></i>
                                                     </button>
                                                 </div>
                                             </div><!-- end col-->
@@ -112,7 +112,7 @@
                                             </table>
                                         </div>
 
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -144,11 +144,11 @@
                                             <input type="month" class="form-control" style="direction: rtl;" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد التاريخ')" oninput="this.setCustomValidity('')" >
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
+                                    <div class="modal-footer justify-content-between">
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">البحث</button>
 
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                                        
+
                                     </div>
 
                                 </form>
@@ -230,7 +230,7 @@
                 document.getElementById("rtl-mode-switch").trigger('click');
         });
 
-        function searchBy(id){ 
+        function searchBy(id){
     document.getElementById("mini_id").value = id;
 }
 

@@ -50,11 +50,11 @@
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                     <h4 class="mb-sm-0 font-size-18"> تــعبــئــة بـــيــانــات  </h4>
-                                    
+
                                     <h5 class="mb-sm-0 font-size-18">{{$ministry->name}}  ({{$date}}) </h5>
 
                                     <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" onclick="searchBy({{$ministry->id}})" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
-                                        تحديد التاريخ <i class="mdi mdi-calendar-month me-1"></i> 
+                                        تحديد التاريخ <i class="mdi mdi-calendar-month me-1"></i>
                                     </button>
 
                                 </div>
@@ -99,7 +99,11 @@
                                                     @else
                                                     <div class="col-sm-2">
                                                         <div class="mb-3">
-                                                            <label for="fullname">{{$item->name}}</label>
+                                                            <label for="fullname" class="form-label" style="white-space: nowrap;
+                                                            width: 150px;
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                            display: inline-block;">{{$item->name}}</label>
                                                             <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                             <input type="hidden" value="1" name="door_id[]">
                                                             <input id="fullname" style="direction: rtl;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
@@ -135,7 +139,11 @@
                                             @else
                                             <div class="col-sm-2">
                                                 <div class="mb-3">
-                                                    <label for="fullname">{{$item->name}}</label>
+                                                    <label for="fullname" style="white-space: nowrap;
+                                                    width: 150px;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    display: inline-block;">{{$item->name}}</label>
                                                     <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                     <input type="hidden" value="2" name="door_id[]">
                                                     <input id="fullname" style="direction: rtl;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
@@ -331,7 +339,7 @@
                                         <button type="submit" class="btn btn-primary waves-effect waves-light">البحث</button>
 
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                                        
+
                                     </div>
 
                                 </form>
@@ -418,7 +426,7 @@
         <script src="{{asset('assets/js/app.js')}}"></script>
 
         <script>
-                        function searchBy(id){ 
+                        function searchBy(id){
     document.getElementById("mini_id").value = id;
 }
         </script>

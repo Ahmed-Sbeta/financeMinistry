@@ -59,8 +59,10 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <a href="{{route('decisions.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضــافــة بــنـد جـديـد</a>
-                                                </div>
+                                                  @if(Auth::user()->role->role == "مدير")
+                                                    <a href="{{route('decisions.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضــافــة قــرار جــديــد</a>
+                                                    @endif
+                                                  </div>
                                             </div><!-- end col-->
                                             @include('includes.messages')
 
@@ -84,24 +86,25 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                  @foreach($decisions as $decision)
                                                     <tr>
                                                         <td>
                                                             <div class="form-check font-size-16">
 
                                                             </div>
                                                         </td>
-                                                        <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2540</a> </td>
-                                                        <td>قــرار زيــأدة الــمــرتـبـات</td>
+                                                        <td><a href="javascript: void(0);" class="text-body fw-bold">{{$decision->decisionsNumber}}</a> </td>
+                                                        <td>{{$decision->title}}</td>
                                                         <td>
-                                                            03 AUG, 2022
+                                                            {{$decision->date}}
                                                         </td>
                                                         <td>
-                                                            وزارة الــعــمــل
+                                                            {{$decision->issuer}}
                                                         </td>
                                                         <td>
                                                         </td>
                                                         <td>
-                                                            وزارة الــعــمــل
+                                                            {{$decision->receiver}}
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
@@ -111,11 +114,12 @@
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-3">
-                                                                <a href="javascript:void(0);" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                                <a href="{{route('decisions.edit',[$decision->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
                                                                 <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
                                                             </div>
                                                         </td>
                                                     </tr>
+                                                    @endforeach
 
                                                 </tbody>
                                             </table>
@@ -147,16 +151,14 @@
                 <!-- End Page-content -->
 
                 <!-- Modal -->
-                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby=orderdetailsModalLabel" aria-hidden="true">
+                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id=orderdetailsModalLabel">Order Details</h5>
+                                <h5 class="modal-title" id="orderdetailsModalLabel">Order Details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
-                                <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p>
 
                                 <div class="table-responsive">
                                     <table class="table align-middle table-nowrap">

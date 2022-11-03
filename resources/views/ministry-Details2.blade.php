@@ -53,7 +53,7 @@
 
                                     <form action="{{route('monthPayeds.update',[$ministry->id])}}" method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
-                                        {{ method_field('PATCH') }}                                    
+                                        {{ method_field('PATCH') }}
                                     <div class="mb-3" style="display: none;">
                                         <label for="manufacturerbrand">تحديد التاريخ</label>
                                         <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
@@ -95,7 +95,11 @@
                                                     @else
                                                     <div class="col-sm-2 one" id="one">
                                                         <div class="mb-3">
-                                                            <label for="fullname">{{$item->name}}</label>
+                                                            <label for="fullname" style="white-space: nowrap;
+                                                            width: 150px;
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                            display: inline-block;">{{$item->name}}</label>
                                                             <p style="color: green;" for="fullname">0</p>
                                                         </div>
                                                     </div>
@@ -103,7 +107,11 @@
 
                                                     <div class="col-sm-2 two" style="display: none" id="two">
                                                         <div class="mb-3">
-                                                            <label for="fullname">{{$item->name}}</label>
+                                                            <label for="fullname" style="white-space: nowrap;
+                                                            width: 150px;
+                                                            overflow: hidden;
+                                                            text-overflow: ellipsis;
+                                                            display: inline-block;" >{{$item->name}}</label>
                                                             <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                             <input type="hidden" value="1" name="door_id[]">
                                                             @if($payeds->where('item_id', $item->id)->first())
@@ -141,7 +149,11 @@
                                             @else
                                             <div class="col-sm-2 one" id="one">
                                                 <div class="mb-3">
-                                                    <label for="fullname">{{$item->name}}</label>
+                                                    <label for="fullname" style="white-space: nowrap;
+                                                    width: 150px;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    display: inline-block;">{{$item->name}}</label>
                                                     <p style="color: green;" for="fullname">0</p>
                                                 </div>
                                             </div>
@@ -149,7 +161,11 @@
 
                                             <div class="col-sm-2 two" style="display: none" id="two">
                                                 <div class="mb-3">
-                                                    <label for="fullname">{{$item->name}}</label>
+                                                    <label for="fullname" style="white-space: nowrap;
+                                                    width: 150px;
+                                                    overflow: hidden;
+                                                    text-overflow: ellipsis;
+                                                    display: inline-block;">{{$item->name}}</label>
                                                     <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                     <input type="hidden" value="2" name="door_id[]">
                                                     @if($payeds->where('item_id', $item->id)->first())
@@ -180,14 +196,22 @@
                                                 @if($payeds->where('item_id', $item->id)->first())
                                                 <div class="col-sm-2 one" id="one">
                                                     <div class="mb-3">
-                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <label for="fullname" style="white-space: nowrap;
+                                                        width: 150px;
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        display: inline-block;">{{$item->name}}</label>
                                                         <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
                                                     </div>
                                                 </div>
                                                 @else
                                                 <div class="col-sm-2 one" id="one">
                                                     <div class="mb-3">
-                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <label for="fullname" style="white-space: nowrap;
+                                                        width: 150px;
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        display: inline-block;">{{$item->name}}</label>
                                                         <p style="color: green;" for="fullname">0</p>
                                                     </div>
                                                 </div>
@@ -195,7 +219,11 @@
 
                                                 <div class="col-sm-2 two" style="display: none" id="two">
                                                     <div class="mb-3">
-                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <label for="fullname" style="white-space: nowrap;
+                                                        width: 150px;
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        display: inline-block;">{{$item->name}}</label>
                                                         <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                         <input type="hidden" value="3" name="door_id[]">
                                                         @if($payeds->where('item_id', $item->id)->first())
@@ -277,14 +305,22 @@
                                                 @if($payeds->where('item_id', $item->id)->first())
                                                 <div class="col-sm-2 one" id="one">
                                                     <div class="mb-3">
-                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <label for="fullname" style="white-space: nowrap;
+                                                        width: 150px;
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        display: inline-block;">{{$item->name}}</label>
                                                         <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
                                                     </div>
                                                 </div>
                                                 @else
                                                 <div class="col-sm-2 one" id="one">
                                                     <div class="mb-3">
-                                                        <label for="fullname">{{$item->name}}</label>
+                                                        <label for="fullname" style="white-space: nowrap;
+                                                        width: 150px;
+                                                        overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        display: inline-block;">{{$item->name}}</label>
                                                         <p style="color: green;" for="fullname">0</p>
                                                     </div>
                                                 </div>

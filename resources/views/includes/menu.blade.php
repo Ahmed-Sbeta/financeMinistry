@@ -62,6 +62,7 @@
                             </button>
                         </div>
 
+                        @if(Auth::user()->role->role == "مدير")
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -148,6 +149,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
@@ -165,7 +167,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
-                                <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">شخصي</span></a>
+                                <!-- <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">شخصي</span></a> -->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -196,6 +198,7 @@
                     <div id="sidebar-menu">
                         <!-- Left Menu Start -->
                         <ul class="metismenu list-unstyled" id="side-menu">
+                          @if(Auth::user()->role->role == "مدير")
                             <li class="menu-title" key="t-menu" >عام</li>
 
                             <li>
@@ -212,6 +215,7 @@
                                     <span key="t-file-manager " style="font-size: 130%">تـقــاريــر</span>
                                 </a>
                             </li>
+                            @endif
 
                             <li class="menu-title" key="t-apps">الإدارة</li>
 
@@ -223,6 +227,8 @@
                                     <span key="t-file-manager" style="font-size: 130%">الجـــهـــات</span>
                                 </a>
                             </li>
+
+                            @if(Auth::user()->role->role == "مدير")
 
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
@@ -237,6 +243,7 @@
                                   <li><a href="{{route('items.show',[5])}}" key="t-full-calendar">البــاب الــخــامــس</a></li>
                                 </ul>
                             </li>
+                            @endif
 
 
                             <li>
@@ -246,7 +253,10 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{route('decisions.index')}}">كــل الــقــرارات </a></li>
+                                    @if(Auth::user()->role->role == "مدير")
+
                                     <li><a href="{{route('decisions.create')}}">إنــشــاء قــرار</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             <li>
@@ -256,7 +266,10 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{route('notifications.index')}}" key="t-inbox">كــل الإشــعــارات</a></li>
+                                    @if(Auth::user()->role->role == "مدير")
+
                                     <li><a href="{{route('notifications.create')}}" key="t-read-email">إرســال إشــعــار</a></li>
+                                    @endif
 
                                 </ul>
                             </li>
@@ -296,6 +309,7 @@
                                 </ul>
                             </li> -->
 
+                            @if(Auth::user()->role->role == "مدير")
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -310,6 +324,7 @@
                                     <!-- <li><a href="contacts-profile.html" key="t-profile">Profile</a></li> -->
                                 </ul>
                             </li>
+                            @endif
 
                             <!-- <li>
                                 <a href="javascript: void(0);" class="waves-effect">

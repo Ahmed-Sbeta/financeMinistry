@@ -85,7 +85,7 @@
                                                         <td>
                                                             <div class="avatar-xs">
                                                               <a href="javascript: void(0);" class="d-inline-block">
-                                                                  <img src="{{ asset(Storage::url($mini->image)) }}" alt="" class="rounded-circle avatar-xs">
+                                                                  <img src="{{asset('assets/images/blue.png')}}" alt="" class="rounded-circle avatar-xs">
                                                                 </a>
                                                             </div>
                                                         </td>
@@ -116,7 +116,7 @@
                                                             </a>
                                                             @else
                                                             <button type="button" class="btn btn-success btn-sm btn-rounded" onclick="searchBy({{$mini->id}})" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
-                                                                تعبئة <i class="mdi mdi-calendar-month me-1"></i> 
+                                                                تعبئة <i class="mdi mdi-calendar-month me-1"></i>
                                                             </button>
                                                             @endif
 
@@ -172,12 +172,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light">البحث</button>
+                                    <div class="modal-footer justify-content-between">
 
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
-                                        
+                                        <button type="submit" class=" btn btn-primary waves-effect waves-light">البحث</button>
+
+                                        <button type="button" class=" btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
                                     </div>
+
+
 
                                 </form>
 
@@ -215,7 +217,7 @@
 
                 <div class="p-4">
                     <div class="mb-2">
-                        <img src="assets/images/layouts/layout-3.jpg" class="img-thumbnail" alt="layout images">
+                        <img src="{{asset('assets/images/layouts/layout-3.jpg')}}" class="img-thumbnail" alt="layout images">
                     </div>
                     <div class="form-check form-switch mb-3">
                         <input class="form-check-input theme-choice active" type="checkbox" id="rtl-mode-switch" checked>
@@ -223,7 +225,7 @@
                     </div>
 
                     <div class="mb-2">
-                        <img src="assets/images/layouts/layout-4.jpg" class="img-thumbnail" alt="layout images">
+                        <img src="{{asset('assets/images/layouts/layout-4.jpg')}}" class="img-thumbnail" alt="layout images">
                     </div>
                     <div class="form-check form-switch mb-5">
                         <input class="form-check-input theme-choice" type="checkbox" id="dark-rtl-mode-switch">
@@ -246,11 +248,19 @@
         <script src="{{asset('assets/libs/metismenu/metisMenu.min.js')}}"></script>
         <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
         <script src="{{asset('assets/libs/node-waves/waves.min.js')}}"></script>
+        <!-- apexcharts -->
+        <script src="{{asset('assets/libs/apexcharts/apexcharts.min.js')}}"></script>
 
+        <script src="{{asset('assets/js/pages/profile.init.js')}}"></script>
+        <script>
+            $( document ).ready(function() {
+                document.getElementById("rtl-mode-switch").trigger('click');
+        });
+        </script>
         <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
 <script>
-            function searchBy(id){ 
+            function searchBy(id){
     document.getElementById("mini_id").value = id;
 }
 </script>
