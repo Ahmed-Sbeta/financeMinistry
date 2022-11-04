@@ -4,7 +4,7 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
-                            <a href="index.html" class="logo logo-dark">
+                            <a href="{{route('home')}}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <img src="{{asset('assets/images/white.png')}}" alt="" height="22">
                                 </span>
@@ -13,7 +13,7 @@
                                 </span>
                             </a>
 
-                            <a href="index.html" class="logo logo-light">
+                            <a href="{{route('home')}}" class="logo logo-light">
                                 <span class="logo-sm">
                                     <img src="{{asset('assets/images/white.png')}}" alt="" height="22">
                                 </span>
@@ -62,7 +62,7 @@
                             </button>
                         </div>
 
-                        @if(Auth::user()->role->role == "مدير")
+                        @if(Auth::user()->role_id == 1)
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -178,11 +178,7 @@
                             </div>
                         </div>
 
-                        <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon right-bar-toggle waves-effect">
-                                <i class="bx bx-cog bx-spin"></i>
-                            </button>
-                        </div>
+
 
                     </div>
                 </div>
