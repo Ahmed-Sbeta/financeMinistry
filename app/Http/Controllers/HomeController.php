@@ -2,15 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Items;
+use App\Models\Ministrie;
+use Illuminate\Http\Request;
+use App\Models\MonthllyPayed;
 
 class HomeController extends Controller
 {
+
       public function index()
       {
-          return view('dashboard');
+        $ministries = Ministrie::where('parent_id', NULL)->count();
+        $subMinistries = Ministrie::where('parent_id', '!=', NULL)->count();
+        $items = Items::count();
+        $users = User::where('role_id', '!=', 1)->count();
+        $door1 = MonthllyPayed::where('door_id', 1)->sum('total');
+        $door2 = MonthllyPayed::where('door_id', 2)->sum('total');
+        $door3 = MonthllyPayed::where('door_id', 3)->sum('total');
+        $door4 = MonthllyPayed::where('door_id', 4)->sum('total');
+        $door5 = MonthllyPayed::where('door_id', 5)->sum('total');
+        $total = MonthllyPayed::whereYear('created_at', date('Y'))->sum('total');
+        $total1 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 1)->sum('total');
+        $total2 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 2)->sum('total');
+        $total3 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 3)->sum('total');
+        $total4 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 4)->sum('total');
+        $total5 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 5)->sum('total');
+        return view('dashboard',compact('ministries','subMinistries','items','users','door1','door2','door3','door4','door5','total','total1','total2','total3','total4','total5'));
       }
 
       public function login(){

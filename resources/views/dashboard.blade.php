@@ -83,19 +83,19 @@
                                                         <div class="col-4">
                                                             <div>
                                                                 <p class="text-muted text-truncate mb-2">الــوزارات</p>
-                                                                <h5 class="mb-0">36</h5>
+                                                                <h5 class="mb-0">{{$ministries}}</h5>
                                                             </div>
                                                         </div>
                                                         <div class="col-4">
                                                             <div>
                                                                 <p class="text-muted text-truncate mb-2">الهــيـئـات</p>
-                                                                <h5 class="mb-0">0</h5>
+                                                                <h5 class="mb-0">{{$subMinistries}}</h5>
                                                             </div>
                                                         </div>
                                                         <div class="col-4">
                                                             <div>
                                                                 <p class="text-muted text-truncate mb-2">الــبــنــود</p>
-                                                                <h5 class="mb-0">0</h5>
+                                                                <h5 class="mb-0">{{$items}}</h5>
 
                                                             </div>
                                                         </div>
@@ -136,8 +136,8 @@
                                                     <p>الصفحة الرئيسية</p>
 
                                                     <ul class="ps-3 mb-0">
-                                                        <li class="py-1">عدد الموظفين 0</li>
-                                                        <li class="py-1">مراقبين ماليين 0</li>
+                                                        <li class="py-1">عدد الموظفين {{$users}}</li>
+                                                        {{-- <li class="py-1">مراقبين ماليين 0</li> --}}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -156,13 +156,13 @@
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div class="avatar-xs me-3">
                                                         <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                                                            <i class="bx bx-copy-alt"></i>
+                                                            <i class="bx bx-envelope"></i>
                                                         </span>
                                                     </div>
-                                                    <h5 class="font-size-23 mb-0">المـرتـبـات الأساسـيـة</h5>
+                                                    <h5 class="font-size-23 mb-0">الاشعارات</h5>
                                                 </div>
                                                 <div class="text-muted mt-4">
-                                                    <h4>0 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                                    <h4>3 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 
                                                 </div>
                                             </div>
@@ -175,13 +175,13 @@
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div class="avatar-xs me-3">
                                                         <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                                                            <i class="bx bx-archive-in"></i>
+                                                            <i class="bx bx-task"></i>
                                                         </span>
                                                     </div>
-                                                    <h5 class="font-size-23 mb-0">عـلاوة العـائـلة</h5>
+                                                    <h5 class="font-size-23 mb-0">القرارات</h5>
                                                 </div>
                                                 <div class="text-muted mt-4">
-                                                    <h4> 0 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                                    <h4> 10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 
                                                 </div>
                                             </div>
@@ -194,13 +194,13 @@
                                                 <div class="d-flex align-items-center mb-3">
                                                     <div class="avatar-xs me-3">
                                                         <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                                                            <i class="bx bx-purchase-tag-alt"></i>
+                                                            <i class="bx bx-receipt"></i>
                                                         </span>
                                                     </div>
-                                                    <h5 class="font-size-23 mb-0">عـلاوة الـسـكـن</h5>
+                                                    <h5 class="font-size-23 mb-0">التقارير</h5>
                                                 </div>
                                                 <div class="text-muted mt-4">
-                                                    <h4> 0 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                                    <h4> 2 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 
 
                                                 </div>
@@ -219,13 +219,7 @@
                                         <div class="clearfix">
                                             <div class="float-end">
                                                 <div class="input-group input-group-sm">
-                                                    <select class="form-select form-select-sm">
-                                                        <option value="JA" selected>2022</option>
-                                                        <option value="DE">2021</option>
-                                                        <option value="NO">2020</option>
-                                                        <option value="OC">2019</option>
-                                                    </select>
-                                                    <label class="input-group-text">year</label>
+                                                    <label class="input-group-text">سنة {{now()->format('Y')}}</label>
                                                 </div>
                                             </div>
                                             <h4 class="card-title mb-4">إجـمـالـي الـمـصـروفـات</h4>
@@ -236,34 +230,34 @@
                                                 <div class="text-muted">
                                                     <div class="mb-4">
                                                         <p>هـذه الـسـنـة</p>
-                                                        <h4>$0</h4>
-                                                        <div><span class="badge badge-soft-success font-size-12 me-1"> + 0.2% </span> عن السنة الماضية</div>
+                                                        <h4>${{$total}}</h4>
+                                                        {{-- <div><span class="badge badge-soft-success font-size-12 me-1"> + 0.2% </span> عن السنة الماضية</div> --}}
                                                     </div>
 
 
                                                     <div class="row">
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الأول</p>
-                                                        <h5>$0</h5>
+                                                        <h5>${{$total1}}</h5>
                                                     </div>
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الثاني</p>
-                                                        <h5>$0</h5>
+                                                        <h5>${{$total2}}</h5>
                                                     </div>
                                                     </div>
                                                     <div class="row">
 
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الثالث</p>
-                                                        <h5>$0</h5>
+                                                        <h5>${{$total3}}</h5>
                                                     </div>
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الرابع</p>
-                                                        <h5>$0</h5>
+                                                        <h5>${{$total4}}</h5>
                                                     </div>
                                                     <div class="mt-2">
                                                         <p class="mb-2">الباب الخامس</p>
-                                                        <h5>$0</h5>
+                                                        <h5>${{$total5}}</h5>
                                                     </div>
                                                     </div>
                                                 </div>
@@ -291,21 +285,37 @@
                                                 <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-primary me-1"></i> الباب 1</p>
-                                                        <h5>$ 0</h5>
+                                                        <h5>$ {{$door1}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-success me-1"></i> الباب 2</p>
-                                                        <h5>$ 0</h5>
+                                                        <h5>$ {{$door2}}</h5>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-danger me-1"></i> الباب 3</p>
-                                                        <h5>$ 0</h5>
+                                                        <h5>$ {{$door3}}</h5>
                                                     </div>
                                                 </div>
+                                                @if($door4 > 0)
+                                                <div class="col-4">
+                                                    <div class="mt-4">
+                                                        <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-danger me-1"></i> الباب 4</p>
+                                                        <h5>$ {{$door4}}</h5>
+                                                    </div>
+                                                </div>
+                                                @endif
+                                                @if($door5 > 0)
+                                                <div class="col-4">
+                                                    <div class="mt-4">
+                                                        <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-danger me-1"></i> الباب 5</p>
+                                                        <h5>$ {{$door5}}</h5>
+                                                    </div>
+                                                </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -595,7 +605,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">$0</h5>
+                                                            <h5 class="mb-0">${{$door1}}</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -607,7 +617,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">$0</h5>
+                                                            <h5 class="mb-0">${{$door2}}</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -618,7 +628,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">$0</h5>
+                                                            <h5 class="mb-0">${{$door3}}</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -629,7 +639,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">$0</h5>
+                                                            <h5 class="mb-0">${{$door4}}</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -640,7 +650,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">$0</h5>
+                                                            <h5 class="mb-0">${{$door5}}</h5>
                                                         </td>
                                                     </tr>
                                                 </tbody>

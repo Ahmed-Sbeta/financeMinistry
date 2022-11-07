@@ -219,7 +219,6 @@
                             <li>
                                 <a href="{{route('ministries.index')}}" class="waves-effect">
                                     <i class="bx bx-briefcase-alt-2"></i>
-                                    <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
                                     <span key="t-file-manager" style="font-size: 130%">الجـــهـــات</span>
                                 </a>
                             </li>
@@ -227,8 +226,8 @@
                             @if(Auth::user()->role->role == "مدير")
 
                             <li>
-                                <a href="javascript: void(0);" class="waves-effect">
-                                    <i class="bx bx-calendar"></i><span class="badge rounded-pill bg-success float-end">New</span>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bx-calendar"></i>
                                     <span key="t-dashboards" style="font-size: 130%">الــبــنــود</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
@@ -258,7 +257,7 @@
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="bx bx-envelope"></i>
-                                    <span key="t-email" style="font-size: 130%">الإشــعــارات</span>
+                                    <span key="t-notifications" style="font-size: 130%">الإشــعــارات</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{route('notifications.index')}}" key="t-inbox">كــل الإشــعــارات</a></li>
