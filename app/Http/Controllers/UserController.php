@@ -104,8 +104,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        if(auth()->user()->role_id != 1){
+            return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
         $user = User::find($id);
-        $roles = Role::get();
+        $roles = Role::where('id','!=',1)->get();
         return view('edit-employee',compact('user','roles'));
     }
 
