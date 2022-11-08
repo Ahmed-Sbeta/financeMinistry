@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>إرسال اشعار</title>
+        <title>إضافة اشعار</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -12,6 +12,8 @@
         <link rel="shortcut icon" href="{{asset('assets/images/blue.png')}}">
 
         <link href="{{asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
         <!-- dropzone css -->
         <link href="{{asset('assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
@@ -62,18 +64,27 @@
                                         <h4 class="card-title mb-4"></h4>
                                         @include('includes.messages')
 
-                                        <form>
+                                        <form action="{{route('notifications.store')}}" method="post">
+                                        @csrf
                                             <div class="row mb-4">
-                                                <label for="worktitle" class="col-form-label col-lg-2" style="font-size:140%;">عــنــوان</label>
-                                                <div class="col-lg-10">
-                                                    <input id="worktitle" name="worktitle" type="text" class="form-control" placeholder="عــنــوان الإشــعــار...">
+                                                <div class="col-lg-6">
+                                                    <label for="worktitle" class="col-form-label col-lg-2" style="font-size:140%;">عــنــوان</label>
+                                                    <input id="worktitle" name="title" type="text" class="form-control" placeholder="عــنــوان الإشــعــار..." required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان خاص بالاشعار')" oninput="this.setCustomValidity('')">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label for="worktitle" class="col-form-label col-lg-2" style="font-size:140%;">الأهـمـيـة</label>
+                                                    <select class="form-control select" name="priority">
+                                                        <option value="1">ضعيف</option>
+                                                        <option value="2" selected>متوسط</option>
+                                                        <option value="3">مهم</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
                                             <div class="row mb-4">
                                                 <label for="description" class="col-form-label col-lg-2" style="font-size:140%;"> وصــف الاشــعــار</label>
                                                 <div class="col-lg-10">
-                                                    <textarea class="form-control" id="description" rows="3" placeholder="وصف..."></textarea>
+                                                    <textarea class="form-control" id="description" name="desc" rows="3" placeholder="وصف..."></textarea>
                                                 </div>
                                             </div>
 

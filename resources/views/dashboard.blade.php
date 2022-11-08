@@ -11,6 +11,9 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('assets/images/blue.png')}}">
 
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
         <!-- Bootstrap Css -->
         <link href="{{asset('assets/css/bootstrap-rtl.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
@@ -28,8 +31,6 @@
         <div id="layout-wrapper">
 
             @include('includes.menu')
-
-
 
 
             <!-- ============================================================== -->

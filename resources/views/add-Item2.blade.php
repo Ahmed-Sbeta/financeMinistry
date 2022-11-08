@@ -12,6 +12,8 @@
         <link rel="shortcut icon" href="{{asset('assets/images/blue.png')}}">
 
         <link href="{{asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
         <!-- dropzone css -->
         <link href="{{asset('assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />

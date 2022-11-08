@@ -4,7 +4,11 @@
                     <div class="d-flex">
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
+                            @if(Auth::user()->role_id == 1)
                             <a href="{{route('home')}}" class="logo logo-dark">
+                            @else
+                            <a href="{{route('ministries.index')}}" class="logo logo-dark">
+                            @endif
                                 <span class="logo-sm">
                                     <img src="{{asset('assets/images/white.png')}}" alt="" height="22">
                                 </span>
@@ -13,7 +17,11 @@
                                 </span>
                             </a>
 
-                            <a href="{{route('home')}}" class="logo logo-light">
+                                @if(Auth::user()->role_id == 1)
+                                    <a href="{{route('home')}}" class="logo logo-light">
+                                @else
+                                    <a href="{{route('ministries.index')}}" class="logo logo-light">
+                                @endif
                                 <span class="logo-sm">
                                     <img src="{{asset('assets/images/white.png')}}" alt="" height="22">
                                 </span>
@@ -62,12 +70,19 @@
                             </button>
                         </div>
 
-                        @if(Auth::user()->role_id == 1)
                         <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @if(Auth::user()->notifications->count() > 0)
+                                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @else
+                                <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown">
+                            @endif
                                 <i class="bx bx-bell bx-tada"></i>
-                                <span class="badge bg-danger rounded-pill">3</span>
+                                @if(Auth::user()->notifications->where('read', 0)->count() > 0)
+                                <span class="badge bg-danger rounded-pill">{{Auth::user()->notifications->where('read', 0)->count()}}</span>
+                                @else
+                                <span class="badge bg-danger rounded-pill"></span>
+                                @endif
                             </button>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
                                 aria-labelledby="page-header-notifications-dropdown">
@@ -77,79 +92,35 @@
                                             <h6 class="m-0" key="t-notifications"> الإشــعــارات </h6>
                                         </div>
                                         <div class="col-auto">
-                                            <a href="#!" class="small" key="t-view-all"> عــرض الـكـل</a>
+                                            <a href="{{route('notifications.index')}}" class="small" key="t-view-all"> عــرض الـكـل</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div data-simplebar style="max-height: 230px;">
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
+                                    @foreach (Auth::user()->notifications->take(5)->sortByDesc('created_at') as $notif)
+                                    <a href="{{route('notifications.index')}}" class="text-reset notification-item">
                                         <div class="d-flex">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                                    <i class="bx bx-cart"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1" key="t-your-order">إجتماع يوم الأحد</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-grammer">إجتماع بخصوص منطومه يوم الاحد بالمكتب</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">3 min ago</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <img src="assets/images/users/avatar-3.jpg"
+                                            <img src="{{asset('assets/images/blue.png')}}"
                                                 class="me-3 rounded-circle avatar-xs" alt="user-pic">
                                             <div class="flex-grow-1">
-                                                <h6 class="mb-1">محمود علي محمد</h6>
+                                                <h6 class="mb-1" key="t-your-order">{{$notif->title}}</h6>
                                                 <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-simplified">إجتماع بخصوص منطومه يوم الاحد بالمكتب</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-hours-ago">1 hours ago</span></p>
+                                                    <p class="mb-1" key="t-grammer">{{$notif->desc}}</p>
+                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">{{$notif->created_at->diffForHumans()}}</span></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <div class="avatar-xs me-3">
-                                                <span class="avatar-title bg-success rounded-circle font-size-16">
-                                                    <i class="bx bx-badge-check"></i>
-                                                </span>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1" key="t-shipped">إجتماع يوم الأحد</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-grammer">إجتماع بخصوص منطومه يوم الاحد بالمكتب</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-min-ago">3 min ago</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
+                                    @endforeach
 
-                                    <a href="javascript: void(0);" class="text-reset notification-item">
-                                        <div class="d-flex">
-                                            <img src="assets/images/users/avatar-4.jpg"
-                                                class="me-3 rounded-circle avatar-xs" alt="user-pic">
-                                            <div class="flex-grow-1">
-                                                <h6 class="mb-1">محمود علي محمد</h6>
-                                                <div class="font-size-12 text-muted">
-                                                    <p class="mb-1" key="t-occidental">إجتماع بخصوص منطومه يوم الاحد بالمكتب</p>
-                                                    <p class="mb-0"><i class="mdi mdi-clock-outline"></i> <span key="t-hours-ago">1 hours ago</span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
                                 </div>
                                 <div class="p-2 border-top d-grid">
-                                    <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                                    <a class="btn btn-sm btn-link font-size-14 text-center" href="{{route('notifications.index')}}">
                                         <i class="mdi mdi-arrow-right-circle me-1"></i> <span key="t-view-more">عرض المزيد..</span>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        @endif
 
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
@@ -157,10 +128,10 @@
                             @if(Auth::user()->image == "user.png")
                                 <img class="rounded-circle header-profile-user" src="{{asset('assets/images/users/user.png')}}"
                                     alt="Header Avatar">
-                                @else
+                            @else
                                 <img class="rounded-circle header-profile-user" src="{{asset(Storage::url(Auth::user()->image))}}"
                                     alt="Header Avatar">
-                                @endif
+                            @endif
 
                                 <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{Auth::user()->name}}</span>
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
@@ -194,7 +165,7 @@
                     <div id="sidebar-menu">
                         <!-- Left Menu Start -->
                         <ul class="metismenu list-unstyled" id="side-menu">
-                          @if(Auth::user()->role->role == "مدير")
+                          @if(Auth::user()->role_id == 1)
                             <li class="menu-title" key="t-menu" >عام</li>
 
                             <li>
@@ -223,7 +194,7 @@
                                 </a>
                             </li>
 
-                            @if(Auth::user()->role->role == "مدير")
+                            @if(Auth::user()->role_id == 1)
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -238,8 +209,6 @@
                                   <li><a href="{{route('items.show',[5])}}" key="t-full-calendar">البــاب الــخــامــس</a></li>
                                 </ul>
                             </li>
-                            @endif
-
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -248,10 +217,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{route('decisions.index')}}">كــل الــقــرارات </a></li>
-                                    @if(Auth::user()->role->role == "مدير")
-
                                     <li><a href="{{route('decisions.create')}}">إنــشــاء قــرار</a></li>
-                                    @endif
                                 </ul>
                             </li>
                             <li>
@@ -261,13 +227,29 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{route('notifications.index')}}" key="t-inbox">كــل الإشــعــارات</a></li>
-                                    @if(Auth::user()->role->role == "مدير")
 
                                     <li><a href="{{route('notifications.create')}}" key="t-read-email">إرســال إشــعــار</a></li>
-                                    @endif
 
                                 </ul>
                             </li>
+
+                            @else
+
+                            <li>
+                                <a href="{{route('decisions.index')}}" class=" waves-effect">
+                                    <i class="bx bx-task"></i>
+                                    <span key="t-ecommerce" style="font-size: 130%">الــقــرارات</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{route('notifications.index')}}" class=" waves-effect">
+                                    <i class="bx bx-envelope"></i>
+                                    <span key="t-notifications" style="font-size: 130%">الإشــعــارات</span>
+                                </a>
+                            </li>
+
+                            @endif
+
                             <!-- <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="bx bx-receipt"></i>
@@ -341,3 +323,137 @@
                 </div>
             </div>
             <!-- Left Sidebar End -->
+
+
+
+
+            @if(auth()->user()->notifications->where('show',0)->count() > 0)
+            @foreach (auth()->user()->notifications->where('show',0) as $not)
+                <script>
+                    var title = {!! json_encode($not->title) !!};
+                    var desc = {!! json_encode($not->desc) !!};
+
+                    let permission = Notification.permission;
+                    if(permission === "granted") {
+                       showNotification(title,desc);
+                    } else if(permission === "default"){
+                       requestAndShowPermission(title,desc);
+                    }
+                    function showNotification(title,desc) {
+                       var title = title;
+                       icon = "{{asset('assets/images/blue.png')}}"
+                       if(desc == null){
+                          var body = "";
+                       }else{
+                          var body = desc;
+                       }
+                       var notification = new Notification(title, { body, icon });
+                       notification.onclick = () => { 
+                              notification.close();
+                              window.parent.focus();
+                       }
+                   }
+                   function requestAndShowPermission(title,desc) {
+                      Notification.requestPermission(function (permission) {
+                         if (permission === "granted") {
+                               showNotification(title,desc);
+                         }
+                      });
+                   }
+    
+                </script>
+            @endforeach
+    
+            <script>
+                var url = "{{ route('changeShowNotification') }}";
+                $.ajax({
+                    url: url,
+                    type: "get",
+                    data:{ 
+                        _token:'{{ csrf_token() }}'
+                    },
+                    cache: false,
+                    dataType: 'json',
+                }); 
+            </script>
+    
+            @endif
+
+
+            <script>    
+		setInterval(function()
+		{
+			var url = "{{route('notificationsCheck')}}";
+			$.ajax({
+				url: url,
+				type: "get",
+				data:{ 
+					_token:'{{ csrf_token() }}'
+				},
+				cache: false,
+				dataType: 'json',
+				success: function(dataResult){
+					var resultData = dataResult.data;
+					var count = dataResult.count;
+					// if(count == 0){
+					// 	document.getElementById("billing").style.display = "none";
+					// 	document.getElementById("notifCount").style.display = "none";
+					// }else{
+					// 	show2 = document.getElementById("notifCount");
+					// 	show = document.getElementById("billing");
+					// 	show.style.display = "block";
+					// 	show.innerHTML = count;
+					// 	show2.style.display = "block";
+					// 	show2.innerHTML = count;
+					// }
+	
+					if(resultData.length == 0){
+						return;
+					}else{
+						var data = resultData;
+						let permission = Notification.permission;
+						for(i=0; i < data.length; i++){
+							if(permission === "granted") {
+							   showNotification(data[i]['title'],data[i]['desc']);
+							} else if(permission === "default"){
+							   requestAndShowPermission(data[i]['title'],data[i]['desc']);
+							}
+						}
+
+						function showNotification(title,desc) {
+						   var title = title;
+						   icon = "{{asset('assets/images/blue.png')}}"
+                           if(desc == null){
+                                var body = "";
+                            }else{
+                                var body = desc;
+                            }
+						   var notification = new Notification(title, { body, icon });
+						   notification.onclick = () => { 
+								  notification.close();
+								  window.parent.focus();
+						   }
+						}
+						function requestAndShowPermission(title,desc) {
+						   Notification.requestPermission(function (permission) {
+							  if (permission === "granted") {
+									showNotification(title,desc);
+							  }
+						   });
+						}
+						var url = "{{ route('changeShowNotification') }}";
+						$.ajax({
+							url: url,
+							type: "get",
+							data:{ 
+								_token:'{{ csrf_token() }}'
+							},
+							cache: false,
+							dataType: 'json',
+						});
+	
+					}
+				}
+			});
+		}, 120000);
+            </script>

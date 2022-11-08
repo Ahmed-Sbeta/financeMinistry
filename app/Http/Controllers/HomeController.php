@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Items;
 use App\Models\Ministrie;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\MonthllyPayed;
 
@@ -34,6 +35,20 @@ class HomeController extends Controller
 
       public function login(){
         return view('auth-login');
+      }
+
+      public function notifications()
+      {
+        $data = notification::where([['receive_id', auth()->user()->id],['show', 0]])->get();
+        $count = notification::Where([['receive_id', auth()->user()->id],['read', 0]])->count();
+        return json_encode(array('data'=>$data, 'count'=>$count));
+      }
+
+      public function changeShowNotification()
+      {
+          Notification::where([['receive_id', auth()->user()->id],['show', 0]])
+          ->update(['show' => 1]);
+          return;
       }
 
 }

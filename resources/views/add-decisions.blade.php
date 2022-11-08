@@ -11,6 +11,9 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('assets/images/blue.png')}}">
 
+        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
         <link href="{{asset('assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet">
 
         <!-- dropzone css -->
