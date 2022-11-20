@@ -127,7 +127,7 @@
                         <!-- end row -->
 
                         <div class="row">
-                            <div class="col-xl-4">
+                            <div class="col-lg-4">
                                 <div class="card bg-primary bg-soft">
                                     <div>
                                         <div class="row">
@@ -149,9 +149,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-8">
+                            <div class="col-lg-8">
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-lg-6">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center mb-3">
@@ -163,14 +163,14 @@
                                                     <h5 class="font-size-23 mb-0">الاشعارات</h5>
                                                 </div>
                                                 <div class="text-muted mt-4">
-                                                    <h4>3 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                                    <h4>{{$notifications}} <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4">
+                                    <div class="col-lg-6">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center mb-3">
@@ -182,32 +182,13 @@
                                                     <h5 class="font-size-23 mb-0">القرارات</h5>
                                                 </div>
                                                 <div class="text-muted mt-4">
-                                                    <h4> 10 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
+                                                    <h4> {{$decisionsCount}} <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center mb-3">
-                                                    <div class="avatar-xs me-3">
-                                                        <span class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                                                            <i class="bx bx-receipt"></i>
-                                                        </span>
-                                                    </div>
-                                                    <h5 class="font-size-23 mb-0">التقارير</h5>
-                                                </div>
-                                                <div class="text-muted mt-4">
-                                                    <h4> 2 <i class="mdi mdi-chevron-up ms-1 text-success"></i></h4>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <!-- end row -->
                             </div>
@@ -409,7 +390,7 @@
 
                                         <ul class="nav nav-pills bg-light rounded">
                                             <li class="nav-item">
-                                                <a class="nav-link active" href="#">كــل الــقــرارات</a>
+                                                <a class="nav-link active" href="{{route('decisions.index')}}">كــل الــقــرارات</a>
                                             </li>
 
                                         </ul>
@@ -420,15 +401,19 @@
                                                 <div class="table-responsive">
                                                     <table class="table table-nowrap align-middle table-hover mb-0">
                                                         <tbody>
+                                                            @foreach ($decisions as $des)
                                                             <tr>
                                                                 <td style="width: 50px;">
-
+                                                                    {{$des->decisionsNumber}}
                                                                 </td>
                                                                 <td>
-                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">قـرار زيادة المرتبات </a></h5>
-                                                                    <p class="text-muted mb-0">وزارة العمل</p>
+                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">{{$des->title}} </a></h5>
                                                                 </td>
+
                                                                 <td style="width: 90px;">
+                                                                    {{$des->date}}
+                                                                </td>
+                                                                {{-- <td style="width: 90px;">
                                                                     <div>
                                                                         <ul class="list-inline mb-0 font-size-16">
                                                                             <li class="list-inline-item">
@@ -439,138 +424,11 @@
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                </td>
+                                                                </td> --}}
                                                             </tr>
+                                                            @endforeach
 
-                                                            <tr>
-                                                                <td>
 
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">قـرار زيادة المرتبات </a></h5>
-                                                                    <p class="text-muted mb-0">وزارة العمل</p>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        <ul class="list-inline mb-0 font-size-16">
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-success p-1"><i class="bx bxs-edit-alt"></i></a>
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-danger p-1"><i class="bx bxs-trash"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>
-
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">قـرار زيادة المرتبات </a></h5>
-                                                                    <p class="text-muted mb-0">وزارة العمل</p>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        <ul class="list-inline mb-0 font-size-16">
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-success p-1"><i class="bx bxs-edit-alt"></i></a>
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-danger p-1"><i class="bx bxs-trash"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>
-
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">قـرار زيادة المرتبات </a></h5>
-                                                                    <p class="text-muted mb-0">وزارة العمل</p>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        <ul class="list-inline mb-0 font-size-16">
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-success p-1"><i class="bx bxs-edit-alt"></i></a>
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-danger p-1"><i class="bx bxs-trash"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-
-                                                            <tr>
-                                                                <td>
-
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">قـرار زيادة المرتبات </a></h5>
-                                                                    <p class="text-muted mb-0">وزارة العمل</p>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        <ul class="list-inline mb-0 font-size-16">
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-success p-1"><i class="bx bxs-edit-alt"></i></a>
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-danger p-1"><i class="bx bxs-trash"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">قـرار زيادة المرتبات </a></h5>
-                                                                    <p class="text-muted mb-0">وزارة العمل</p>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        <ul class="list-inline mb-0 font-size-16">
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-success p-1"><i class="bx bxs-edit-alt"></i></a>
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-danger p-1"><i class="bx bxs-trash"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-
-                                                                </td>
-                                                                <td>
-                                                                    <h5 class="text-truncate font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">قـرار زيادة المرتبات </a></h5>
-                                                                    <p class="text-muted mb-0">وزارة العمل</p>
-                                                                </td>
-                                                                <td>
-                                                                    <div>
-                                                                        <ul class="list-inline mb-0 font-size-16">
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-success p-1"><i class="bx bxs-edit-alt"></i></a>
-                                                                            </li>
-                                                                            <li class="list-inline-item">
-                                                                                <a href="javascript: void(0);" class="text-danger p-1"><i class="bx bxs-trash"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -580,7 +438,7 @@
 
                                     <div class="card-footer bg-transparent border-top">
                                         <div class="text-center">
-                                            <a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light">إضــافــة قــرار جـديـد</a>
+                                            <a href="{{route('decisions.create')}}" class="btn btn-primary waves-effect waves-light">إضــافــة قــرار جـديـد</a>
                                         </div>
                                     </div>
                                 </div>

@@ -101,62 +101,41 @@
                                                             {{$decision->date}}
                                                         </td>
                                                         <td>
-                                                          @foreach($ministries as $ministry)
-                                                            @if($ministry->id == $decision->issuer)
-                                                            {{$ministry->name}}
-                                                            @endif
-                                                          @endforeach
+                                                            {{$decision->issuer1->name}}
                                                         </td>
                                                         <td>
                                                         </td>
                                                         <td>
-                                                          @foreach($ministries as $ministry)
-                                                            @if($ministry->id == $decision->receiver)
-                                                            {{$ministry->name}}
-                                                            @endif
-                                                          @endforeach
+                                                            {{$decision->receiver1->name}}
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            <a href="/download/{{$decision->file}}" type="button" class="btn btn-primary btn-sm btn-rounded">
+                                                            <a href="{{route('downloadFile',['id'=>$decision->id])}}" type="button" class="btn btn-primary btn-sm btn-rounded">
                                                               تــحــمــيــل مــلــف
                                                             </a>
                                                         </td>
+                                                        @if(auth()->user()->role_id == 1)
                                                         <td>
                                                             <div class="d-flex gap-3">
                                                                 <a href="{{route('decisions.edit',[$decision->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
                                                                 <form method="post" action="{{ route('decisions.destroy',[$decision->id]) }}">
                                                                     <!-- here the '1' is the id of the post which you want to delete -->
-
                                                                     {{ csrf_field() }}
                                                                     {{ method_field('DELETE') }}
-
                                                                     <button href="#" style="border: none; background: none;" type="submit" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></button>
                                                                 </form>                                                            </div>
                                                         </td>
+                                                        @endif
                                                     </tr>
                                                     @endforeach
 
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <ul class="pagination pagination-rounded justify-content-end mb-2">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                                    <i class="mdi mdi-chevron-left"></i>
-                                                </a>
-                                            </li>
-                                            <li class="page-item active"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                            <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                                    <i class="mdi mdi-chevron-right"></i>
-                                                </a>
-                                            </li>
+                                        <ul class="pagination pagination-rounded justify-content-center mb-2">
+                                            {{ $decisions->links('pagination::bootstrap-4') }}
                                         </ul>
+
                                     </div>
                                 </div>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Decisions;
 use Carbon\Carbon;
 use App\Models\User;
 use Response;
@@ -19,6 +20,7 @@ class HomeController extends Controller
         $ministries = Ministrie::where('parent_id', NULL)->count();
         $subMinistries = Ministrie::where('parent_id', '!=', NULL)->count();
         $items = Items::count();
+        $decisions = Decisions::take(10)->get();
         $users = User::where('role_id', '!=', 1)->count();
         $door1 = MonthllyPayed::where('door_id', 1)->sum('total');
         $door2 = MonthllyPayed::where('door_id', 2)->sum('total');
@@ -31,7 +33,9 @@ class HomeController extends Controller
         $total3 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 3)->sum('total');
         $total4 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 4)->sum('total');
         $total5 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 5)->sum('total');
-        return view('dashboard',compact('ministries','subMinistries','items','users','door1','door2','door3','door4','door5','total','total1','total2','total3','total4','total5'));
+        $notifications = Notification::count();
+        $decisionsCount = Decisions::count();
+        return view('dashboard',compact('ministries','subMinistries','notifications','decisionsCount','decisions','items','users','door1','door2','door3','door4','door5','total','total1','total2','total3','total4','total5'));
       }
 
       public function login(){
@@ -50,22 +54,6 @@ class HomeController extends Controller
           Notification::where([['receive_id', auth()->user()->id],['show', 0]])
           ->update(['show' => 1]);
           return;
-      }
-
-      public function download($filename){
-        $file_path = storage_path() .'/app/'. $filename;
-        if (file_exists($file_path))
-        {
-            // Send Download
-            return Response::download($file_path, $filename, [
-                'Content-Length: '. filesize($file_path)
-            ]);
-        }
-        else
-        {
-            // Error
-            exit('Requested file does not exist on our server!');
-        }
       }
 
 }

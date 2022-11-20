@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Decisions;
 use App\Models\Ministrie;
+use File;
 
 class DecisionController extends Controller
 {
@@ -16,9 +17,8 @@ class DecisionController extends Controller
      */
     public function index()
     {
-        $decisions = Decisions::all();
-        $ministries = Ministrie::all();
-        return view('decisions',compact('decisions','ministries'));
+        $decisions = Decisions::paginate(20);
+        return view('decisions',compact('decisions'));
     }
 
     /**
@@ -28,6 +28,9 @@ class DecisionController extends Controller
      */
     public function create()
     {
+        if(auth()->user()->role_id != 1){
+            return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
         $ministries = Ministrie::where("parent_id",'!=',NULL)->get();
         return view('add-decisions',compact('ministries'));
     }
@@ -40,6 +43,26 @@ class DecisionController extends Controller
      */
     public function store(Request $request)
     {
+        if(auth()->user()->role_id != 1){
+            return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
+        request()->validate(
+        [
+            'title'  => "required",
+            'decisionNumber'  => "required",
+            'issuer'  => "required",
+            'receiving'  => "required",
+            'date'  => "required",
+            'file'  => "required",
+        ],
+        [ 
+            'worktitle.required' => 'الرجاء كتابة عنوان القرار',
+            'decisionNumber.required' => 'الرجاء كتابة رقم القرار',
+            'issuer.required' => 'الرجاءاختيار الجهة الصادرة',
+            'receiving.required' => 'الرجاء باختيار الجهة المستلمة',
+            'date.required' => 'الرجاء كتابة تاريخ القرار',
+            'file.required' => 'الرجاء تحميل ملف القرار',
+        ]);
         $decision = new Decisions;
         $decision->title = request('title');
         $decision->decisionsNumber = request('decisionNumber');
@@ -47,10 +70,8 @@ class DecisionController extends Controller
         $decision->receiver = request('receiving');
         $decision->date = request('date');
         $decision->description = request('description');
-        $file = request()->file('file');
-        $name = $file->getClientOriginalName();
-        $name = str_replace(' ', '', $name);
-        $decision->file = request()->file('file') ? request()->file('file')->storePubliclyAs('',$name) : null;
+        $newFilePath = request()->file('file')->store('public');
+        $decision->file = str_replace('public', '', $newFilePath);
         $decision->save();
         return redirect()->back()->with('success','تـم إضـــافــة قــرار بــنــجــاح');
     }
@@ -63,7 +84,8 @@ class DecisionController extends Controller
      */
     public function show($id)
     {
-        //
+        $des = Decisions::find($id);
+        return response()->download(public_path('storage'.$des->file));
     }
 
     /**
@@ -74,6 +96,9 @@ class DecisionController extends Controller
      */
     public function edit($id)
     {
+        if(auth()->user()->role_id != 1){
+            return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
         $decision = Decisions::find($id);
         return view('edit-decision',compact('decision'));
     }
@@ -87,6 +112,24 @@ class DecisionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(auth()->user()->role_id != 1){
+            return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
+        }
+        request()->validate(
+            [
+                'title'  => "required",
+                'decisionNumber'  => "required",
+                'issuer'  => "required",
+                'receiving'  => "required",
+                'date'  => "required",
+            ],
+            [ 
+                'worktitle.required' => 'الرجاء كتابة عنوان القرار',
+                'decisionNumber.required' => 'الرجاء كتابة رقم القرار',
+                'issuer.required' => 'الرجاءاختيار الجهة الصادرة',
+                'receiving.required' => 'الرجاء باختيار الجهة المستلمة',
+                'date.required' => 'الرجاء كتابة تاريخ القرار',
+            ]);
         $decision = Decisions::find($id);
         // dd($decision);
         $decision->title = request('title');
@@ -95,14 +138,13 @@ class DecisionController extends Controller
         $decision->receiver = request('receiving');
         $decision->date = request('date');
         $decision->description = request('description');
-        if(request()->file('file') != Null){
-          $file = request()->file('file');
-          $name = $file->getClientOriginalName();
-          $name = str_replace(' ', '', $name);
-          $decision->file = request()->file('file') ? request()->file('file')->storePubliclyAs('',$name) : null;
+        if(request()->file('file')){
+            File::delete(public_path('storage/'.$decision->file));
+            $newFilePath = request()->file('file')->store('public');
+            $decision->file = str_replace('public', '', $newFilePath);
         }
         $decision->update();
-        return redirect()->route('decisions.edit',[$decision->id])->with('success','تــم تـعـديـل الــقـــرار بـــنــجـــاح');
+        return redirect()->route('decisions.index')->with('success','تــم تـعـديـل الــقـــرار بـــنــجـــاح');
         }
 
     /**
@@ -113,7 +155,9 @@ class DecisionController extends Controller
      */
     public function destroy($id)
     {
-        Decisions::find($id)->delete();
+        $des = Decisions::find($id);
+        File::delete(public_path('storage/'.$des->file));
+        $des->delete();
         return redirect()->back()->with('success','تم مــسـح الــقــرار بـنـجـاح');
     }
 }

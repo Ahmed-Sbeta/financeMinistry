@@ -34,8 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/notificationsCheck', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notificationsCheck');
     Route::get('/changeShowNotification', [HomeController::class, 'changeShowNotification'])->name('changeShowNotification');
 
-    Route::get('/download/{filename}',[App\Http\Controllers\HomeController::class, 'download']);
-
     Route::get('ministries/create/{id}', [MinistrieController::class, 'create'])->name('ministries.create');
     Route::post('ministries/store/{id}', [MinistrieController::class, 'store'])->name('ministries.store');
     Route::resource('ministries', MinistrieController::class)->except(['create','store']);
@@ -46,7 +44,9 @@ Route::middleware('auth')->group(function () {
     Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
     Route::post('items/store/{id}', [ItemController::class, 'store'])->name('items.store');
     Route::resource('items', ItemController::class)->except(['create','store']);
-    Route::resource('decisions', DecisionController::class);
+    Route::resource('decisions', DecisionController::class)->except(['show']);
+    Route::get('/download/{id}',[DecisionController::class, 'show'])->name('downloadFile');
+
     Route::resource('notifications', NotificationController::class);
     Route::resource('users', UserController::class);
     Route::post('monthPayeds/create/{id}', [MonthPayedController::class, 'create'])->name('monthPayeds.create');
@@ -54,6 +54,5 @@ Route::middleware('auth')->group(function () {
     Route::post('monthPayeds/edit/{id}', [MonthPayedController::class, 'edit'])->name('monthPayeds.edit');
     Route::get('monthPayeds/backTo/{date}/{id}/{num}', [MonthPayedController::class, 'backTo'])->name('monthPayeds.backTo');
     Route::resource('monthPayeds', MonthPayedController::class)->except(['create','store','edit']);
-
 
 });
