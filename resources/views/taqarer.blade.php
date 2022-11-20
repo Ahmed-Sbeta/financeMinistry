@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>الــبــاب الأول</title>
+        <title>الـتـقاريـر</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -36,7 +36,6 @@
             @include('includes.menu')
 
 
-
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -46,29 +45,21 @@
                    <div class="container-fluid">
 
                        <!-- start page title -->
-                           <form action="{{route('reports.store')}}" method="post" class="pb-4">
+                           <form action="{{route('searchReports')}}" method="get" class="pb-4">
                              @csrf
                                <div class="row">
                                    <div class="col-4 pb-2" lang="ar">
                                        <label for="">اســم الجــهــة</label>
-                                       <select name="ministry[]" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar">
+                                       <select name="ministry[]" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar" required oninvalid="this.setCustomValidity('الرجاء اختيار جهة معينة')" oninput="this.setCustomValidity('')">
                                          @foreach($ministries as $ministry)
                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
                                           @endforeach
                                        </select>
                                    </div>
-                                   <div class="col-4 pb-2">
-                                       <label for="">مــن شــهــر</label>
-                                       <input type="month" class="form-control" name="from" value="">
-                                   </div>
-                                   <div class="col-4 ">
-                                       <label for="to">الي شــهــر</label>
-                                       <input type="month" class="form-control" name="to" value="">
 
-                                   </div>
                                    <div class="col-4">
                                      <label for="">الأبــواب</label>
-                                       <select name="doors[]" class="form-control js-example-basic-multiple" multiple="multiple" id="" required>
+                                       <select name="doors[]" class="form-control js-example-basic-multiple" multiple="multiple" id="" required oninvalid="this.setCustomValidity('الرجاء اختيار الابواب المطلوب البحث عنها')" oninput="this.setCustomValidity('')">
                                            <option value="1">الــبــاب الأول</option>
                                            <option value="2">الــبــاب الـثـانـي</option>
                                            <option value="3">الــبــاب الـثـالـث</option>
@@ -84,6 +75,20 @@
                                            @endforeach
                                        </select>
                                    </div>
+
+                                   <div class="col-4 ">
+                                    <label for="to">الســنــة</label>
+                                    <input type="number" min="1900" max="{{now()->format('Y')}}"  class="form-control" name="year" required oninvalid="this.setCustomValidity('الرجاء ادخال السنة')" oninput="this.setCustomValidity('')">
+                                </div>
+                                   <div class="col-4 pb-2">
+                                    <label for="">مــن شــهــر</label>
+                                    <input type="number" min="1" max="12" class="form-control" name="from" required oninvalid="this.setCustomValidity('الرجاء ادخال من الشهر المعين')" oninput="this.setCustomValidity('')">
+                                </div>
+                                <div class="col-4 ">
+                                    <label for="to">الي شــهــر</label>
+                                    <input type="number" min="1" max="12"  class="form-control" name="to" required oninvalid="this.setCustomValidity('الرجاء ادخال إلي الشهر المعين')" oninput="this.setCustomValidity('')">
+                                </div>
+
                                </div>
                                <div class="d-flex flex-wrap gap-2 pt-4">
                                    <button type="submit" class="btn btn-primary waves-effect waves-light">مـــوافــق</button>
@@ -159,6 +164,29 @@
 
                 document.getElementById("rtl-mode-switch").trigger('click');
         });
+
+    //     $(document).ready(function() {
+    // $(document).on('submit', '#subme', function() {
+	// 	name = document.getElementById("myInput").value;
+	// 	if(name == ''){
+	// 		name = 'all';
+	// 		document.getElementById("paginate").style.display = "block";
+	// 	}else{
+	// 		name = name.replaceAll(' ', '_');
+	// 		document.getElementById("paginate").style.display = "none";
+	// 	}
+		
+    //     let url = "#";
+	// 	url = url.replace(':id', name);
+    //       $('.table-container').fadeOut();
+    //       $('.table-container').load(url, function() {
+    //           $('.table-container').fadeIn();
+    //     });
+    //     return false;
+    //    });
+    // });
+
+
         </script>
         <script src="{{asset('assets/js/app.js')}}"></script>
         <script src="{{asset('assets\libs\select2\js\select2.full.min.js')}}" charset="utf-8"></script>

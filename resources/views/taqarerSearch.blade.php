@@ -4,7 +4,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>الــبــاب الأول</title>
+        <title>تقارير للجهة {{$ministrie->name}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -36,7 +36,6 @@
             @include('includes.menu')
 
 
-
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -46,29 +45,22 @@
                    <div class="container-fluid">
 
                        <!-- start page title -->
-                           <form action="{{route('reports.store')}}" method="post" class="pb-4">
+                           <form action="{{route('searchReports')}}" method="get" class="pb-4">
                              @csrf
                                <div class="row">
                                    <div class="col-4 pb-2" lang="ar">
                                        <label for="">اســم الجــهــة</label>
-                                       <select name="ministry[]" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar">
-                                         @foreach($allministries as $ministry)
+                                       <select name="ministry[]" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar" required oninvalid="this.setCustomValidity('الرجاء اختيار جهة معينة')" oninput="this.setCustomValidity('')">
+                                        <option selected value="{{$ministrie->id}}">{{$ministrie->name}}</option>
+                                         @foreach($ministries as $ministry)
                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
                                           @endforeach
                                        </select>
                                    </div>
-                                   <div class="col-4 pb-2">
-                                       <label for="">مــن شــهــر</label>
-                                       <input type="month" class="form-control" name="from" value="">
-                                   </div>
-                                   <div class="col-4 ">
-                                       <label for="to">الي شــهــر</label>
-                                       <input type="month" class="form-control" name="to" value="">
 
-                                   </div>
                                    <div class="col-4">
                                      <label for="">الأبــواب</label>
-                                       <select name="doors[]" class="form-control js-example-basic-multiple" multiple="multiple" id="" required>
+                                       <select name="doors[]" class="form-control js-example-basic-multiple" multiple="multiple" id="" required oninvalid="this.setCustomValidity('الرجاء اختيار الابواب المطلوب البحث عنها')" oninput="this.setCustomValidity('')">
                                            <option value="1">الــبــاب الأول</option>
                                            <option value="2">الــبــاب الـثـانـي</option>
                                            <option value="3">الــبــاب الـثـالـث</option>
@@ -79,11 +71,25 @@
                                    <div class="col-4">
                                      <label for="">الــبــنــود</label>
                                        <select name="items[]" class="form-control js-example-basic-multiple" multiple="multiple" id="">
-                                           @foreach($allitems as $item)
+                                           @foreach($items as $item)
                                            <option value="{{$item->id}}">{{$item->name}}</option>
                                            @endforeach
                                        </select>
                                    </div>
+
+                                   <div class="col-4 ">
+                                    <label for="to">الســنــة</label>
+                                    <input type="number" min="1900" value="{{$year}}" max="{{now()->format('Y')}}"  class="form-control" name="year" required oninvalid="this.setCustomValidity('الرجاء ادخال السنة ')" oninput="this.setCustomValidity('')">
+                                </div>
+                                   <div class="col-4 pb-2">
+                                    <label for="">مــن شــهــر</label>
+                                    <input type="number" min="1" max="12" value="{{$fromMonth}}" class="form-control" name="from" required oninvalid="this.setCustomValidity('الرجاء ادخال من الشعر المعين')" oninput="this.setCustomValidity('')">
+                                </div>
+                                <div class="col-4 ">
+                                    <label for="to">الي شــهــر</label>
+                                    <input type="number" min="1" max="12" value="{{$toMonth}}" class="form-control" name="to" required oninvalid="this.setCustomValidity('الرجاء ادخال إلي الشهر المعين')" oninput="this.setCustomValidity('')">
+                                </div>
+
                                </div>
                                <div class="d-flex flex-wrap gap-2 pt-4">
                                    <button type="submit" class="btn btn-primary waves-effect waves-light">مـــوافــق</button>
@@ -96,55 +102,74 @@
                            <div class="col-lg-12">
                                <div class="card">
                                    <div class="card-body">
+
+                                    <div class="row mb-2">
+                                        <div class="col-4">
+                                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                                <h4 class="mb-sm-0 font-size-18"> <span>{{$ministrie->name}}</span> </h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="text-sm-end">
+                                                <h4 class="mb-sm-0 font-size-18">من الشهر {{$from}} الي الشهر {{$to}}</h4>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <div class="text-sm-end">
+                                                <a href="#" onclick="exportData('xlsx',{{json_encode($ministrie->name.' '.$from.' إلي '.$to)}})" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-file me-1"></i> تــصديــر</a>
+                                            </div>
+                                        </div>
+
+                                        @include('includes.messages')
+
+                                    </div>
+
                                        <div class="table-responsive">
-                                           <table class="table align-middle table-nowrap table-hover" style="table-layout: fixed;">
+                                           <table class="table align-middle table-nowrap table-hover" id="tab1">
                                                <thead class="table-light">
                                                    <tr>
-                                                       <th class="text-center" scope="col" style="width: 150px;">الــبــنــد</th>
-                                                       @for($i=$mFrom ; $i<$mTo+1 ; $i++)
-                                                         <th class="text-center" > {{$i}}</th>
-                                                        @endfor
+                                                    <th>البند</th>
+                                                    @for($i = $fromMonth; $i <= $toMonth; $i++)
+                                                        <th>{{$i}}</th>
+                                                        <?php $sum[$i] = 0 ?>
+                                                    @endfor
                                                    </tr>
                                                </thead>
                                                <tbody>
-                                                 @foreach($titleList as $title)
-                                                   <tr class="align-middle">
-                                                       <td class="text-center" style="width: 180px; overflow: hidden;
-                                                       text-overflow: ellipsis;">
-                                                         {{$title->name}}
-                                                       </td>
+                                                @foreach ($items2 as $item)
+                                                   <tr>
+                                                    <td>{{$item->name}}</td>
+                                                    @for($i = $fromMonth; $i <= $toMonth; $i++)
+                                                        @if($i < 10)
+                                                            @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->count() > 0)
+                                                                <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</td>
+                                                                <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total ?>
+                                                            @else
+                                                                <td>0</td>
+                                                            @endif
+                                                        @else
+                                                            @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->count() > 0)
+                                                                <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total}}</td>
+                                                                <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total ?>
+                                                            @else
+                                                                <td>0</td>
+                                                            @endif
+                                                        @endif
+                                                    @endfor
                                                    </tr>
-                                                   @endforeach
+                                                @endforeach
+
+                                                <tr>
+                                                    <td>المجموع</td>
+                                                    @for($i = $fromMonth; $i <= $toMonth; $i++)
+                                                        <td>{{$sum[$i]}}</td>
+                                                    @endfor
+                                                   </tr>
                                                </tbody>
                                            </table>
                                        </div>
-                                       <div class="row">
-                                           <div class="col-lg-12">
-                                               <ul class="pagination pagination-rounded justify-content-center mt-4">
-                                                   <li class="page-item disabled">
-                                                       <a href="javascript: void(0);" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-                                                   </li>
-                                                   <li class="page-item">
-                                                       <a href="javascript: void(0);" class="page-link">1</a>
-                                                   </li>
-                                                   <li class="page-item active">
-                                                       <a href="javascript: void(0);" class="page-link">2</a>
-                                                   </li>
-                                                   <li class="page-item">
-                                                       <a href="javascript: void(0);" class="page-link">3</a>
-                                                   </li>
-                                                   <li class="page-item">
-                                                       <a href="javascript: void(0);" class="page-link">4</a>
-                                                   </li>
-                                                   <li class="page-item">
-                                                       <a href="javascript: void(0);" class="page-link">5</a>
-                                                   </li>
-                                                   <li class="page-item">
-                                                       <a href="javascript: void(0);" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-                                                   </li>
-                                               </ul>
-                                           </div>
-                                       </div>
+                                       
                                    </div>
                                </div>
                            </div>
@@ -192,9 +217,42 @@
 
                 document.getElementById("rtl-mode-switch").trigger('click');
         });
+
+    //     $(document).ready(function() {
+    // $(document).on('submit', '#subme', function() {
+	// 	name = document.getElementById("myInput").value;
+	// 	if(name == ''){
+	// 		name = 'all';
+	// 		document.getElementById("paginate").style.display = "block";
+	// 	}else{
+	// 		name = name.replaceAll(' ', '_');
+	// 		document.getElementById("paginate").style.display = "none";
+	// 	}
+		
+    //     let url = "#";
+	// 	url = url.replace(':id', name);
+    //       $('.table-container').fadeOut();
+    //       $('.table-container').load(url, function() {
+    //           $('.table-container').fadeIn();
+    //     });
+    //     return false;
+    //    });
+    // });
+
+
         </script>
         <script src="{{asset('assets/js/app.js')}}"></script>
         <script src="{{asset('assets\libs\select2\js\select2.full.min.js')}}" charset="utf-8"></script>
+        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
+<script>
+    function exportData(type,name)
+    {
+      var data = document.getElementById('tab1');
+      var file = XLSX.utils.table_to_book(data, {sheet: "المنتجات"});
+      XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
+      XLSX.writeFile(file, name+'.' + type);
+    }
+</script>
     </body>
 </html>

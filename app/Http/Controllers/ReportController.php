@@ -40,37 +40,43 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-      $allitems = Items::all();
-      $allministries = Ministrie::where("parent_id",'!=',NULL)->get();
-      $ministry = request('ministry');
-      $from = request('from').'-01';
-      $To = request('to').'-01';
+      if(request('from') > request('to')){
+        return redirect()->back()->with('error','لا يمكن ان تكون من شهر اكبر من الي شهر');
+      }
+      $ministries = Ministrie::where("parent_id",'!=',NULL)->get();
       $doors = request('doors');
       $items = request('items');
-
-      for($i=0 ; $i<count($doors) ; $i++){
-        if($i==0){
-          $titleList = Items::where('door','=',$doors[$i])->get();
-        }
-        else {
-          $titleList = $titleList->merge(Items::where('door','=',$doors[$i])->get());
-        }
+      $year = request('year');
+      $fromMonth = request('from');
+      if(request('to')){
+        $toMonth = request('to');
+      }else{
+        $toMonth = '12';
       }
-
-      $toDate = Carbon::parse($To);
-      $fromDate = Carbon::parse($from);
-      $monthes = $toDate->diffInMonths($fromDate);
-
-      $mFrom = $fromDate->format('m');
-      $mTo = $toDate->format('m');
-      $mFrom = ltrim($mFrom, '0');
-
-
-
-      $pay = MonthllyPayed::where('ministry_id','=',$ministry)->whereBetween('date', [$fromDate, $toDate])->get();
-
-      $ministrie = Ministrie::find($ministry)->first();
-      return view('taqarerSearch',compact('titleList','allitems','allministries','pay','mFrom','mTo'));
+      if(request('items')){
+        $items2 = Items::whereIn('id', $items)->get();
+        if(request('to')){
+          $from = request('year').'-'.request('from');
+          $to = request('year').'-'.request('to');
+        }else{
+          $from = request('year').'-'.request('from');
+          $to = request('year').'-'.'12';
+        }
+      }else{
+          $items2 = Items::whereIn('door', $doors)->get();
+          if(request('to')){
+            $from = request('year').'-'.request('from');
+            $to = request('year').'-'.request('to');
+          }else{
+            $from = request('year').'-'.request('from');
+            $to = request('year').'-'.'12';
+          }
+      }
+      $fromMonth = (int)$fromMonth;
+      $toMonth = (int)$toMonth;
+      $items = Items::all();
+      $ministrie = Ministrie::find(request('ministry'))->first();
+      return view('taqarerSearch',compact('ministries','ministrie','items','items2','from','to','year','fromMonth','toMonth'));
     }
 
     /**

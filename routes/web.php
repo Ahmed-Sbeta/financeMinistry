@@ -37,7 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::get('ministries/create/{id}', [MinistrieController::class, 'create'])->name('ministries.create');
     Route::post('ministries/store/{id}', [MinistrieController::class, 'store'])->name('ministries.store');
     Route::resource('ministries', MinistrieController::class)->except(['create','store']);
-    Route::resource('reports', ReportController::class);
+
+    Route::resource('reports', ReportController::class)->except(['store']);
+    Route::get('search/reports', [ReportController::class, 'store'])->name('searchReports');
+
     Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
     Route::post('items/store/{id}', [ItemController::class, 'store'])->name('items.store');
     Route::resource('items', ItemController::class)->except(['create','store']);
