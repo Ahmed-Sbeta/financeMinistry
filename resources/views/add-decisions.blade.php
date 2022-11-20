@@ -25,6 +25,9 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <!-- select2 -->
+        <link rel="stylesheet" href="{{asset('assets\libs\select2\css\select2.min.css')}}">
+
 
     </head>
 
@@ -75,15 +78,10 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة صادرة</label>
-                                                        <select class="form-control select" name="issuer">
-                                                            <option>الجهه</option>
-                                                            <option  >Visual Identity Design </option>
-                                                            <option value="EL">Content Writing</option>
-                                                            <option  >Graphic Design </option>
-                                                            <option  >Web Desgin </option>
-                                                            <option  >Billboard Design </option>
-                                                            <option  >Animation </option>
-                                                            <option  > product photography  </option>
+                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="issuer">
+                                                            @foreach($ministries as $ministry)
+                                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
+                                                            @endforeach
 
                                                         </select>
                                                     </div>
@@ -102,15 +100,10 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة المستلمة</label>
-                                                        <select class="form-control select" name="receiving">
-                                                            <option>الجهه</option>
-                                                            <option  >Visual Identity Design </option>
-                                                            <option value="EL">Content Writing</option>
-                                                            <option  >Graphic Design </option>
-                                                            <option  >Web Desgin </option>
-                                                            <option  >Billboard Design </option>
-                                                            <option  >Animation </option>
-                                                            <option  > product photography  </option>
+                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="receiving">
+                                                            @foreach($ministries as $ministry)
+                                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
+                                                            @endforeach
 
                                                         </select>
                                                     </div>
@@ -200,6 +193,20 @@
 
         <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
+        <script src="{{asset('assets\libs\select2\js\select2.full.min.js')}}" charset="utf-8"></script>
+        <script>
+            $( document ).ready(function() {
+                $('.js-example-basic-single').select2({
+                  dir: "rtl",
+                  maximumSelectionLength: 1 ,
+
+                });
+                $('.js-example-basic-multiple').select2();
+
+                document.getElementById("rtl-mode-switch").trigger('click');
+        });
+        </script>
+
 
     </body>
 </html>

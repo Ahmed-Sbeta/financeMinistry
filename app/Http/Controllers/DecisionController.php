@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Decisions;
+use App\Models\Ministrie;
 
 class DecisionController extends Controller
 {
@@ -16,7 +17,8 @@ class DecisionController extends Controller
     public function index()
     {
         $decisions = Decisions::all();
-        return view('decisions',compact('decisions'));
+        $ministries = Ministrie::all();
+        return view('decisions',compact('decisions','ministries'));
     }
 
     /**
@@ -26,7 +28,8 @@ class DecisionController extends Controller
      */
     public function create()
     {
-        return view('add-decisions');
+        $ministries = Ministrie::where("parent_id",'!=',NULL)->get();
+        return view('add-decisions',compact('ministries'));
     }
 
     /**
@@ -110,6 +113,7 @@ class DecisionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Decisions::find($id)->delete();
+        return redirect()->back()->with('success','تم مــسـح الــقــرار بـنـجـاح');
     }
 }

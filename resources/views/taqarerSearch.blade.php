@@ -104,6 +104,8 @@
                                                        @for($i=$mFrom ; $i<$mTo+1 ; $i++)
                                                          <th class="text-center" > {{$i}}</th>
                                                         @endfor
+                                                        <th class="text-center" scope="col" style="width: 150px;">الـمــجــمـوع</th>
+
                                                    </tr>
                                                </thead>
                                                <tbody>
@@ -113,6 +115,14 @@
                                                        text-overflow: ellipsis;">
                                                          {{$title->name}}
                                                        </td>
+                                                       @for($i=$mFrom ; $i<$mTo+1 ; $i++)
+                                                       @foreach($pay as $p)
+
+                                                        @if($i == ltrim(Carbon\Carbon::parse($p->date)->format('m'),'0') && $title->id == $p->item_id )
+                                                         <td class="text-center">{{$p->total}}</td>
+                                                         @endif
+                                                         @endforeach
+                                                        @endfor
                                                    </tr>
                                                    @endforeach
                                                </tbody>

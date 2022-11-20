@@ -83,7 +83,7 @@
                                                         <th class="align-middle">جــهـة صــادرة</th>
                                                         <th class="align-middle"></th>
                                                         <th class="align-middle">جــهـة مـسـتـلـمـة</th>
-                                                        <th class="align-middle">تــفـاصــيـل</th>
+                                                        <th class="align-middle">مــلــف</th>
                                                         <th class="align-middle">تـعـديـل \ مـسـح</th>
                                                     </tr>
                                                 </thead>
@@ -101,24 +101,38 @@
                                                             {{$decision->date}}
                                                         </td>
                                                         <td>
-                                                            {{$decision->issuer}}
+                                                          @foreach($ministries as $ministry)
+                                                            @if($ministry->id == $decision->issuer)
+                                                            {{$ministry->name}}
+                                                            @endif
+                                                          @endforeach
                                                         </td>
                                                         <td>
                                                         </td>
                                                         <td>
-                                                            {{$decision->receiver}}
+                                                          @foreach($ministries as $ministry)
+                                                            @if($ministry->id == $decision->receiver)
+                                                            {{$ministry->name}}
+                                                            @endif
+                                                          @endforeach
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
-                                                                عــرض الـتـفـاصيل
-                                                            </button>
+                                                            <a href="/download/{{$decision->file}}" type="button" class="btn btn-primary btn-sm btn-rounded">
+                                                              تــحــمــيــل مــلــف
+                                                            </a>
                                                         </td>
                                                         <td>
                                                             <div class="d-flex gap-3">
                                                                 <a href="{{route('decisions.edit',[$decision->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                                <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
-                                                            </div>
+                                                                <form method="post" action="{{ route('decisions.destroy',[$decision->id]) }}">
+                                                                    <!-- here the '1' is the id of the post which you want to delete -->
+
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+
+                                                                    <button href="#" style="border: none; background: none;" type="submit" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></button>
+                                                                </form>                                                            </div>
                                                         </td>
                                                     </tr>
                                                     @endforeach
