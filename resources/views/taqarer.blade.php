@@ -50,7 +50,8 @@
                                <div class="row">
                                    <div class="col-4 pb-2" lang="ar">
                                        <label for="">اســم الجــهــة</label>
-                                       <select name="ministry[]" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar" required oninvalid="this.setCustomValidity('الرجاء اختيار جهة معينة')" oninput="this.setCustomValidity('')">
+                                       <select name="ministry" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar" required oninvalid="this.setCustomValidity('الرجاء اختيار جهة معينة')" oninput="this.setCustomValidity('')">
+                                        <option value="0">الكل</option>
                                          @foreach($ministries as $ministry)
                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
                                           @endforeach

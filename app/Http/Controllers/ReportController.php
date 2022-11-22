@@ -53,8 +53,19 @@ class ReportController extends Controller
       }else{
         $toMonth = '12';
       }
-      if(request('items')){
+      if(request('ministry') == 0){
+          $items2 = NULL;
+          $ministries2 = Ministrie::where("parent_id",'!=',NULL)->get();
+          if(request('to')){
+            $from = request('year').'-'.request('from');
+            $to = request('year').'-'.request('to');
+          }else{
+            $from = request('year').'-'.request('from');
+            $to = request('year').'-'.'12';
+          }
+      }elseif(request('items')){
         $items2 = Items::whereIn('id', $items)->get();
+        $ministries2 = NULL;
         if(request('to')){
           $from = request('year').'-'.request('from');
           $to = request('year').'-'.request('to');
@@ -64,6 +75,7 @@ class ReportController extends Controller
         }
       }else{
           $items2 = Items::whereIn('door', $doors)->get();
+          $ministries2 = NULL;
           if(request('to')){
             $from = request('year').'-'.request('from');
             $to = request('year').'-'.request('to');
@@ -75,8 +87,8 @@ class ReportController extends Controller
       $fromMonth = (int)$fromMonth;
       $toMonth = (int)$toMonth;
       $items = Items::all();
-      $ministrie = Ministrie::find(request('ministry'))->first();
-      return view('taqarerSearch',compact('ministries','ministrie','items','items2','from','to','year','fromMonth','toMonth'));
+      $ministrie = Ministrie::find(request('ministry'));
+      return view('taqarerSearch',compact('ministries','ministries2','doors','ministrie','items','items2','from','to','year','fromMonth','toMonth'));
     }
 
     /**
