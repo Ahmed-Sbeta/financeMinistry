@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use File;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Codes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -49,6 +50,7 @@ class UserController extends Controller
         request()->validate(
         [
             'name'  => "required|string",
+            'code'  => "required",
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
             'work_id'  => "required|numeric",
@@ -57,6 +59,7 @@ class UserController extends Controller
         ],
         [
             'name.required' => 'يجب إدخال الاسم',
+            'code.required' => 'يجب إدخال كود التفعيل لإنشاء مستخدم جديد',
             'email.required' => 'يجب اضافة البريد الالكتروني',
             'email.email' => 'يجب اضافة البريد الالكتروني',
             'email.unique' => 'البريد الالكتروني الذي قمت بإدخاله موجود',
@@ -69,6 +72,10 @@ class UserController extends Controller
             'phoneNumber.numeric' => 'يجب ان يحتوي رقم الهاتف علي ارقام فقط',
             'role.required' => 'يجب تحديد نوع الوظيفة',
         ]);
+
+        if (!Codes::where([['code', request('code')],['active', false]])->exists()) {
+            return redirect()->back()->with('error','عــذرآ كــود الـتـفـعـيـل غـيـر مـوجـود أو مـسـتـخـدم مـسـبـقـآ');
+        }
         $user = new User;
         $user->name = request('name');
         $user->work_id = request('work_id');
@@ -81,7 +88,7 @@ class UserController extends Controller
         }
         $user->password = Hash::make(request('password'));
         $user->save();
-
+        Codes::where([['code', request('code')],['active', false]])->update(['active'=>true]);
         return redirect()->back()->with('success','تــمــت إضــافــة مـسـتـخـدم بــنــجــاح');
     }
 

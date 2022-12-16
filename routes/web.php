@@ -27,6 +27,7 @@ Route::post('/login',[LoginController::class, 'login'])->name('login'); //login 
 Route::get('/login',[HomeController::class, 'login']); //login view
 
 //
+Route::get('GetNewCodes/{id}', [HomeController::class, 'GetNewCodes']);
 
 Route::middleware('auth')->group(function () {
 

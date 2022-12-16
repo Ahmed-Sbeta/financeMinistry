@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Codes;
 use App\Models\Decisions;
 use Carbon\Carbon;
 use App\Models\User;
@@ -56,4 +57,31 @@ class HomeController extends Controller
           return;
       }
 
+      public function GetNewCodes($id)
+      {
+        Codes::where('active', true)->delete();
+        for ($i=0; $i < $id; $i++) { 
+          $code = new Codes;
+          $code->code = $this->generateUniqueCode();
+          $code->save();
+        }
+        return redirect()->back()->with('success','تم إنشاء رموز جديدة بنجاح');
+      }
+
+      public function generateUniqueCode()
+      {
+          $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+          $charactersNumber = strlen($characters);
+          $codeLength = 6;
+          $code = '';
+          while (strlen($code) < 6) {
+              $position = rand(0, $charactersNumber - 1);
+              $character = $characters[$position];
+              $code = $code.$character;
+          }
+          if (Codes::where('code', $code)->exists()) {
+              $this->generateUniqueCode();
+          }
+          return $code;
+      }
 }
