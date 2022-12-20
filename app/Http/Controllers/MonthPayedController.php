@@ -31,7 +31,37 @@ class MonthPayedController extends Controller
         $ministry = Ministrie::find(request('id'));
         $items = Items::get();
         $payeds = MonthllyPayed::where('ministry_id', request('id'))->whereDate('date', request('date').'-1')->get();
-        return view('add-month-pay',compact('ministry','payeds','date','items'));
+        $sum1 =0;
+        $sum2 =0;
+        $sum3 =0;
+        $sum4 =0;
+        $sum5 =0;
+        foreach ($items->where('door', 1) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum1 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 2) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum2 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 3) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum3 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 4) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum4 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 5) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum5 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        return view('add-month-pay',compact('ministry','payeds','date','items','sum1','sum2','sum3','sum4','sum5'));
     }
 
     /**
@@ -45,14 +75,11 @@ class MonthPayedController extends Controller
         request()->validate(
             [
                 'item_id'  => "required|array|min:1",
-                'price'  => "required|array|min:1",
                 'date' => 'required',
             ],
-            [ 
+            [
                 'item_name.required' => 'الرجاء اضافة بعض الخانات علي الاقل',
                 'item_name.min' => 'الرجاء اضافة بعض الخانات علي الاقل',
-                'price.required' => 'الرجاء اضافة بعض الخانات علي الاقل',
-                'price.min' => 'الرجاء اضافة بعض الخانات علي الاقل',
                 'date.required' => 'يجب تحديد التاريخ',
             ]);
 
@@ -87,7 +114,7 @@ class MonthPayedController extends Controller
 
             MonthllyPayed::insert($finalArray);
 
-            DB::commit(); 
+            DB::commit();
             if($counter > 0 && $counter2 > 0){
                 return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>1])->with('success','تمت اضافة بعض المدخلات الشهرية بنجاح والبعض من المدخلات موجودة مسبقآ');
             }elseif($counter > 0 && $counter2 == 0){
@@ -109,7 +136,38 @@ class MonthPayedController extends Controller
         $ministry = Ministrie::find(request('id'));
         $items = Items::get();
         $payeds = MonthllyPayed::where('ministry_id', request('id'))->whereDate('date', request('date').'-1')->get();
-        return view('add-month-pay',['ministry'=>$ministry, 'payeds'=>$payeds, 'date'=>$date, 'items'=>$items]);
+        $sum1 =0;
+        $sum2 =0;
+        $sum3 =0;
+        $sum4 =0;
+        $sum5 =0;
+        foreach ($items->where('door', 1) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum1 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 2) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum2 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 3) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum3 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 4) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum4 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+        foreach ($items->where('door', 5) as $item){
+          if($payeds->where('item_id', $item->id)->first()){
+            $sum5 += $payeds->where('item_id', $item->id)->first()->total;
+          }
+        }
+
+        return view('add-month-pay',['ministry'=>$ministry, 'payeds'=>$payeds, 'date'=>$date, 'items'=>$items , 'sum1'=>$sum1,'sum2'=>$sum2,'sum3'=>$sum3,'sum4'=>$sum4,'sum5'=>$sum5]);
     }
 
     /**
@@ -158,7 +216,7 @@ class MonthPayedController extends Controller
                 'price'  => "required|array|min:1",
                 'date' => 'required',
             ],
-            [ 
+            [
                 'item_name.required' => 'الرجاء اضافة بعض الخانات علي الاقل',
                 'item_name.min' => 'الرجاء اضافة بعض الخانات علي الاقل',
                 'price.required' => 'الرجاء اضافة بعض الخانات علي الاقل',
@@ -203,13 +261,13 @@ class MonthPayedController extends Controller
 
             MonthllyPayed::insert($finalArray);
 
-            DB::commit(); 
+            DB::commit();
             if($counter > 0 && $counter2 > 0){
-                return redirect()->route('monthPayeds.show',[$id])->with('success','تمت اضافة بعض المدخلات الشهرية بنجاح والبعض من المدخلات موجودة مسبقآ');    
+                return redirect()->route('monthPayeds.show',[$id])->with('success','تمت اضافة بعض المدخلات الشهرية بنجاح والبعض من المدخلات موجودة مسبقآ');
             }elseif($counter > 0 && $counter2 == 0){
-                return redirect()->route('monthPayeds.show',[$id])->with('error','عذرآ ولكن قيمة البنود المدخلة قد تم إدخالها لهذا الشهر');    
+                return redirect()->route('monthPayeds.show',[$id])->with('error','عذرآ ولكن قيمة البنود المدخلة قد تم إدخالها لهذا الشهر');
             }else{
-                return redirect()->route('monthPayeds.show',[$id])->with('success','تمت تعديل كل المدخلات الشهرية بنجاح');    
+                return redirect()->route('monthPayeds.show',[$id])->with('success','تمت تعديل كل المدخلات الشهرية بنجاح');
             }
             // all good
         } catch (\Exception $e) {
