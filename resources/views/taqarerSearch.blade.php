@@ -4,7 +4,11 @@
     <head>
 
         <meta charset="utf-8" />
+        @if($ministrie)
         <title>تقارير للجهة {{$ministrie->name}}</title>
+        @else
+        <title>تقارير لكل الجهات</title>
+        @endif
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -50,8 +54,12 @@
                                <div class="row">
                                    <div class="col-4 pb-2" lang="ar">
                                        <label for="">اســم الجــهــة</label>
-                                       <select name="ministry[]" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar" required oninvalid="this.setCustomValidity('الرجاء اختيار جهة معينة')" oninput="this.setCustomValidity('')">
-                                        <option selected value="{{$ministrie->id}}">{{$ministrie->name}}</option>
+                                       <select name="ministry" class="form-control js-example-basic-single" multiple="multiple" id="" lang="ar" required oninvalid="this.setCustomValidity('الرجاء اختيار جهة معينة')" oninput="this.setCustomValidity('')">
+                                        @if($ministrie)
+                                            <option selected value="{{$ministrie->id}}">{{$ministrie->name}}</option>
+                                        @else
+                                            <option selected value="0">الكل</option>
+                                        @endif
                                          @foreach($ministries as $ministry)
                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
                                           @endforeach
@@ -106,7 +114,11 @@
                                     <div class="row mb-2">
                                         <div class="col-4">
                                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                                @if($ministrie)
                                                 <h4 class="mb-sm-0 font-size-18"> <span>{{$ministrie->name}}</span> </h4>
+                                                @else
+                                                <h4 class="mb-sm-0 font-size-18"> <span>كل الجهات</span> </h4>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="col-4">
@@ -117,7 +129,11 @@
 
                                         <div class="col-4">
                                             <div class="text-sm-end">
+                                                @if($ministrie)
                                                 <a href="#" onclick="exportData('xlsx',{{json_encode($ministrie->name.' '.$from.' إلي '.$to)}})" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-file me-1"></i> تــصديــر</a>
+                                                @else
+                                                <a href="#" onclick="exportData('xlsx',{{json_encode('كل الجهات '.$from.' إلي '.$to)}})" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-file me-1"></i> تــصديــر</a>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -137,29 +153,53 @@
                                                    </tr>
                                                </thead>
                                                <tbody>
-                                                @foreach ($items2 as $item)
-                                                   <tr>
-                                                    <td>{{$item->name}}</td>
-                                                    @for($i = $fromMonth; $i <= $toMonth; $i++)
-                                                        @if($i < 10)
-                                                            @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->count() > 0)
-                                                                <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</td>
-                                                                <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total ?>
+                                                @if($items2)
+                                                    @foreach ($items2 as $item)
+                                                       <tr>
+                                                        <td>{{$item->name}}</td>
+                                                        @for($i = $fromMonth; $i <= $toMonth; $i++)
+                                                            @if($i < 10)
+                                                                @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->count() > 0)
+                                                                    <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</td>
+                                                                    <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total ?>
+                                                                @else
+                                                                    <td>0</td>
+                                                                @endif
                                                             @else
-                                                                <td>0</td>
+                                                                @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->count() > 0)
+                                                                    <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total}}</td>
+                                                                    <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total ?>
+                                                                @else
+                                                                    <td>0</td>
+                                                                @endif
                                                             @endif
-                                                        @else
-                                                            @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->count() > 0)
-                                                                <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total}}</td>
-                                                                <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total ?>
-                                                            @else
-                                                                <td>0</td>
-                                                            @endif
-                                                        @endif
-                                                    @endfor
-                                                   </tr>
-                                                @endforeach
-
+                                                        @endfor
+                                                       </tr>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($ministries2 as $item)
+                                                        <tr>
+                                                        <td>{{$item->name}}</td>
+                                                        @for($i = $fromMonth; $i <= $toMonth; $i++)
+                                                             @if($i < 10)
+                                                                 @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
+                                                                     <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</td>
+                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+                                                                 @else
+                                                                     <td>0</td>
+                                                                 @endif
+                                                             @else
+                                                                 @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
+                                                                     <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</td>
+                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+                                                                 @else
+                                                                     <td>0</td>
+                                                                 @endif
+                                                             @endif
+                                                        @endfor
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                                 <tr>
                                                     <td>المجموع</td>
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)

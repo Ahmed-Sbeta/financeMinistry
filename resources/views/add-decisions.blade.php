@@ -78,7 +78,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة صادرة</label>
-                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="issuer">
+                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="issuer" required oninvalid="this.setCustomValidity('الرجاء اختيار الجهة الصادرة')" oninput="this.setCustomValidity('')">
                                                             @foreach($ministries as $ministry)
                                                             <option value="{{$ministry->id}}">{{$ministry->name}}</option>
                                                             @endforeach
@@ -100,7 +100,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة المستلمة</label>
-                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="receiving">
+                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="receiving" required oninvalid="this.setCustomValidity('الرجاء اختيار الجهة المستلمة')" oninput="this.setCustomValidity('')">
                                                             @foreach($ministries as $ministry)
                                                             <option value="{{$ministry->id}}">{{$ministry->name}}</option>
                                                             @endforeach
@@ -114,6 +114,7 @@
                                                     </div>
 
                                                 </div>
+                                                
                                             </div>
 
                                             <!-- <div class="d-flex flex-wrap gap-2">
@@ -126,10 +127,11 @@
 
                                 <div class="card">
                                     <div class="card-body">
+
                                         <h4 class="card-title mb-3">الـــقــرار</h4>
 
                                             <div class="fallback">
-                                                <input name="file" type="file" multiple />
+                                                <input name="file" type="file" multiple  required oninvalid="this.setCustomValidity('الرجاء تحميل ملف القرار')" oninput="this.setCustomValidity('')"/>
                                             </div>
 
                                             <div class="dz-message needsclick">
@@ -140,8 +142,6 @@
                                                 <h4>قم بإدخال ملف هنا.</h4>
                                             </div>
                                     </div>
-
-
                                 </div> <!-- end card-->
 
                                 <div class="card">

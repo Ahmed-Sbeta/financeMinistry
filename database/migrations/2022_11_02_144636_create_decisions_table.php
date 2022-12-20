@@ -17,10 +17,10 @@ class CreateDecisionsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('decisionsNumber');
-            $table->string('issuer');
-            $table->string('receiver');
+            $table->integer('issuer');
+            $table->integer('receiver');
             $table->date('date');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('file');
             $table->timestamps();
         });

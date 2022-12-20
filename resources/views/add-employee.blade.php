@@ -88,7 +88,15 @@
                                                         <label for="email">كــلـمـة الــمرور</label>
                                                         <input id="email" name="password" type="password" class="form-control" required oninvalid="this.setCustomValidity('الرجاء ادخال كلمة المرور')" oninput="this.setCustomValidity('')">
                                                     </div>
-
+                                                    <div class="mb-3">
+                                                        <label class="control-label">الــوظــيفــة</label>
+                                                        <select class="form-control select" name="role">
+                                                            <option selected disabled>اخــتــيـار</option>
+                                                            @foreach ($roles as $role)
+                                                                <option value="{{$role->id}}">{{$role->role}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
@@ -104,18 +112,13 @@
                                                         <label for="email">إعــادة كــلـمـة الــمرور</label>
                                                         <input id="email" name="password_confirmation" type="password" class="form-control" required oninvalid="this.setCustomValidity('الرجاء اعادة ادخال كلمة المرور')" oninput="this.setCustomValidity('')">
                                                     </div>
-
-
-                                                </div>
-                                                <div class="mb-3">
-                                                        <label class="control-label">الــوظــيفــة</label>
-                                                        <select class="form-control select" name="role">
-                                                            <option selected disabled>اخــتــيـار</option>
-                                                            @foreach ($roles as $role)
-                                                                <option value="{{$role->id}}">{{$role->role}}</option>
-                                                            @endforeach
-                                                        </select>
+                                                    <div class="mb-3">
+                                                        <label for="code">كود التفعيل</label>
+                                                        <input id="code" name="code" type="text" class="form-control" required oninvalid="this.setCustomValidity('الرجاء ادخال كود التفعيل')" oninput="this.setCustomValidity('')">
                                                     </div>
+                                                </div>
+                                                
+
                                                 <div class="mt-3">
                                                     <label for="formFile" class="form-label">صــورة شــخــصــيـة</label>
                                                     <input class="form-control" type="file" id="formFile" name="image">
