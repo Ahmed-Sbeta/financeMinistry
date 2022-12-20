@@ -42,7 +42,7 @@ class MinistrieController extends Controller
             [
                 'name'  => "required|string",
             ],
-            [ 
+            [
                 'name.required' => 'يجب إدخال الاسم',
             ]);
         $mini = new Ministrie;
@@ -52,7 +52,7 @@ class MinistrieController extends Controller
             $mini->image = request()->file('image')->store('public');
             $mini->image = str_replace('public', '', $mini->image);
         }
-        $mini->parent_id = $id;            
+        $mini->parent_id = $id;
         $mini->save();
         return redirect()->back()->with('success','تــمــت إضــافــة الـجـهـة الـتـابـعـة بــنــجــاح');
     }
@@ -68,6 +68,15 @@ class MinistrieController extends Controller
         $ministry = Ministrie::find($id);
         $all = Ministrie::where('parent_id', $id)->paginate(15);
         return view('Sub-ministrie',compact('all','ministry'));
+    }
+
+    public function search($id){
+      $ministry =Ministrie::find($id);
+      $all = Ministrie::where('name', 'LIKE', '%' . request('name') . '%')->Where('parent_id',$id)->paginate(20);
+      if($all->count() == 0){
+          return redirect()->back()->with('error',' الــذي تبــحث عنــه غيــر موجــود');
+      }
+      return view('Sub-ministrie',compact('all','ministry'));
     }
 
     /**
@@ -95,7 +104,7 @@ class MinistrieController extends Controller
             [
                 'name'  => "required|string",
             ],
-            [ 
+            [
                 'name.required' => 'يجب إدخال الاسم',
             ]);
             $ministry = Ministrie::find($id);

@@ -95,7 +95,7 @@
                                                     <div class="col-sm-2">
                                                         <div class="mb-3">
                                                             <label for="fullname">{{$item->name}}</label>
-                                                            <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                            <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                         </div>
                                                     </div>
                                                     @else
@@ -142,7 +142,7 @@
                                             <div class="col-sm-2">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
-                                                    <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                 </div>
                                             </div>
                                             @else
@@ -182,7 +182,7 @@
                                                 <div class="col-sm-2">
                                                     <div class="mb-3">
                                                         <label for="fullname">{{$item->name}}</label>
-                                                        <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                     </div>
                                                 </div>
                                                 @else
@@ -220,7 +220,7 @@
                                             <div class="col-sm-2">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
-                                                    <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                 </div>
                                             </div>
                                             @else
@@ -257,7 +257,7 @@
                                                 <div class="col-sm-2">
                                                     <div class="mb-3">
                                                         <label for="fullname">{{$item->name}}</label>
-                                                        <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                     </div>
                                                 </div>
                                                 @else

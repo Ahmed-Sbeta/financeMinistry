@@ -54,12 +54,24 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+
                                     <div class="card-body">
                                         <div class="row mb-2">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-5">
+                                              <form action="{{url('/searchMinistry/'.$ministry->id)}}" method="get" class="p-3">
+                                                  @csrf
+                                                  <div class="form-group m-0">
+                                                      <div class="input-group">
+                                                          <input type="text" class="form-control" name="name" placeholder="البحث عن جهة" aria-label="Recipient's username" required oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
+                                                          <div class="input-group-append">
+                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </form>
 
                                             </div>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-7">
                                                 <div class="text-sm-end">
                                                     <a href="{{route('ministries.create',[$ministry->id])}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضـــافــة جهة تابعة جديدة</a>
                                                 </div>
