@@ -34,7 +34,7 @@ class HomeController extends Controller
         $total3 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 3)->sum('total');
         $total4 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 4)->sum('total');
         $total5 = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 5)->sum('total');
-        $notifications = Notification::count();
+        $notifications = Notification::where('receive_id', auth()->user()->id)->count();
         $decisionsCount = Decisions::count();
         return view('dashboard',compact('ministries','subMinistries','notifications','decisionsCount','decisions','items','users','door1','door2','door3','door4','door5','total','total1','total2','total3','total4','total5'));
       }
@@ -60,7 +60,7 @@ class HomeController extends Controller
       public function GetNewCodes($id)
       {
         Codes::where('active', true)->delete();
-        for ($i=0; $i < $id; $i++) { 
+        for ($i=0; $i < $id; $i++) {
           $code = new Codes;
           $code->code = $this->generateUniqueCode();
           $code->save();
