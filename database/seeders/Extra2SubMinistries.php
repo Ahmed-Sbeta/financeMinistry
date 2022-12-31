@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\Ministrie;
 
 use Illuminate\Database\Seeder;
 
