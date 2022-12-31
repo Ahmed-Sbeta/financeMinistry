@@ -92,10 +92,10 @@
                                                         </div>                                                    </div>
                                                         <div class="mb-3">
                                                             <label for="manufacturerbrand">موضوع القرار</label>
-                                                            <input id="fullname" name="subject" type="text" class="form-control" placeholder="" required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار')" oninput="this.setCustomValidity('')">
+                                                            <input id="fullname" name="subject" type="text" class="form-control" placeholder="" required oninvalid="this.setCustomValidity('الرجاء ادخال موضوع القرار')" oninput="this.setCustomValidity('')">
                                                           </div>
                                                             <div class="mb-3">
-                                                                <label for="manufacturerbrand">مدة القــرار ألي تــاريــخ</label>
+                                                              <label for="manufacturerbrand">مدة القرار الي تاريخ</label>
                                                                 <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
                                                                     <input type="date" class="form-control" placeholder="تاريخ الاصدار" name="expire" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
                                                                 </div>                                                    </div>

@@ -24,7 +24,8 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
-
+        <!-- select2 -->
+        <link rel="stylesheet" href="{{asset('assets\libs\select2\css\select2.min.css')}}">
     </head>
 
     <body data-sidebar="dark">
@@ -75,15 +76,11 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة صادرة</label>
-                                                        <select class="form-control select" name="issuer">
-                                                            <option value="{{$decision->issuer}}" selected>{{$decision->issuer}}</option>
-                                                            <option  >Visual Identity Design </option>
-                                                            <option value="EL">Content Writing</option>
-                                                            <option  >Graphic Design </option>
-                                                            <option  >Web Desgin </option>
-                                                            <option  >Billboard Design </option>
-                                                            <option  >Animation </option>
-                                                            <option  > product photography  </option>
+                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="issuer" required oninvalid="this.setCustomValidity('الرجاء اختيار الجهة الصادرة')" oninput="this.setCustomValidity('')">
+                                                            <option selected value="{{$decision->issuer}}">{{$decision->issuer1->name}}</option>
+                                                            @foreach($ministries as $ministry)
+                                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
+                                                            @endforeach
 
                                                         </select>
                                                     </div>
@@ -92,7 +89,15 @@
                                                         <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
                                                             <input type="date" class="form-control" value="{{$decision->date}}" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
                                                         </div>                                                    </div>
-
+                                                        <div class="mb-3">
+                                                            <label for="manufacturerbrand">موضوع القرار</label>
+                                                            <input id="fullname" name="subject" type="text" value="{{$decision->subject}}" class="form-control" placeholder="" required oninvalid="this.setCustomValidity('الرجاء ادخال موضوع القرار')" oninput="this.setCustomValidity('')">
+                                                          </div>
+                                                          <div class="mb-3">
+                                                              <label for="manufacturerbrand">مدة القرار الي تاريخ</label>
+                                                              <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
+                                                                  <input type="date" value="{{$decision->expire}}" class="form-control" placeholder="تاريخ الاصدار" name="expire" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
+                                                              </div>                                                    </div>
                                                 </div>
 
                                                 <div class="col-sm-6">
@@ -102,17 +107,8 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة المستلمة</label>
-                                                        <select class="form-control select" name="receiving">
-                                                          <option value="{{$decision->receiver}}" selected>{{$decision->receiver}}</option>
-                                                            <option  >Visual Identity Design </option>
-                                                            <option value="EL">Content Writing</option>
-                                                            <option  >Graphic Design </option>
-                                                            <option  >Web Desgin </option>
-                                                            <option  >Billboard Design </option>
-                                                            <option  >Animation </option>
-                                                            <option  > product photography  </option>
+                                                        <input id="fullname" name="receiving" type="text" value="{{$decision->receiver}}" class="form-control" placeholder="" required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار')" oninput="this.setCustomValidity('')">
 
-                                                        </select>
                                                     </div>
 
                                                     <div class="mb-3">
@@ -202,6 +198,19 @@
 
         <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
+        <script src="{{asset('assets/libs/select2/js/select2.full.min.js')}}" charset="utf-8"></script>
+        <script>
+            $( document ).ready(function() {
+                $('.js-example-basic-single').select2({
+                  dir: "rtl",
+                  maximumSelectionLength: 1 ,
+
+                });
+                $('.js-example-basic-multiple').select2();
+
+                document.getElementById("rtl-mode-switch").trigger('click');
+        });
+        </script>
 
     </body>
 </html>
