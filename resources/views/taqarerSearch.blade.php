@@ -160,14 +160,14 @@
                                                         @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                             @if($i < 10)
                                                                 @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->count() > 0)
-                                                                    <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</td>
+                                                                    <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total)}}</td>
                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total ?>
                                                                 @else
                                                                     <td>0</td>
                                                                 @endif
                                                             @else
                                                                 @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->count() > 0)
-                                                                    <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total}}</td>
+                                                                    <td>{{number_format($item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total)}}</td>
                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total ?>
                                                                 @else
                                                                     <td>0</td>
@@ -183,14 +183,14 @@
                                                         @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                              @if($i < 10)
                                                                  @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
-                                                                     <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</td>
+                                                                     <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total'))}}</td>
                                                                      <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
                                                                  @else
                                                                      <td>0</td>
                                                                  @endif
                                                              @else
                                                                  @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
-                                                                     <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</td>
+                                                                     <td>{{number_format($item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total'))}}</td>
                                                                      <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
                                                                  @else
                                                                      <td>0</td>
@@ -203,7 +203,7 @@
                                                 <tr>
                                                     <td>المجموع</td>
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)
-                                                        <td>{{$sum[$i]}}</td>
+                                                        <td>{{number_format($sum[$i])}}</td>
                                                     @endfor
                                                    </tr>
                                                </tbody>

@@ -82,7 +82,7 @@
                                                         </th>
                                                         <th class="align-middle">الــبــنــد</th>
 
-                                                        <th class="align-middle">تـعـديـل \ مـسـح</th>
+                                                        <th class="align-middle">تــعــديــل</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -98,17 +98,7 @@
                                                         <td>
                                                             <div class="d-flex gap-3 ">
                                                                 <a href="{{route('items.edit',[$item->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                                {{-- <a href="{{route('items.destroy',[$item->id])}}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a> --}}
-
-                                                                <form method="post" action="{{ route('items.destroy',[$item->id]) }}">
-                                                                    <!-- here the '1' is the id of the post which you want to delete -->
                                                                 
-                                                                    {{ csrf_field() }}
-                                                                    {{ method_field('DELETE') }}
-                                                                
-                                                                    <button href="#" style="border: none; background: none;" type="submit" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></button>
-                                                                </form>
-
                                                             </div>
                                                         </td>
                                                     </tr>

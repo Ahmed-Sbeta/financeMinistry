@@ -95,7 +95,7 @@
                                                     <div class="col-sm-2">
                                                         <div class="mb-3">
                                                             <label for="fullname">{{$item->name}}</label>
-                                                            <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                            <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                         </div>
                                                     </div>
                                                     @else
@@ -115,6 +115,10 @@
 
 
                                                 @endforeach
+                                                <div class="col-sm-2">
+                                                  <label for="fullname">المجموع</label>
+                                                  <p style="color: green;" for="fullname">{{number_format($sum1)}}</p>
+                                                </div>
 
                                             </div>
 
@@ -135,7 +139,7 @@
                                             <div class="col-sm-2">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
-                                                    <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                 </div>
                                             </div>
                                             @else
@@ -154,8 +158,13 @@
                                             @endif
 
                                         @endforeach
+                                        <div class="col-sm-2">
+                                                  <label for="fullname">المجموع</label>
+                                                  <p style="color: green;" for="fullname">{{number_format($sum2)}}</p>
+                                                </div>
 
                                             </div>
+                                            
 
                                             <br>
 
@@ -175,7 +184,7 @@
                                                 <div class="col-sm-2">
                                                     <div class="mb-3">
                                                         <label for="fullname">{{$item->name}}</label>
-                                                        <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                     </div>
                                                 </div>
                                                 @else
@@ -189,7 +198,11 @@
                                                 </div>
                                                 @endif
                                                 @endforeach
-
+                                                <div class="col-sm-2">
+                                                  <label for="fullname">المجموع</label>
+                                                  <p style="color: green;" for="fullname">{{number_format($sum3)}}</p>
+                                                </div>
+    
 
                                             </div>
 
@@ -213,7 +226,7 @@
                                             <div class="col-sm-2">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
-                                                    <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                 </div>
                                             </div>
                                             @else
@@ -227,6 +240,10 @@
                                             </div>
                                             @endif
                                         @endforeach
+                                        <div class="col-sm-2">
+                                                  <label for="fullname">المجموع</label>
+                                                  <p style="color: green;" for="fullname">{{number_format($sum4)}}</p>
+                                                </div>
 
 
 
@@ -250,7 +267,7 @@
                                                 <div class="col-sm-2">
                                                     <div class="mb-3">
                                                         <label for="fullname">{{$item->name}}</label>
-                                                        <p style="color: green;" for="fullname">{{$payeds->where('item_id', $item->id)->first()->total}}</p>
+                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                     </div>
                                                 </div>
                                                 @else
@@ -264,7 +281,12 @@
                                                 </div>
                                                 @endif
                                                 @endforeach
-
+                                                <div class="col-sm-2">
+                                                  <label for="fullname">المجموع</label>
+                                                  <p style="color: green;" for="fullname">{{number_format($sum5)}}</p>
+                                                </div>
+                                                
+                                                
 
                                             </div>
 

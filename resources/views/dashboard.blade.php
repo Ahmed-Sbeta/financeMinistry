@@ -195,7 +195,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-xl-8">
+                            <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="clearfix">
@@ -212,7 +212,7 @@
                                                 <div class="text-muted">
                                                     <div class="mb-4">
                                                         <p>هـذه الـسـنـة</p>
-                                                        <h4>${{$total}}</h4>
+                                                        <h4>{{$total}}</h4>
                                                         {{-- <div><span class="badge badge-soft-success font-size-12 me-1"> + 0.2% </span> عن السنة الماضية</div> --}}
                                                     </div>
 
@@ -220,26 +220,26 @@
                                                     <div class="row">
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الأول</p>
-                                                        <h5>${{$total1}}</h5>
+                                                        <h5>{{$total1}}</h5>
                                                     </div>
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الثاني</p>
-                                                        <h5>${{$total2}}</h5>
+                                                        <h5>{{$total2}}</h5>
                                                     </div>
                                                     </div>
                                                     <div class="row">
 
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الثالث</p>
-                                                        <h5>${{$total3}}</h5>
+                                                        <h5>{{$total3}}</h5>
                                                     </div>
                                                     <div class="mt-2 col-6">
                                                         <p class="mb-2">الباب الرابع</p>
-                                                        <h5>${{$total4}}</h5>
+                                                        <h5>{{$total4}}</h5>
                                                     </div>
                                                     <div class="mt-2">
                                                         <p class="mb-2">الباب الخامس</p>
-                                                        <h5>${{$total5}}</h5>
+                                                        <h5>{{$total5}}</h5>
                                                     </div>
                                                     </div>
                                                 </div>
@@ -253,7 +253,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xl-4">
+                            <div class="col-xl-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title mb-4">احــصائــيات</h4>
@@ -267,26 +267,21 @@
                                                 <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-primary me-1"></i> الباب 1</p>
-                                                        <h5>$ {{$door1}}</h5>
+                                                        <h5> {{number_format($door1)}} د.ل</h5>
                                                     </div>
                                                 </div>
                                                 <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-success me-1"></i> الباب 2</p>
-                                                        <h5>$ {{$door2}}</h5>
+                                                        <h5> {{number_format($door2)}} د.ل</h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-4">
-                                                    <div class="mt-4">
-                                                        <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-danger me-1"></i> الباب 3</p>
-                                                        <h5>$ {{$door3}}</h5>
-                                                    </div>
-                                                </div>
+                                                
                                                 @if($door4 > 0)
                                                 <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-danger me-1"></i> الباب 4</p>
-                                                        <h5>$ {{$door4}}</h5>
+                                                        <h5> {{number_format($door4)}} د.ل</h5>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -294,7 +289,7 @@
                                                 <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i class="mdi mdi-circle text-danger me-1"></i> الباب 5</p>
-                                                        <h5>$ {{$door5}}</h5>
+                                                        <h5>{{$door5}}</h5>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -464,7 +459,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{$door1}}</h5>
+                                                            <h5 class="mb-0">{{number_format($door1)}} د.ل </h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -476,7 +471,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{$door2}}</h5>
+                                                            <h5 class="mb-0">{{number_format($door2)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -487,7 +482,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{$door3}}</h5>
+                                                            <h5 class="mb-0">{{number_format($door3)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -498,7 +493,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{$door4}}</h5>
+                                                            <h5 class="mb-0">{{number_format($door4)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -509,7 +504,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{$door5}}</h5>
+                                                            <h5 class="mb-0">{{number_format($door5)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                 </tbody>

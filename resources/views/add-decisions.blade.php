@@ -90,6 +90,16 @@
                                                         <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
                                                             <input type="date" class="form-control" placeholder="تاريخ الاصدار" name="date" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
                                                         </div>                                                    </div>
+                                                        <div class="mb-3">
+                                                        <label class="control-label">موضوع القرار</label>
+                                                        <input id="fullname" type="text" class="form-control" placeholder="" required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار')" oninput="this.setCustomValidity('')">
+                                                    </div>
+                                                    
+                                                    <div class="mb-3">
+                                                        <label for="manufacturerbrand">مــدة القــرار</label>
+                                                        <div class="input-daterange input-group" id="project-date-inputgroup" data-provide="datepicker" data-date-format="dd M, yyyy"  data-date-container='#project-date-inputgroup' data-date-autoclose="true">
+                                                            <input type="date" class="form-control" placeholder="تاريخ الاصدار" required oninvalid="this.setCustomValidity('الرجاء تحديد تاريخ القرار')" oninput="this.setCustomValidity('')" />
+                                                        </div>                                                    </div>
 
                                                 </div>
 
@@ -100,17 +110,12 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="control-label">جهة المستلمة</label>
-                                                        <select class="form-control select js-example-basic-single" multiple="multiple" name="receiving" required oninvalid="this.setCustomValidity('الرجاء اختيار الجهة المستلمة')" oninput="this.setCustomValidity('')">
-                                                            @foreach($ministries as $ministry)
-                                                            <option value="{{$ministry->id}}">{{$ministry->name}}</option>
-                                                            @endforeach
-
-                                                        </select>
+                                                        <input id="fullname" name="receiving" type="text" class="form-control" placeholder="" required oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار')" oninput="this.setCustomValidity('')">
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="productdesc">الــقــرار بإختصار</label>
-                                                        <textarea class="form-control" id="productdesc" rows="6" name="description" placeholder="نبذه عن القرار"></textarea>
+                                                        <label for="productdesc">نــتــائــج الـلــجــنــة </label>
+                                                        <textarea class="form-control" id="productdesc" rows="6" name="description" placeholder=""></textarea>
                                                     </div>
 
                                                 </div>
