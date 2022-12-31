@@ -142,10 +142,10 @@
                                     </div>
 
                                        <div class="table-responsive">
-                                           <table class="table align-middle table-nowrap table-hover" id="tab1">
+                                           <table class="table align-middle table-nowrap table-hover"  id="tab1">
                                                <thead class="table-light">
                                                    <tr>
-                                                    <th>البند</th>
+                                                    <th width="70px">البند</th>
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                         <th>{{$i}}</th>
                                                         <?php $sum[$i] = 0 ?>

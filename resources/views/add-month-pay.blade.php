@@ -120,6 +120,13 @@
                                                   <p style="color: green;" for="fullname">{{number_format($sum1)}}</p>
                                                 </div>
 
+                                                <div class="col-sm-2">
+                                                  <label for="fullname">المجموع</label>
+                                                  <p style="color: green;" for="fullname">{{number_format($sum1)}}</p>
+                                                </div>
+
+
+
                                             </div>
 
                                             <br>

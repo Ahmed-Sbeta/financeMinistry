@@ -54,12 +54,24 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
+
                                     <div class="card-body">
                                         <div class="row mb-2">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-5">
+                                              <form action="{{url('/searchMinistry/'.$ministry->id)}}" method="get" class="p-3">
+                                                  @csrf
+                                                  <div class="form-group m-0">
+                                                      <div class="input-group">
+                                                          <input type="text" class="form-control" name="name" placeholder="البحث عن جهة" aria-label="Recipient's username" required oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
+                                                          <div class="input-group-append">
+                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </form>
 
                                             </div>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-7">
                                                 <div class="text-sm-end">
                                                     <a href="{{route('ministries.create',[$ministry->id])}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضـــافــة جهة تابعة جديدة</a>
                                                 </div>
@@ -75,10 +87,14 @@
 
                                                         <th scope="col" style="width: 70px;">#</th>
                                                         <th scope="col">الإســـم</th>
+                                                        @if(auth()->user()->role_id == 1)
                                                         <th scope="col">القيمة الشهرية</th>
                                                         <th scope="col">تفاصيل</th>
+                                                        @endif
                                                         <th scope="col">تعبئة</th>
+                                                        @if(auth()->user()->role_id == 1)
                                                         <th class="col">تـعـديـل</th>
+                                                        @endif
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -95,24 +111,24 @@
                                                         <td>
                                                             <h5 class="font-size-14 mb-1"><a href="javascript: void(0);" class="text-dark">{{$mini->name}}</a></h5>
                                                         </td>
-
+                                                        @if(auth()->user()->role_id == 1)
                                                         <td>
                                                             {{$mini->total}}
                                                         </td>
+                                                        @endif
 
+                                                        @if(auth()->user()->role_id == 1)
                                                         <td>
                                                             <!-- Button trigger modal -->
-                                                            @if(auth()->user()->role_id == 1)
                                                             <a href="{{route('monthPayeds.show',[$mini->id])}}" class="btn btn-primary btn-sm btn-rounded">
                                                                 عــرض الـتـفـاصيل
                                                             </a>
-                                                            @else
-                                                            -
-                                                            @endif
+
                                                         </td>
+                                                        @endif
 
                                                         <td>
-                                                            @if($mini->chilldren->count() > 0)
+                                                          @if($mini->chilldren->count() > 0)
                                                             <a href="{{route('ministries.show',[$mini->id])}}" class="btn btn-primary btn-sm btn-rounded">
                                                                 الجـهات الفرعية
                                                             </a>
@@ -120,10 +136,11 @@
                                                             <button type="button" class="btn btn-success btn-sm btn-rounded" onclick="searchBy({{$mini->id}})" data-bs-toggle="modal" data-bs-target=".orderdetailsModal">
                                                                 تعبئة <i class="mdi mdi-calendar-month me-1"></i>
                                                             </button>
-                                                            @endif
 
+                                                            @endif
                                                         </td>
 
+                                                        @if(auth()->user()->role_id == 1)
                                                         <td>
                                                             <ul class="list-inline font-size-20 contact-links mb-0">
                                                                 <li class="list-inline-item px-2">
@@ -134,8 +151,9 @@
                                                                 </li>
                                                             </ul>
                                                         </td>
-                                                    </tr>
+                                                        @endif
                                                     @endforeach
+                                                  </tr>
 
                                                 </tbody>
                                             </table>

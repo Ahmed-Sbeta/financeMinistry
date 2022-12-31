@@ -42,6 +42,7 @@
                             <div class="card-body pt-0">
                                 <div class="auth-logo">
                                     <a class="auth-logo-light">
+
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
                                                 <img src="assets/images/white.png" alt="" class="rounded-circle" height="34">
@@ -116,7 +117,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>

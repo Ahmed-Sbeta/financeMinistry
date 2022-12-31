@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('ministries/create/{id}', [MinistrieController::class, 'create'])->name('ministries.create');
     Route::post('ministries/store/{id}', [MinistrieController::class, 'store'])->name('ministries.store');
     Route::resource('ministries', MinistrieController::class)->except(['create','store']);
+    Route::get('/searchMinistry/{id}', [MinistrieController::class, 'search'])->name('searchministry');
+
 
     Route::resource('reports', ReportController::class)->except(['store']);
     Route::get('search/reports', [ReportController::class, 'store'])->name('searchReports');

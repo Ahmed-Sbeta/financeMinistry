@@ -20,7 +20,9 @@ class CreateDecisionsTable extends Migration
             $table->integer('issuer');
             $table->string('receiver');
             $table->date('date');
+            $table->date('expire');
             $table->string('description')->nullable();
+            $table->string('subject');
             $table->string('file');
             $table->timestamps();
         });

@@ -47,28 +47,32 @@ class DecisionController extends Controller
             return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
         }
         request()->validate(
-        [
-            'title'  => "required",
-            'decisionNumber'  => "required",
-            'issuer'  => "required",
-            'receiving'  => "required",
-            'date'  => "required",
-            'file'  => "required",
-        ],
-        [ 
-            'worktitle.required' => 'الرجاء كتابة عنوان القرار',
-            'decisionNumber.required' => 'الرجاء كتابة رقم القرار',
-            'issuer.required' => 'الرجاءاختيار الجهة الصادرة',
-            'receiving.required' => 'الرجاء باختيار الجهة المستلمة',
-            'date.required' => 'الرجاء كتابة تاريخ القرار',
-            'file.required' => 'الرجاء تحميل ملف القرار',
-        ]);
+            [
+                'title'  => "required",
+                'decisionNumber'  => "required",
+                'issuer'  => "required",
+                'receiving'  => "required",
+                'subject'  => "required",
+                'expire'  => "required",
+                'date'  => "required",
+            ],
+            [
+                'worktitle.required' => 'الرجاء كتابة عنوان القرار',
+                'decisionNumber.required' => 'الرجاء كتابة رقم القرار',
+                'issuer.required' => 'الرجاءاختيار الجهة الصادرة',
+                'receiving.required' => 'الرجاء باختيار الجهة المستلمة',
+                'subject.required' => 'الرجاء باختيار موضوع القرار',
+                'expire.required' => 'الرجاء باختيار مدة القرار',
+                'date.required' => 'الرجاء كتابة تاريخ القرار',
+            ]);
         $decision = new Decisions;
         $decision->title = request('title');
         $decision->decisionsNumber = request('decisionNumber');
         $decision->issuer = request('issuer');
         $decision->receiver = request('receiving');
         $decision->date = request('date');
+        $decision->expire = request('expire');
+        $decision->subject = request('subject');
         $decision->description = request('description');
         $newFilePath = request()->file('file')->store('public');
         $decision->file = str_replace('public', '', $newFilePath);
@@ -100,8 +104,9 @@ class DecisionController extends Controller
         if(auth()->user()->role_id != 1){
             return redirect()->back()->with('error','عذرآ غير مسموح لك بالتواجد في هذه الصفحة');
         }
+        $ministries = Ministrie::where("parent_id",'!=',NULL)->get();
         $decision = Decisions::find($id);
-        return view('edit-decision',compact('decision'));
+        return view('edit-decision',compact('decision','ministries'));
     }
 
     /**
@@ -122,13 +127,17 @@ class DecisionController extends Controller
                 'decisionNumber'  => "required",
                 'issuer'  => "required",
                 'receiving'  => "required",
+                'subject'  => "required",
+                'expire'  => "required",
                 'date'  => "required",
             ],
-            [ 
+            [
                 'worktitle.required' => 'الرجاء كتابة عنوان القرار',
                 'decisionNumber.required' => 'الرجاء كتابة رقم القرار',
                 'issuer.required' => 'الرجاءاختيار الجهة الصادرة',
                 'receiving.required' => 'الرجاء باختيار الجهة المستلمة',
+                'subject.required' => 'الرجاء باختيار موضوع القرار',
+                'expire.required' => 'الرجاء باختيار مدة القرار',
                 'date.required' => 'الرجاء كتابة تاريخ القرار',
             ]);
         $decision = Decisions::find($id);
@@ -138,6 +147,8 @@ class DecisionController extends Controller
         $decision->issuer = request('issuer');
         $decision->receiver = request('receiving');
         $decision->date = request('date');
+        $decision->subject = request('subject');
+        $decision->expire = request('expire');
         $decision->description = request('description');
         if(request()->file('file')){
             File::delete(public_path('storage/'.$decision->file));
