@@ -366,7 +366,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{number_format($door2)}} د.ل</h5>
+                                                            <h5 class="mb-0">{{number_format($door2)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -377,7 +377,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{number_format($door3)}} د.ل</h5>
+                                                            <h5 class="mb-0">{{number_format($door3)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -388,7 +388,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{number_format($door4)}} د.ل</h5>
+                                                            <h5 class="mb-0">{{number_format($door4)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -399,7 +399,7 @@
 
                                                         <td>
                                                             <p class="text-muted mb-1">دينار ليبي</p>
-                                                            <h5 class="mb-0">${{number_format($door5)}} د.ل</h5>
+                                                            <h5 class="mb-0">{{number_format($door5)}} د.ل</h5>
                                                         </td>
                                                     </tr>
                                                 </tbody>

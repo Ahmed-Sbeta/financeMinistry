@@ -55,7 +55,7 @@ class DecisionController extends Controller
             'date'  => "required",
             'file'  => "required",
         ],
-        [ 
+        [
             'worktitle.required' => 'الرجاء كتابة عنوان القرار',
             'decisionNumber.required' => 'الرجاء كتابة رقم القرار',
             'issuer.required' => 'الرجاءاختيار الجهة الصادرة',
@@ -69,6 +69,8 @@ class DecisionController extends Controller
         $decision->issuer = request('issuer');
         $decision->receiver = request('receiving');
         $decision->date = request('date');
+        $decision->expire = request('expire');
+        $decision->subject = request('subject');
         $decision->description = request('description');
         $newFilePath = request()->file('file')->store('public');
         $decision->file = str_replace('public', '', $newFilePath);
@@ -124,7 +126,7 @@ class DecisionController extends Controller
                 'receiving'  => "required",
                 'date'  => "required",
             ],
-            [ 
+            [
                 'worktitle.required' => 'الرجاء كتابة عنوان القرار',
                 'decisionNumber.required' => 'الرجاء كتابة رقم القرار',
                 'issuer.required' => 'الرجاءاختيار الجهة الصادرة',

@@ -106,7 +106,7 @@
                                                         <td>
                                                         </td>
                                                         <td>
-                                                            {{$decision->receiver1->name}}
+                                                            {{$decision->receiver}}
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
