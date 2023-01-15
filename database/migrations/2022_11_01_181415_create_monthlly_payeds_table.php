@@ -18,7 +18,8 @@ class CreateMonthllyPayedsTable extends Migration
             $table->integer("ministry_id");
             $table->integer("item_id");
             $table->integer("door_id");
-            $table->float("total");
+            $table->float("total")->nullable();
+            $table->float("given")->nullable();
             $table->date("date");
             $table->integer("created_id");
             $table->timestamps();

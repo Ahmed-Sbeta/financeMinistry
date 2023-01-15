@@ -141,7 +141,7 @@
 
                                     </div>
 
-                                       <div class="table-responsive">
+                                        <div class="table-responsive">
                                            <table class="table align-middle table-nowrap table-hover"  id="tab1">
                                                <thead class="table-light">
                                                    <tr>
@@ -149,6 +149,7 @@
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                         <th>{{$i}}</th>
                                                         <?php $sum[$i] = 0 ?>
+                                                        <?php $sum2[$i] = 0 ?>
                                                     @endfor
                                                    </tr>
                                                </thead>
@@ -161,14 +162,18 @@
                                                             @if($i < 10)
                                                                 @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->count() > 0)
                                                                     <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</td>
+                                                                    <td>المصروفات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</span> - المعطيات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->given}}</span> </td>
+
                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total ?>
+                                                                    <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->given ?>
                                                                 @else
                                                                     <td>0</td>
                                                                 @endif
                                                             @else
                                                                 @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->count() > 0)
-                                                                    <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total}}</td>
+                                                                    <td>المصروفات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</span> - المعطيات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->given}}</span> </td>
                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total ?>
+                                                                    <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->given ?>
                                                                 @else
                                                                     <td>0</td>
                                                                 @endif
@@ -183,15 +188,18 @@
                                                         @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                              @if($i < 10)
                                                                  @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
-                                                                     <td>{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</td>
+                                                                     <td>المصروفات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</span> - المعطيات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('given')}}</span> </td>
                                                                      <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+                                                                     <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('given') ?>
                                                                  @else
                                                                      <td>0</td>
                                                                  @endif
                                                              @else
                                                                  @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
-                                                                     <td>{{$item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</td>
-                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+                                                                 <td>المصروفات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total')}}</span> - المعطيات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('given')}}</span> </td>
+                                                                 <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+                                                                 <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('given') ?>+
+
                                                                  @else
                                                                      <td>0</td>
                                                                  @endif
@@ -203,12 +211,12 @@
                                                 <tr>
                                                     <td>المجموع</td>
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)
-                                                        <td>{{$sum[$i]}}</td>
+                                                        <td>المصروفات <span style="color: green;">{{$sum[$i]}}</span> - المعطيات <span style="color: green;">{{$sum2[$i]}}</span> </td>
                                                     @endfor
                                                    </tr>
                                                </tbody>
                                            </table>
-                                       </div>
+                                        </div>
 
                                    </div>
                                </div>

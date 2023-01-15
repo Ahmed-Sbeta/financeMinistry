@@ -182,7 +182,7 @@
                                 {{-- <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
                                 <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p> --}}
 
-                                <form action="{{route('monthPayeds.create',[$ministry->id])}}" method="post" enctype="multipart/form-data">
+                                <form action="{{route('monthPayeds.create',[$ministry->id])}}" method="get">
                                     @csrf
                                     <input type="hidden" value="" id="mini_id" name="id">
                                     <div class="mb-3">

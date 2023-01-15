@@ -31,34 +31,44 @@ class MonthPayedController extends Controller
         $ministry = Ministrie::find(request('id'));
         $items = Items::get();
         $payeds = MonthllyPayed::where('ministry_id', request('id'))->whereDate('date', request('date').'-1')->get();
-        $sum1 =0;
-        $sum2 =0;
-        $sum3 =0;
-        $sum4 =0;
-        $sum5 =0;
+        $sum1[0] = 0;
+        $sum1[1] = 0;
+        $sum2[0] = 0;
+        $sum2[1] = 0;
+        $sum3[0] = 0;
+        $sum3[1] = 0;
+        $sum4[0] = 0;
+        $sum4[1] = 0;
+        $sum5[0] = 0;
+        $sum5[1] = 0;
         foreach ($items->where('door', 1) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum1 += $payeds->where('item_id', $item->id)->first()->total;
+            $sum1[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum1[1] += $payeds->where('item_id', $item->id)->first()->given;
           }
         }
         foreach ($items->where('door', 2) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum2 += $payeds->where('item_id', $item->id)->first()->total;
+            $sum2[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum2[1] += $payeds->where('item_id', $item->id)->first()->given;
           }
         }
         foreach ($items->where('door', 3) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum3 += $payeds->where('item_id', $item->id)->first()->total;
+            $sum3[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum3[1] += $payeds->where('item_id', $item->id)->first()->given;
           }
         }
         foreach ($items->where('door', 4) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum4 += $payeds->where('item_id', $item->id)->first()->total;
+            $sum4[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum4[1] += $payeds->where('item_id', $item->id)->first()->given;
           }
         }
         foreach ($items->where('door', 5) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum5 += $payeds->where('item_id', $item->id)->first()->total;
+            $sum5[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum5[1] += $payeds->where('item_id', $item->id)->first()->given;
           }
         }
         return view('add-month-pay',compact('ministry','payeds','date','items','sum1','sum2','sum3','sum4','sum5'));
@@ -88,37 +98,63 @@ class MonthPayedController extends Controller
              $finalArray = array();
             $items = request('item_id');
             $itemP = request('price');
+            $itemP2 = request('price2');
             $itemd = request('door_id');
             $counter = 0;
             $counter2 = 0;
             $date = request('date');
             for ($i=0; $i < count($items); $i++) {
-                if($itemP[$i] != NULL){
+                // if(!array_key_exists($i, $itemP)){
+                //   $itemP[$i] = "0";
+                //   // array_push($itemP, 0);
+                // }
+                // if(!array_key_exists($i, $itemP2)){
+                //   $itemP2[$i] = "0";
+                // }
+                if($itemP[$i] || $itemP2[$i]){
                     $found = MonthllyPayed::where([['ministry_id', $id],['item_id', $items[$i]]])->whereDate('date', request('date').'-1')->first();
+                    // if(!$itemP[$i]){
+                    //   $itemP[$i] = "0";
+                    // }
+                    // if(!$itemP2[$i]){
+                    //   $itemP2[$i] = "0";
+                    // }
+
                     if(!$found){
                         array_push($finalArray, array(
                             'ministry_id'=>$id,
                             'item_id'=>$items[$i],
                             'door_id'=>$itemd[$i],
                             'total'=>$itemP[$i],
+                            'given'=>$itemP2[$i],
                             'date'=>request('date').'-1',
                             'created_id'=> auth()->user()->id
                             )
                         );
                         $counter2++;
                     }else{
+                        if($itemP[$i]){
+                          $found->total = $itemP[$i];
+                        }
+                        if($itemP2[$i]){
+                          $found->given = $itemP2[$i];
+                        }
+                        $found->update();
                         $counter++;
                     }
                 }
             }
 
-            MonthllyPayed::insert($finalArray);
+
+            if(count($finalArray) > 0){
+              MonthllyPayed::insert($finalArray);
+            }
 
             DB::commit();
             if($counter > 0 && $counter2 > 0){
                 return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>1])->with('success','تمت اضافة بعض المدخلات الشهرية بنجاح والبعض من المدخلات موجودة مسبقآ');
-            }elseif($counter > 0 && $counter2 == 0){
-                return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>2])->with('error','عذرآ ولكن قيمة البنود المدخلة قد تم إدخالها لهذا الشهر');
+            }elseif($counter > 0 || $counter2 > 0){
+                return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>2])->with('success','تمت اضافة كل المدخلات الشهرية بنجاح');
             }else{
                 return redirect()->route('monthPayeds.backTo',['date'=>request('date'),'id'=>$id,'num'=>3])->with('success','تمت اضافة كل المدخلات الشهرية بنجاح');
             }
@@ -136,35 +172,40 @@ class MonthPayedController extends Controller
         $ministry = Ministrie::find(request('id'));
         $items = Items::get();
         $payeds = MonthllyPayed::where('ministry_id', request('id'))->whereDate('date', request('date').'-1')->get();
-        $sum1 =0;
-        $sum2 =0;
-        $sum3 =0;
-        $sum4 =0;
-        $sum5 =0;
+        $sum1[0] = 0;
+        $sum1[1] = 0;
+        $sum2[0] = 0;
+        $sum2[1] = 0;
+        $sum3[0] = 0;
+        $sum3[1] = 0;
+        $sum4[0] = 0;
+        $sum4[1] = 0;
+        $sum5[0] = 0;
+        $sum5[1] = 0;
         foreach ($items->where('door', 1) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum1 += $payeds->where('item_id', $item->id)->first()->total;
-          }
+            $sum1[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum1[1] += $payeds->where('item_id', $item->id)->first()->given;          }
         }
         foreach ($items->where('door', 2) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum2 += $payeds->where('item_id', $item->id)->first()->total;
-          }
+            $sum2[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum2[1] += $payeds->where('item_id', $item->id)->first()->given;          }
         }
         foreach ($items->where('door', 3) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum3 += $payeds->where('item_id', $item->id)->first()->total;
-          }
+            $sum3[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum3[1] += $payeds->where('item_id', $item->id)->first()->given;          }
         }
         foreach ($items->where('door', 4) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum4 += $payeds->where('item_id', $item->id)->first()->total;
-          }
+            $sum4[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum4[1] += $payeds->where('item_id', $item->id)->first()->given;          }
         }
         foreach ($items->where('door', 5) as $item){
           if($payeds->where('item_id', $item->id)->first()){
-            $sum5 += $payeds->where('item_id', $item->id)->first()->total;
-          }
+            $sum5[0] += $payeds->where('item_id', $item->id)->first()->total;
+            $sum5[1] += $payeds->where('item_id', $item->id)->first()->given;          }
         }
 
         return view('add-month-pay',['ministry'=>$ministry, 'payeds'=>$payeds, 'date'=>$date, 'items'=>$items , 'sum1'=>$sum1,'sum2'=>$sum2,'sum3'=>$sum3,'sum4'=>$sum4,'sum5'=>$sum5]);

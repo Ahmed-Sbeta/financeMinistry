@@ -101,12 +101,11 @@
                                                         </div>
                                                     </td>
                                                       <th scope="row">{{$i}}</th>
-                                                      <td style="color: green;">{{number_format($ministry->payeds()->where('door_id', 1)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</td>
-                                                      <td style="color: green;">{{number_format($ministry->payeds()->where('door_id', 2)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</td>
-                                                      <td style="color: green;">{{number_format($ministry->payeds()->where('door_id', 3)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</td>
-                                                      <td style="color: green;">{{number_format($ministry->payeds()->where('door_id', 4)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</td>
-                                                      <td style="color: green;">{{number_format($ministry->payeds()->where('door_id', 5)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</td>
-
+                                                      <td>المصروفات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 1)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</span> - المعطيات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 1)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('given'))}}</span> </td>
+                                                      <td>المصروفات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 2)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</span> - المعطيات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 2)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('given'))}}</span> </td>
+                                                      <td>المصروفات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 3)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</span> - المعطيات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 3)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('given'))}}</span> </td>
+                                                      <td>المصروفات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 4)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</span> - المعطيات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 4)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('given'))}}</span> </td>
+                                                      <td>المصروفات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 5)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('total'))}}</span> - المعطيات <span style="color: green;">{{number_format($ministry->payeds()->where('door_id', 5)->whereDate('date', now()->format('Y').'-'.$i.'-1')->sum('given'))}}</span> </td>
                                                   </tr>
                                                   @endfor
 
