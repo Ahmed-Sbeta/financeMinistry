@@ -26,7 +26,13 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
 
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+        </style>
     </head>
 
     <body data-sidebar="dark">
@@ -117,7 +123,7 @@
                                                         <input id="code" name="code" type="text" class="form-control" required oninvalid="this.setCustomValidity('الرجاء ادخال كود التفعيل')" oninput="this.setCustomValidity('')">
                                                     </div>
                                                 </div>
-                                                
+
 
                                                 <div class="mt-3">
                                                     <label for="formFile" class="form-label">صــورة شــخــصــيـة</label>

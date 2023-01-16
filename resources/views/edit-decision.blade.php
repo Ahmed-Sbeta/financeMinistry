@@ -26,6 +26,13 @@
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
         <!-- select2 -->
         <link rel="stylesheet" href="{{asset('assets\libs\select2\css\select2.min.css')}}">
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
+
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+      </style>
     </head>
 
     <body data-sidebar="dark">
