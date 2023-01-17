@@ -19,7 +19,13 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
 
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+        </style>
     </head>
 
     <body data-sidebar="dark">
@@ -99,10 +105,10 @@
 
                                                                 <form method="post" action="{{ route('items.destroy',[$item->id]) }}">
                                                                     <!-- here the '1' is the id of the post which you want to delete -->
-                                                                
+
                                                                     {{ csrf_field() }}
                                                                     {{ method_field('DELETE') }}
-                                                                
+
                                                                     <button href="#" style="border: none; background: none;" type="submit" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></button>
                                                                 </form>
 

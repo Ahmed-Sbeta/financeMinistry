@@ -18,6 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+    @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
+
+    * {
+      font-family: 'Cairo', sans-serif;
+    }
+  </style>
 </head>
 <body>
     <div id="app">

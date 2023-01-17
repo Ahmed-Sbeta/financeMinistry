@@ -25,7 +25,13 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
 
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+        </style>
     </head>
 
     <body data-sidebar="dark">
@@ -95,26 +101,26 @@
                                                         <div class="col-sm-2">
                                                             <div class="mb-3">
                                                                 <label for="fullname">{{$item->name}}</label>
-    
+
                                                                 {{-- @if(!$payeds->where('item_id', $item->id)->first()->given || !$payeds->where('item_id', $item->id)->first()->total) --}}
                                                                     <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                                     <input type="hidden" value="1" name="door_id[]">
                                                                 {{-- @endif --}}
-    
+
                                                                 @if(!$payeds->where('item_id', $item->id)->first()->given)
                                                                     <input id="fullname" style="direction: rtl; margin-top: 6px;" name="price2[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المعطاة">
                                                                 @else
                                                                     <p for="fullname" style="padding-top: 10px;"> المعطاة <span style="color: green;">{{number_format($payeds->where('item_id', $item->id)->first()->given)}}</span> </p>
                                                                     <input type="hidden" value="0" name="price2[]">
                                                                 @endif
-    
+
                                                                 @if(!$payeds->where('item_id', $item->id)->first()->total)
                                                                     <input id="fullname" style="direction: rtl; margin-top: 5px;" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المصروفة">
                                                                 @else
                                                                     <p for="fullname" class="mt-3"> المصروفة <span style="color: green;">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</span> </p>
                                                                     <input type="hidden" value="0" name="price[]">
                                                                 @endif
-    
+
                                                             </div>
                                                         </div>
                                                     @else
@@ -125,7 +131,7 @@
                                                                 overflow: hidden;
                                                                 text-overflow: ellipsis;
                                                                 display: inline-block;">{{$item->name}}</label>
-    
+
                                                                 <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                                 <input type="hidden" value="1" name="door_id[]">
                                                                 <input id="fullname" style="direction: rtl;" name="price2[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المعطاة">
@@ -274,12 +280,12 @@
                                                     <label for="fullname">مجموع المصروفات</label>
                                                     <p style="color: green;" for="fullname">{{number_format($sum3[0])}}</p>
                                                   </div>
-        
+
                                                   <div class="col-6">
                                                       <label for="fullname">مجموع المعطيات</label>
                                                       <p style="color: green;" for="fullname">{{number_format($sum3[1])}}</p>
                                                   </div>
-        
+
 
                                             </div>
 
@@ -404,12 +410,12 @@
                                                     <label for="fullname">مجموع المصروفات</label>
                                                     <p style="color: green;" for="fullname">{{number_format($sum5[0])}}</p>
                                                   </div>
-        
+
                                                   <div class="col-6">
                                                       <label for="fullname">مجموع المعطيات</label>
                                                       <p style="color: green;" for="fullname">{{number_format($sum5[1])}}</p>
                                                   </div>
-        
+
                                             </div>
 
                                             <br>

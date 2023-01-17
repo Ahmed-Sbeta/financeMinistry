@@ -24,7 +24,13 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
 
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+        </style>
     </head>
 
     <body data-sidebar="dark">
@@ -51,7 +57,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">تـعـديـل الـبــنــد  
+                                    <h4 class="mb-sm-0 font-size-18">تـعـديـل الـبــنــد
                                         @if($item->door == 1)
                                         <a href="{{route('items.show',[1])}}">(الباب الاول)</a>
                                         @elseif($item->door == 2)
