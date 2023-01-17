@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/notificationsCheck', [App\Http\Controllers\HomeController::class, 'notifications'])->name('notificationsCheck');
     Route::get('/changeShowNotification', [HomeController::class, 'changeShowNotification'])->name('changeShowNotification');
+    Route::get('/yearFilter', [HomeController::class, 'yearFilter'])->name('yearFilter');
 
     Route::get('ministries/create/{id}', [MinistrieController::class, 'create'])->name('ministries.create');
     Route::post('ministries/store/{id}', [MinistrieController::class, 'store'])->name('ministries.store');
