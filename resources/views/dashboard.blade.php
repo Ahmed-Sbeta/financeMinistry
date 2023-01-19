@@ -227,9 +227,9 @@
                                                 <div class="text-muted">
                                                     <div class="mb-4">
                                                         <p>اجمالي المصروفات</p>
-                                                        <h4>$ {{$total}}</h4>
+                                                        <h4>د,ل {{number_format($total)}}</h4>
                                                         <p>اجمالي المعطيات</p>
-                                                        <h4>$ {{$total2}}</h4>
+                                                        <h4>د,ل {{number_format($total2)}}</h4>
                                                         {{-- <div><span class="badge badge-soft-success font-size-12 me-1"> + 0.2% </span> From previous period</div> --}}
                                                     </div>
 
@@ -240,49 +240,49 @@
                                                             <input type="number" style="display: none;" max="{{now()->format('Y')}}" class="input-group-text mt-3" name="year" id="year22" placeholder="ادخل السنة" required oninvalid="this.setCustomValidity('الرجاء ادخال السنة المطلوبة')" oninput="this.setCustomValidity('')">
                                                         </form>
                                                     </div>
-                                                    
+
                                                     {{-- <div class="mt-4">
                                                         <p class="mb-2">Last month</p>
                                                         <h5>$2281.04</h5>
                                                     </div> --}}
-                                                    
+
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-8">
 
                                              <canvas id="myChart2"></canvas>
-          
+
                                             <script>
-                                
+
                                                 var dates = {!! json_encode($child_arr) !!};
                                                 var xValues = [];
                                                 for (let i = 0; i <= 12; i++) {
                                                   xValues[i] = i
                                                 }
                                                 // var xValues = [1,2,3,4,5,6,7,8,9,10,11,12];
-                                
+
                                                 var chart = new Chart("myChart2", {
                                                   type: "line",
                                                   data: {
                                                     labels: xValues,
-                                                    datasets: [{ 
+                                                    datasets: [{
                                                       data: [0,dates['door1'][1],dates['door1'][2],dates['door1'][3],dates['door1'][4],dates['door1'][5],dates['door1'][6],dates['door1'][7],dates['door1'][8],dates['door1'][9],dates['door1'][10],dates['door1'][11],dates['door1'][12]],
                                                       backgroundColor: "#b91d47",
                                                       fill: false
-                                                    }, { 
+                                                    }, {
                                                         data: [0,dates['door2'][1],dates['door2'][2],dates['door2'][3],dates['door2'][4],dates['door2'][5],dates['door2'][6],dates['door2'][7],dates['door2'][8],dates['door2'][9],dates['door2'][10],dates['door2'][11],dates['door2'][12]],
                                                         backgroundColor: "#00aba9",
                                                       fill: false
-                                                    }, { 
+                                                    }, {
                                                         data: [0,dates['door3'][1],dates['door3'][2],dates['door3'][3],dates['door3'][4],dates['door3'][5],dates['door3'][6],dates['door3'][7],dates['door3'][8],dates['door3'][9],dates['door3'][10],dates['door3'][11],dates['door3'][12]],
                                                         backgroundColor: "#2b5797",
                                                       fill: false
-                                                    }, { 
+                                                    }, {
                                                         data: [0,dates['door4'][1],dates['door4'][2],dates['door4'][3],dates['door4'][4],dates['door4'][5],dates['door4'][6],dates['door4'][7],dates['door4'][8],dates['door4'][9],dates['door4'][10],dates['door4'][11],dates['door4'][12]],
                                                         backgroundColor: "#e8c3b9",
                                                       fill: false
-                                                    }, { 
+                                                    }, {
                                                         data: [0,dates['door5'][1],dates['door5'][2],dates['door5'][3],dates['door5'][4],dates['door5'][5],dates['door5'][6],dates['door5'][7],dates['door5'][8],dates['door5'][9],dates['door5'][10],dates['door5'][11],dates['door5'][12]],
                                                         backgroundColor: "#1e7145",
                                                       fill: false
@@ -293,10 +293,10 @@
                                                     legend: {display: false}
                                                   }
                                                 });
-                                
+
                                             </script>
-                
-        
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -328,7 +328,7 @@
                                               "#e8c3b9",
                                               "#1e7145"
                                             ];
-                                            
+
                                             new Chart("myChart", {
                                               type: "doughnut",
                                               data: {
@@ -350,36 +350,26 @@
 
                                         <div class="text-center text-muted">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-6">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i style="color: #b91d47 !important;" class="mdi mdi-circle text-primary me-1"></i> الباب الاول</p>
-                                                        <h5>$ {{$door1}}</h5>
+                                                        <h5> {{number_format($door1)}}</h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-6">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i style="color: #00aba9 !important;" class="mdi mdi-circle text-success me-1"></i> الباب الثاني</p>
-                                                        <h5>$ {{$door2}}</h5>
+                                                        <h5> {{number_format($door2)}}</h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
-                                                    <div class="mt-4">
-                                                        <p class="mb-2 text-truncate"><i style="color: #2b5797 !important;" class="mdi mdi-circle text-danger me-1"></i> الباب الثالث</p>
-                                                        <h5>$ {{$door3}}</h5>
-                                                    </div>
-                                                </div>
-                                                <div class="col-3">
+
+                                                <div class="col-6">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i style="color: #e8c3b9 !important;" class="mdi mdi-circle text-danger me-1"></i> الباب الرابع</p>
-                                                        <h5>$ {{$door4}}</h5>
+                                                        <h5>{{number_format($door4)}}</h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
-                                                    <div class="mt-4">
-                                                        <p class="mb-2 text-truncate"><i style="color: #1e7145 !important;" class="mdi mdi-circle text-danger me-1"></i> الباب الخامس</p>
-                                                        <h5>$ {{$door5}}</h5>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

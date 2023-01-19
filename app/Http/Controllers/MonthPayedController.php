@@ -274,12 +274,13 @@ class MonthPayedController extends Controller
             $finalArray = array();
             $items = request('item_id');
             $itemP = request('price');
+            $itemP1 = request('price1');
             $itemd = request('door_id');
             $counter = 0;
             $counter2 = 0;
             $date = request('date').'-1';
             for ($i=0; $i < count($items); $i++) {
-                if($itemP[$i] != NULL){
+                if($itemP[$i] != NULL && $itemP1 !=NULL){
                     $found = MonthllyPayed::where(([['ministry_id', $id],['item_id', $items[$i]]]))->whereDate('date', $date)->first();
                     if(!$found){
                         array_push($finalArray, array(
@@ -287,6 +288,7 @@ class MonthPayedController extends Controller
                             'item_id'=>$items[$i],
                             'door_id'=>$itemd[$i],
                             'total'=>$itemP[$i],
+                            'given'=>$itemP1[$i],
                             'date'=>$date,
                             'created_id'=> auth()->user()->id
                             )
@@ -295,6 +297,10 @@ class MonthPayedController extends Controller
                     }else{
                         if($found->total != $itemP[$i]){
                             $found->total = $itemP[$i];
+                            $found->update();
+                        }
+                        if($found->given != $itemP1[$i]){
+                            $found->given = $itemP1[$i];
                             $found->update();
                         }
                         $counter++;
