@@ -227,9 +227,9 @@
                                                 <div class="text-muted">
                                                     <div class="mb-4">
                                                         <p>اجمالي المصروفات</p>
-                                                        <h4>$ {{$total}}</h4>
+                                                        <h4>د,ل {{number_format($total)}}</h4>
                                                         <p>اجمالي المعطيات</p>
-                                                        <h4>$ {{$total2}}</h4>
+                                                        <h4>د,ل {{number_format($total2)}}</h4>
                                                         {{-- <div><span class="badge badge-soft-success font-size-12 me-1"> + 0.2% </span> From previous period</div> --}}
                                                     </div>
 
