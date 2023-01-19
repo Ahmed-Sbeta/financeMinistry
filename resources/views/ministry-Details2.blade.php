@@ -101,7 +101,8 @@
                                                     <div class="col-sm-2 one" id="one">
                                                         <div class="mb-3">
                                                             <label for="fullname">{{$item->name}}</label>
-                                                            <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
+                                                            <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->given)}}</p>
+                                                            <p style="color: red;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                         </div>
                                                     </div>
                                                     @else
@@ -113,6 +114,8 @@
                                                             text-overflow: ellipsis;
                                                             display: inline-block;">{{$item->name}}</label>
                                                             <p style="color: green;" for="fullname">0</p>
+                                                            <p style="color: red;" for="fullname">0</p>
+
                                                         </div>
                                                     </div>
                                                     @endif
@@ -127,9 +130,11 @@
                                                             <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                             <input type="hidden" value="1" name="door_id[]">
                                                             @if($payeds->where('item_id', $item->id)->first())
-                                                            <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                            <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->given}}" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success " placeholder=" القيمة المعطاة">
+                                                            <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                             @else
-                                                            <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                            <input id="fullname" style="direction: rtl;" value="" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                            <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                             @endif
                                                         </div>
                                                     </div>
@@ -155,7 +160,8 @@
                                             <div class="col-sm-2 one" id="one">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
-                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
+                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->given)}}</p>
+                                                    <p style="color: red;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                 </div>
                                             </div>
                                             @else
@@ -167,6 +173,7 @@
                                                     text-overflow: ellipsis;
                                                     display: inline-block;">{{$item->name}}</label>
                                                     <p style="color: green;" for="fullname">0</p>
+                                                    <p style="color: red;" for="fullname">0</p>
                                                 </div>
                                             </div>
                                             @endif
@@ -181,9 +188,11 @@
                                                     <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                     <input type="hidden" value="2" name="door_id[]">
                                                     @if($payeds->where('item_id', $item->id)->first())
-                                                    <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->given}}" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                    <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                     @else
-                                                    <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    <input id="fullname" style="direction: rtl;" value="" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                    <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                     @endif                                                </div>
                                             </div>
 
@@ -213,7 +222,8 @@
                                                         overflow: hidden;
                                                         text-overflow: ellipsis;
                                                         display: inline-block;">{{$item->name}}</label>
-                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
+                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->given)}}</p>
+                                                        <p style="color: red;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                     </div>
                                                 </div>
                                                 @else
@@ -225,6 +235,7 @@
                                                         text-overflow: ellipsis;
                                                         display: inline-block;">{{$item->name}}</label>
                                                         <p style="color: green;" for="fullname">0</p>
+                                                        <p style="color: red;" for="fullname">0</p>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -239,9 +250,11 @@
                                                         <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                         <input type="hidden" value="3" name="door_id[]">
                                                         @if($payeds->where('item_id', $item->id)->first())
-                                                        <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                        <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->given}}" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                        <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                         @else
-                                                        <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                        <input id="fullname" style="direction: rtl;" value="" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                        <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                         @endif                                                    </div>
                                                 </div>
 
@@ -270,7 +283,8 @@
                                             <div class="col-sm-2 one" id="one">
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
-                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
+                                                    <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->given)}}</p>
+                                                    <p style="color: red;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                 </div>
                                             </div>
                                             @else
@@ -278,6 +292,7 @@
                                                 <div class="mb-3">
                                                     <label for="fullname">{{$item->name}}</label>
                                                     <p style="color: green;" for="fullname">0</p>
+                                                    <p style="color: red;" for="fullname">0</p>
                                                 </div>
                                             </div>
                                             @endif
@@ -288,9 +303,11 @@
                                                     <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                     <input type="hidden" value="4" name="door_id[]">
                                                     @if($payeds->where('item_id', $item->id)->first())
-                                                    <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->given}}" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                    <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                     @else
-                                                    <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                    <input id="fullname" style="direction: rtl;" value="" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                    <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                     @endif                                                </div>
                                             </div>
 
@@ -322,7 +339,8 @@
                                                         overflow: hidden;
                                                         text-overflow: ellipsis;
                                                         display: inline-block;">{{$item->name}}</label>
-                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
+                                                        <p style="color: green;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->given)}}</p>
+                                                        <p style="color: red;" for="fullname">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</p>
                                                     </div>
                                                 </div>
                                                 @else
@@ -334,6 +352,7 @@
                                                         text-overflow: ellipsis;
                                                         display: inline-block;">{{$item->name}}</label>
                                                         <p style="color: green;" for="fullname">0</p>
+                                                        <p style="color: red;" for="fullname">0</p>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -344,9 +363,11 @@
                                                         <input type="hidden" value="{{$item->id}}" name="item_id[]">
                                                         <input type="hidden" value="5" name="door_id[]">
                                                         @if($payeds->where('item_id', $item->id)->first())
-                                                        <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                        <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->given}}" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                        <input id="fullname" style="direction: rtl;" value="{{$payeds->where('item_id', $item->id)->first()->total}}" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                         @else
-                                                        <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control" placeholder="القيمة المالية">
+                                                        <input id="fullname" style="direction: rtl;" value="" name="price1[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="القيمة المعطاة">
+                                                        <input id="fullname" style="direction: rtl;" value="" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="القيمة المصروفة">
                                                         @endif                                                    </div>
                                                 </div>
 
