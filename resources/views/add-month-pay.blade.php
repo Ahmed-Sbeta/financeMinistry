@@ -142,10 +142,7 @@
 
 
                                                 @endforeach
-                                                <div class="col-sm-2">
-                                                  <label for="fullname">المجموع</label>
-                                                  <p style="color: green;" for="fullname">{{number_format($sum1)}}</p>
-                                                </div>
+
 
                                                 <div class="col-6">
                                                   <label for="fullname">مجموع المصروفات</label>
@@ -215,10 +212,7 @@
                                             @endif
 
                                         @endforeach
-                                        <div class="col-sm-2">
-                                                  <label for="fullname">المجموع</label>
-                                                  <p style="color: green;" for="fullname">{{number_format($sum2)}}</p>
-                                                </div>
+
 
                                         <div class="col-6">
                                             <label for="fullname">مجموع المصروفات</label>
@@ -232,7 +226,7 @@
 
 
                                             </div>
-                                            
+
 
                                             <br>
 
@@ -352,10 +346,7 @@
                                             </div>
                                             @endif
                                         @endforeach
-                                        <div class="col-sm-2">
-                                                  <label for="fullname">المجموع</label>
-                                                  <p style="color: green;" for="fullname">{{number_format($sum4)}}</p>
-                                                </div>
+                                      
 
                                         <div class="col-6">
                                             <label for="fullname">مجموع المصروفات</label>
