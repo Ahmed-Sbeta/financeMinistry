@@ -23,6 +23,13 @@
 
         <!-- select2 -->
         <link rel="stylesheet" href="{{asset('assets\libs\select2\css\select2.min.css')}}">
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
+
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+      </style>
 
     </head>
 
@@ -176,7 +183,7 @@
 	// 		name = name.replaceAll(' ', '_');
 	// 		document.getElementById("paginate").style.display = "none";
 	// 	}
-		
+
     //     let url = "#";
 	// 	url = url.replace(':id', name);
     //       $('.table-container').fadeOut();

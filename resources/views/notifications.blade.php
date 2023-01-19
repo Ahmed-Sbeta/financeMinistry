@@ -24,7 +24,13 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
 
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+      </style>
     </head>
 
     <body data-sidebar="dark">
@@ -75,7 +81,7 @@
                                             <div class="flex-grow-1 overflow-hidden">
                                                 <h5 class="text-truncate font-size-15"><a href="javascript: void(0);" class="text-dark">{{$notif->title}}</a></h5>
                                                 <p class="text-muted mb-4">{{$notif->desc}}</p>
-                                            </div>                                               
+                                            </div>
 
                                             @if(auth()->user()->role_id == 1)
                                              <form method="POST" action="{{route('notifications.destroy',[$notif->num])}}">
@@ -103,7 +109,7 @@
                                             </li>
 
                                         </ul>
-                                        
+
                                     </div>
                                 </div>
                             </div>

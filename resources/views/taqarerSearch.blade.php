@@ -27,6 +27,13 @@
 
         <!-- select2 -->
         <link rel="stylesheet" href="{{asset('assets\libs\select2\css\select2.min.css')}}">
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
+
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+      </style>
 
     </head>
 
@@ -141,7 +148,7 @@
 
                                     </div>
 
-                                       <div class="table-responsive">
+                                        <div class="table-responsive">
                                            <table class="table align-middle table-nowrap table-hover"  id="tab1">
                                                <thead class="table-light">
                                                    <tr>
@@ -149,6 +156,7 @@
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                         <th>{{$i}}</th>
                                                         <?php $sum[$i] = 0 ?>
+                                                        <?php $sum2[$i] = 0 ?>
                                                     @endfor
                                                    </tr>
                                                </thead>
@@ -159,16 +167,22 @@
                                                         <td>{{$item->name}}</td>
                                                         @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                             @if($i < 10)
-                                                                @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->count() > 0)
-                                                                    <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total)}}</td>
-                                                                    <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->total ?>
+
+                                                                @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->count() > 0)
+                                                                    <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total)}}</td>
+                                                                    <!-- <td>المصروفات <span style="color: green;">{{$item->payeds->where('ministry_id',$ministrie->id)->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</span> - المعطيات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->given}}</span> </td> -->
+
+                                                                    <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total ?>
+                                                                    <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->given ?>
                                                                 @else
                                                                     <td>0</td>
                                                                 @endif
                                                             @else
-                                                                @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->count() > 0)
-                                                                    <td>{{number_format($item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total)}}</td>
-                                                                    <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->first()->total ?>
+
+                                                                @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->count() > 0)
+                                                                    <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total)}} </td>
+                                                                    <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total ?>
+                                                                    <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->given ?>
                                                                 @else
                                                                     <td>0</td>
                                                                 @endif
@@ -185,13 +199,17 @@
                                                                  @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
                                                                      <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total'))}}</td>
                                                                      <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+                                                                     <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('given') ?>
                                                                  @else
                                                                      <td>0</td>
                                                                  @endif
                                                              @else
                                                                  @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->count() > 0)
-                                                                     <td>{{number_format($item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total'))}}</td>
-                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+
+                                                                 <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total'))}} </td>
+                                                                 <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('total') ?>
+                                                                 <?php $sum2[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->whereIn('door_id', $doors)->sum('given') ?>+
+
                                                                  @else
                                                                      <td>0</td>
                                                                  @endif
@@ -203,12 +221,13 @@
                                                 <tr>
                                                     <td>المجموع</td>
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)
-                                                        <td>{{number_format($sum[$i])}}</td>
+
+                                                        <td>المصروفات <span style="color: green;">{{number_format($sum[$i])}}</span> - المعطيات <span style="color: green;">{{number_format($sum2[$i])}}</span> </td>
                                                     @endfor
                                                    </tr>
                                                </tbody>
                                            </table>
-                                       </div>
+                                        </div>
 
                                    </div>
                                </div>

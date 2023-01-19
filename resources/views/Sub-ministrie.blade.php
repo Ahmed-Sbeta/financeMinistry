@@ -19,6 +19,13 @@
         <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
+
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+      </style>
 
     </head>
 
@@ -182,7 +189,7 @@
                                 {{-- <p class="mb-2">Product id: <span class="text-primary">#SK2540</span></p>
                                 <p class="mb-4">Billing Name: <span class="text-primary">Neal Matthews</span></p> --}}
 
-                                <form action="{{route('monthPayeds.create',[$ministry->id])}}" method="post" enctype="multipart/form-data">
+                                <form action="{{route('monthPayeds.create',[$ministry->id])}}" method="get">
                                     @csrf
                                     <input type="hidden" value="" id="mini_id" name="id">
                                     <div class="mb-3">

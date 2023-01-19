@@ -18,6 +18,14 @@
         <!-- App Css-->
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
 
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
+
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+      </style>
+
     </head>
 
     <body>
@@ -28,15 +36,13 @@
                         <div class="card overflow-hidden">
                             <div class="bg-primary bg-info">
                                 <div class="row">
-                                    <div class="col-7">
+                                    <div class="col-12">
                                         <div class="text-light p-4">
-                                            <h5 class="text-light" style="font-weight:bold; font-size:140%;">وزارة الــمــالــيـة</h5>
-                                            <p style="font-weight:bold; font-size:140%;"> لــيــبــيــا </p>
+                                          <p style="font-weight:bold; font-size:140%;" class="text-center"> لــيــبــيــا </p>
+                                            <h5 class="text-light text-center" style="font-weight:bold; font-size:140%;">وزارة الــمــالــيـة</h5>
                                         </div>
                                     </div>
-                                    <div class="col-4 align-self-end">
-                                        <img src="assets/images/white.png" alt="" class="img-fluid">
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="card-body pt-0">

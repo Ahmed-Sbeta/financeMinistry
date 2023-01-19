@@ -18,7 +18,13 @@
         <link href="{{asset('assets/css/app-rtl.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
         <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <meta name="csrf-token" content="{{ csrf_token() }}" />
+        <style type="text/css">
+        @import url(https://fonts.googleapis.com/css2?family=Cairo:wght@500&display=swap);
 
+        * {
+          font-family: 'Cairo', sans-serif;
+        }
+        </style>
     </head>
 
     <body data-sidebar="dark">
@@ -28,7 +34,7 @@
         <!-- Begin page -->
         <div id="layout-wrapper">
 
-            
+
             @include('includes.menu')
 
 
@@ -96,7 +102,17 @@
                                                         <td>
                                                             <div class="d-flex gap-3 ">
                                                                 <a href="{{route('items.edit',[$item->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                                
+
+                                                                {{-- <a href="{{route('items.destroy',[$item->id])}}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a> --}}
+
+                                                                <form method="post" action="{{ route('items.destroy',[$item->id]) }}">
+                                                                    <!-- here the '1' is the id of the post which you want to delete -->
+
+                                                                    {{ csrf_field() }}
+                                                                    {{ method_field('DELETE') }}
+
+                                                                    <button href="#" style="border: none; background: none;" type="submit" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></button>
+                                                                </form>
 
                                                             </div>
                                                         </td>
