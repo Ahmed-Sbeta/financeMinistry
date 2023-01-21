@@ -243,6 +243,26 @@
                                                         @endfor
                                                        </tr>
                                                     @endforeach
+
+                                                @elseif($ministrie == NULL)
+                                                  @foreach($ministries2 as $item)
+                                                      <tr>
+                                                        <td>{{$item->name}}</td>
+                                                        <?php $x=0; ?>
+                                                        <?php $y = $Allministries->where('parent_id',$item->id); ?>
+                                                        @foreach($items1 as $i)
+                                                        @foreach($y as $r)
+                                                        <?php $x = $x + $r->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->sum('total'); ?>
+                                                        @endforeach
+                                                            @if($x > 0)
+                                                                <td>{{number_format($x)}}</td>
+                                                                <?php $x=0; ?>
+                                                                @else
+                                                                <td>0</td>
+                                                                @endif
+                                                                @endforeach
+                                                              </tr>
+                                                              @endforeach
                                                 @else
                                                     @foreach ($ministries2 as $item)
                                                         <tr>

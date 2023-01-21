@@ -50,6 +50,7 @@ class ReportController extends Controller
       $year = request('year');
       $fromMonth = request('from');
       $parentMinistry = NULL;
+      $Allministries = NULL;
       if(request('sub-ministry2')){
         $ministrie = Ministrie::find(request('sub-ministry2'));
         $fuckingDetector = 2 ;
@@ -80,7 +81,7 @@ class ReportController extends Controller
             if(request('from') < 10){
               $from = request('year').'-0'.request('from');
             }else{ $from = request('year').'-'.request('from'); }
-            if(request('to' < 10)){
+            if(request('to') < 10 ){
               $to = request('year').'-0'.request('to');
             }else{
               $to = request('year').'-'.request('to');
@@ -99,12 +100,14 @@ class ReportController extends Controller
             $items2 = NULL;
             $items1 = Items::whereIn('door',$doors)->get();
           }
-            $ministries2 = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->get();
+            $ministries2 = Ministrie::with('payeds')->where("parent_id",'=',NULL)->get();
+            $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->get();
+
             if(request('to')){
               if(request('from') < 10){
                 $from = request('year').'-0'.request('from');
               }else{ $from = request('year').'-'.request('from'); }
-              if(request('to' < 10)){
+              if(request('to') < 10){
                 $to = request('year').'-0'.request('to');
               }else{
                 $to = request('year').'-'.request('to');
@@ -128,7 +131,7 @@ class ReportController extends Controller
             if(request('from') < 10){
               $from = request('year').'-0'.request('from');
             }else{ $from = request('year').'-'.request('from'); }
-            if(request('to' < 10)){
+            if(request('to') < 10){
               $to = request('year').'-0'.request('to');
             }else{
               $to = request('year').'-'.request('to');
@@ -147,7 +150,7 @@ class ReportController extends Controller
           if(request('from') < 10){
             $from = request('year').'-0'.request('from');
           }else{ $from = request('year').'-'.request('from'); }
-          if(request('to' < 10)){
+          if(request('to') < 10){
             $to = request('year').'-0'.request('to');
           }else{
             $to = request('year').'-'.request('to');
@@ -166,7 +169,7 @@ class ReportController extends Controller
             if(request('from') < 10){
               $from = request('year').'-0'.request('from');
             }else{ $from = request('year').'-'.request('from'); }
-            if(request('to' < 10)){
+            if(request('to') < 10){
               $to = request('year').'-0'.request('to');
             }else{
               $to = request('year').'-'.request('to');
@@ -181,7 +184,24 @@ class ReportController extends Controller
       $fromMonth = (int)$fromMonth;
       $toMonth = (int)$toMonth;
       $items = Items::all();
-      return view('NewtaqarerSearch',compact('ministries','parentMinistry','ministries2','doors','ministrie','items','items1','items2','from','to','year','fromMonth','toMonth'));
+      $x=0;
+      // dd(Ministrie::with('payeds')->where('parent_id',1)->whereHas('payeds', function ($query) use ($from , $to) {
+      //     return $query->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', [1,2,3]);
+      //   })->count());
+
+      // foreach ($ministries2 as $item) {
+      //   foreach($items1 as $i){
+      //
+      //     $y = $Allministries->where('parent_id',$item->id);
+      //     // dd($y);
+      //     foreach ($y as $r) {
+      //       $x = $x + $r->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->where('item_id', $i->id)->sum('total');
+      //     }
+      //     // dd($x);
+      //   }
+      // }
+
+      return view('NewtaqarerSearch',compact('ministries','Allministries','parentMinistry','ministries2','doors','ministrie','items','items1','items2','from','to','year','fromMonth','toMonth'));
     }
 
     /**
