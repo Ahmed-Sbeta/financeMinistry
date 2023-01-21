@@ -67,13 +67,13 @@ class ReportController extends Controller
       }else{
         $toMonth = '12';
       }
-      if($fuckingDetector == 0){
+      if($fuckingDetector == 0 && request('ministry') != 0){
         if($items){
           $items2 = NULL;
           $items1 = Items::whereIn('id',$items)->get();
         }else{
           $items2 = NULL;
-          $items1 = Items::where('door',$doors)->get();
+          $items1 = Items::whereIn('door',$doors)->get();
         }
           $ministries2 = Ministrie::with('payeds')->where("parent_id",'=',$ministrie->id)->get();
           if(request('to')){
@@ -91,13 +91,37 @@ class ReportController extends Controller
             }else{ $from = request('year').'-'.request('from'); }
             $to = request('year').'-'.'12';
           }
+      }elseif ($fuckingDetector == 0 && request('ministry') == 0) {
+          if($items){
+            $items2 = NULL;
+            $items1 = Items::whereIn('id',$items)->get();
+          }else{
+            $items2 = NULL;
+            $items1 = Items::whereIn('door',$doors)->get();
+          }
+            $ministries2 = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->get();
+            if(request('to')){
+              if(request('from') < 10){
+                $from = request('year').'-0'.request('from');
+              }else{ $from = request('year').'-'.request('from'); }
+              if(request('to' < 10)){
+                $to = request('year').'-0'.request('to');
+              }else{
+                $to = request('year').'-'.request('to');
+              }
+            }else{
+              if(request('from') < 10){
+                $from = request('year').'-0'.request('from');
+              }else{ $from = request('year').'-'.request('from'); }
+              $to = request('year').'-'.'12';
+            }
       }elseif ($fuckingDetector == 1 && Ministrie::where("parent_id",'=',$ministrie->id)->count() > 0) {
         if($items){
           $items2 = NULL;
           $items1 = Items::whereIn('id',$items)->get();
         }else{
           $items2 = NULL;
-          $items1 = Items::where('door',$doors)->get();
+          $items1 = Items::whereIn('door',$doors)->get();
         }
           $ministries2 = Ministrie::with('payeds')->where("parent_id",'=',$ministrie->id)->get();
           if(request('to')){

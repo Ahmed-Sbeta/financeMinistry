@@ -139,7 +139,7 @@
                                      <label for="">الــبــنــود</label>
                                        <select name="items[]" class="form-control js-example-basic-multiple" multiple="multiple" id="">
                                            @foreach($items as $item)
-                                           <option value="{{$item->id}}" {{ ($items) }}>{{$item->name}}</option>
+                                           <option value="{{$item->id}}">{{$item->name}}</option>
                                            @endforeach
                                        </select>
                                    </div>
