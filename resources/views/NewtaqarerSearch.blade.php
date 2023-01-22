@@ -247,7 +247,7 @@
                                                 @elseif($ministrie == NULL)
                                                   @foreach($ministries2 as $item)
                                                       <tr>
-                                                        <td>{{$item->name}}</td>
+                                                        <td>{{$item->name}} والجهات التابعة لها </td>
                                                         <?php $x=0; ?>
                                                         <?php $y = $Allministries->where('parent_id',$item->id); ?>
                                                         @foreach($items1 as $i)
@@ -269,7 +269,7 @@
                                                         <td>{{$item->name}}</td>
                                                         @foreach($items1 as $i)
                                                                @if($item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->count() > 0)
-                                                                   <td>{{number_format($item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$item->id)->sum('total'))}}</td>
+                                                                     <td>{{number_format($item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$item->id)->sum('total'))}}</td>
                                                                @else
                                                                    <td>0</td>
                                                                @endif
