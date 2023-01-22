@@ -76,16 +76,25 @@ class HomeController extends Controller
         $total = MonthllyPayed::whereYear('date', request('year'))->sum('total');
         $total2 = MonthllyPayed::whereYear('date', request('year'))->sum('given');
 
+        // $child_arr = [];
+        // for ($i=1; $i <= 12; $i++) {
+        //     $child_arr['all'][$i] = MonthllyPayed::whereYear('date',request('year'))->whereMonth('date', $i)->sum('total');
+        //     $child_arr['door1'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 1)->sum('total');
+        //     $child_arr['door2'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 2)->sum('total');
+        //     $child_arr['door3'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 3)->sum('total');
+        //     $child_arr['door4'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 4)->sum('total');
+        //     $child_arr['door5'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 5)->sum('total');
+        // }
+        // $year = request('year');
         $child_arr = [];
         for ($i=1; $i <= 12; $i++) {
-            $child_arr['all'][$i] = MonthllyPayed::whereYear('date',request('year'))->whereMonth('date', $i)->sum('total');
-            $child_arr['door1'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 1)->sum('total');
-            $child_arr['door2'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 2)->sum('total');
-            $child_arr['door3'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 3)->sum('total');
-            $child_arr['door4'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 4)->sum('total');
-            $child_arr['door5'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 5)->sum('total');
+            $child_arr['all'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->sum('total');
+            $child_arr['given'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->sum('given');
+
         }
         $year = request('year');
+        // dd($child_arr,$year);
+
 
         $notifications = Notification::where('receive_id', auth()->user()->id)->count();
         $decisionsCount = Decisions::count();
