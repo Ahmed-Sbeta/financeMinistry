@@ -28,6 +28,9 @@
         * {
           font-family: 'Cairo', sans-serif;
         }
+
+
+
       </style>
 
     </head>
@@ -198,9 +201,12 @@
                                         </div>
                                     </div>
 
+
+
                                 </div>
                                 <!-- end row -->
                             </div>
+
                         </div>
 
                         <!-- end row -->
@@ -226,10 +232,12 @@
                                             <div class="col-lg-4">
                                                 <div class="text-muted">
                                                     <div class="mb-4">
-                                                        <p>اجمالي المصروفات</p>
-                                                        <h4>د,ل {{number_format($total)}}</h4>
-                                                        <p>اجمالي المعطيات</p>
-                                                        <h4>د,ل {{number_format($total2)}}</h4>
+
+                                                        <p style="color:#b91d47" >اجمالي المصروفات</p>
+                                                        <h4 class="pb-3">{{number_format($total)}} د,ل</h4>
+                                                        <p style="color:#00aba9">اجمالي المعطيات</p>
+                                                        <h4>{{number_format($total2)}} د,ل</h4>
+
                                                         {{-- <div><span class="badge badge-soft-success font-size-12 me-1"> + 0.2% </span> From previous period</div> --}}
                                                     </div>
 
@@ -267,30 +275,37 @@
                                                   data: {
                                                     labels: xValues,
                                                     datasets: [{
-                                                      data: [0,dates['door1'][1],dates['door1'][2],dates['door1'][3],dates['door1'][4],dates['door1'][5],dates['door1'][6],dates['door1'][7],dates['door1'][8],dates['door1'][9],dates['door1'][10],dates['door1'][11],dates['door1'][12]],
+                                                      data: [0,dates['all'][1],dates['all'][2],dates['all'][3],dates['all'][4],dates['all'][5],dates['all'][6],dates['all'][7],dates['all'][8],dates['all'][9],dates['all'][10],dates['all'][11],dates['all'][12]],
                                                       backgroundColor: "#b91d47",
                                                       fill: false
                                                     }, {
-                                                        data: [0,dates['door2'][1],dates['door2'][2],dates['door2'][3],dates['door2'][4],dates['door2'][5],dates['door2'][6],dates['door2'][7],dates['door2'][8],dates['door2'][9],dates['door2'][10],dates['door2'][11],dates['door2'][12]],
+                                                        data: [0,dates['given'][1],dates['given'][2],dates['given'][3],dates['given'][4],dates['given'][5],dates['given'][6],dates['given'][7],dates['given'][8],dates['given'][9],dates['given'][10],dates['given'][11],dates['given'][12]],
                                                         backgroundColor: "#00aba9",
                                                       fill: false
-                                                    }, {
-                                                        data: [0,dates['door3'][1],dates['door3'][2],dates['door3'][3],dates['door3'][4],dates['door3'][5],dates['door3'][6],dates['door3'][7],dates['door3'][8],dates['door3'][9],dates['door3'][10],dates['door3'][11],dates['door3'][12]],
-                                                        backgroundColor: "#2b5797",
-                                                      fill: false
-                                                    }, {
-                                                        data: [0,dates['door4'][1],dates['door4'][2],dates['door4'][3],dates['door4'][4],dates['door4'][5],dates['door4'][6],dates['door4'][7],dates['door4'][8],dates['door4'][9],dates['door4'][10],dates['door4'][11],dates['door4'][12]],
-                                                        backgroundColor: "#e8c3b9",
-                                                      fill: false
-                                                    }, {
-                                                        data: [0,dates['door5'][1],dates['door5'][2],dates['door5'][3],dates['door5'][4],dates['door5'][5],dates['door5'][6],dates['door5'][7],dates['door5'][8],dates['door5'][9],dates['door5'][10],dates['door5'][11],dates['door5'][12]],
-                                                        backgroundColor: "#1e7145",
-                                                      fill: false
-                                                    }
+                                                    },
                                                 ]
                                                   },
                                                   options: {
-                                                    legend: {display: false}
+                                                    legend: {display: false},
+                                                    tooltips: {
+                                                      callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                          return tooltipItem.yLabel.toLocaleString('en-US');
+                                                        }
+                                                      }
+                                                    },
+                                                      scales: {
+                                                        yAxes: [
+                                                          {
+                                                            ticks: {
+                                                              callback: function(label, index, labels) {
+                                                                return label.toLocaleString('en-US');
+                                                              }
+                                                            },
+                                                          }
+                                                        ]
+                                                      }
+
                                                   }
                                                 });
 
@@ -313,11 +328,12 @@
                                             <canvas id="myChart" style="width:100%;"></canvas>
 
                                             <script>
-                                            var door1 = {!! json_encode($door1) !!};
-                                            var door2 = {!! json_encode($door2) !!};
-                                            var door3 = {!! json_encode($door3) !!};
-                                            var door4 = {!! json_encode($door4) !!};
-                                            var door5 = {!! json_encode($door5) !!};
+                                            var sum = {!! json_encode($door1+$door2+$door4) !!};
+                                            var door1 = ({!! json_encode($door1) !!}/ sum *100).toFixed(2);
+                                            var door2 = ({!! json_encode($door2) !!}/ sum *100).toFixed(2);
+                                            var door3 = ({!! json_encode($door3) !!}/ sum *100).toFixed(2);
+                                            var door4 = ({!! json_encode($door4) !!}/ sum *100).toFixed(2);
+                                            var door5 = ({!! json_encode($door5) !!}/ sum *100).toFixed(2);
 
                                             var xValues = ["الباب الاول", "الباب الثاني", "الباب الثالث", "الباب الرابع", "الباب الخامس"];
                                             var yValues = [door1, door2, door3, door4, door5];
@@ -341,7 +357,7 @@
                                               options: {
                                                 legend: {
                                                   display: false
-                                                }
+                                                },
                                               }
                                             });
                                             </script>
@@ -362,11 +378,24 @@
                                                         <h5> {{number_format($door2)}}</h5>
                                                     </div>
                                                 </div>
+                                                <div class="col-4">
+                                                    <div class="mt-4">
+                                                        <p class="mb-2 text-truncate"><i style="color: #2b5797 !important;" class="mdi mdi-circle text-danger me-1"></i> الباب الـثـالـث</p>
+                                                        <h5>{{number_format($door3)}}</h5>
+                                                    </div>
+                                                </div>
 
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="mt-4">
                                                         <p class="mb-2 text-truncate"><i style="color: #e8c3b9 !important;" class="mdi mdi-circle text-danger me-1"></i> الباب الرابع</p>
                                                         <h5>{{number_format($door4)}}</h5>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="mt-4">
+                                                        <p class="mb-2 text-truncate"><i style="color: #1e7145 !important;" class="mdi mdi-circle text-danger me-1"></i> الباب الـخـامـس</p>
+                                                        <h5>{{number_format($door5)}}</h5>
                                                     </div>
                                                 </div>
 

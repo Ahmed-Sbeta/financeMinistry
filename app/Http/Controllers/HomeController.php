@@ -30,13 +30,13 @@ class HomeController extends Controller
         $door5 = MonthllyPayed::where('door_id', 5)->sum('total');
         // $total = [];
         // $total2 = [];
-        // $total[0] = MonthllyPayed::whereYear('created_at', date('Y'))->sum('total'); 
+        // $total[0] = MonthllyPayed::whereYear('created_at', date('Y'))->sum('total');
         // $total[1] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 1)->sum('total');
         // $total[2] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 2)->sum('total');
         // $total[3] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 3)->sum('total');
         // $total[4] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 4)->sum('total');
         // $total[5] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 5)->sum('total');
-        // $total2[0] = MonthllyPayed::whereYear('created_at', date('Y'))->sum('given'); 
+        // $total2[0] = MonthllyPayed::whereYear('created_at', date('Y'))->sum('given');
         // $total2[1] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 1)->sum('given');
         // $total2[2] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 2)->sum('given');
         // $total2[3] = MonthllyPayed::whereYear('created_at', date('Y'))->where('door_id', 3)->sum('given');
@@ -47,13 +47,10 @@ class HomeController extends Controller
         $total2 = MonthllyPayed::whereYear('date', date('Y'))->sum('given');
 
         $child_arr = [];
-        for ($i=1; $i <= 12; $i++) { 
+        for ($i=1; $i <= 12; $i++) {
             $child_arr['all'][$i] = MonthllyPayed::whereYear('date', date('Y'))->whereMonth('date', $i)->sum('total');
-            $child_arr['door1'][$i] = MonthllyPayed::whereYear('date', date('Y'))->whereMonth('date', $i)->where('door_id', 1)->sum('total');
-            $child_arr['door2'][$i] = MonthllyPayed::whereYear('date', date('Y'))->whereMonth('date', $i)->where('door_id', 2)->sum('total');
-            $child_arr['door3'][$i] = MonthllyPayed::whereYear('date', date('Y'))->whereMonth('date', $i)->where('door_id', 3)->sum('total');
-            $child_arr['door4'][$i] = MonthllyPayed::whereYear('date', date('Y'))->whereMonth('date', $i)->where('door_id', 4)->sum('total');
-            $child_arr['door5'][$i] = MonthllyPayed::whereYear('date', date('Y'))->whereMonth('date', $i)->where('door_id', 5)->sum('total');
+            $child_arr['given'][$i] = MonthllyPayed::whereYear('date', date('Y'))->whereMonth('date', $i)->sum('given');
+
         }
         $year = now()->format('Y');
 
@@ -80,7 +77,7 @@ class HomeController extends Controller
         $total2 = MonthllyPayed::whereYear('date', request('year'))->sum('given');
 
         $child_arr = [];
-        for ($i=1; $i <= 12; $i++) { 
+        for ($i=1; $i <= 12; $i++) {
             $child_arr['all'][$i] = MonthllyPayed::whereYear('date',request('year'))->whereMonth('date', $i)->sum('total');
             $child_arr['door1'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 1)->sum('total');
             $child_arr['door2'][$i] = MonthllyPayed::whereYear('date', request('year'))->whereMonth('date', $i)->where('door_id', 2)->sum('total');
