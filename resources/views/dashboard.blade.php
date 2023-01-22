@@ -29,21 +29,7 @@
           font-family: 'Cairo', sans-serif;
         }
 
-          .box {
-            height: 20px;
-            width: 20px;
-            margin-bottom: 15px;
-            border: 1px solid black;
-            clear: both;
-          }
 
-          .red {
-            background-color: red;
-          }
-
-          .green {
-            background-color: green;
-          }
 
       </style>
 
@@ -215,9 +201,12 @@
                                         </div>
                                     </div>
 
+
+
                                 </div>
                                 <!-- end row -->
                             </div>
+
                         </div>
 
                         <!-- end row -->
