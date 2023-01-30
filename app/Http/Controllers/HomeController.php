@@ -67,11 +67,11 @@ class HomeController extends Controller
         $items = Items::count();
         $decisions = Decisions::take(10)->get();
         $users = User::where('role_id', '!=', 1)->count();
-        $door1 = MonthllyPayed::where('door_id', 1)->sum('total');
-        $door2 = MonthllyPayed::where('door_id', 2)->sum('total');
-        $door3 = MonthllyPayed::where('door_id', 3)->sum('total');
-        $door4 = MonthllyPayed::where('door_id', 4)->sum('total');
-        $door5 = MonthllyPayed::where('door_id', 5)->sum('total');
+        $door1 = MonthllyPayed::where('door_id', 1)->whereYear('date', request('year'))->sum('total');
+        $door2 = MonthllyPayed::where('door_id', 2)->whereYear('date', request('year'))->sum('total');
+        $door3 = MonthllyPayed::where('door_id', 3)->whereYear('date', request('year'))->sum('total');
+        $door4 = MonthllyPayed::where('door_id', 4)->whereYear('date', request('year'))->sum('total');
+        $door5 = MonthllyPayed::where('door_id', 5)->whereYear('date', request('year'))->sum('total');
 
         $total = MonthllyPayed::whereYear('date', request('year'))->sum('total');
         $total2 = MonthllyPayed::whereYear('date', request('year'))->sum('given');
@@ -93,8 +93,7 @@ class HomeController extends Controller
 
         }
         $year = request('year');
-        // dd($child_arr,$year);
-
+//
 
         $notifications = Notification::where('receive_id', auth()->user()->id)->count();
         $decisionsCount = Decisions::count();

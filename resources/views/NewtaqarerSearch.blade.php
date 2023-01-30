@@ -211,12 +211,18 @@
                                                     @if($items2)
                                                     @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                       <th> {{$i}}</th>
+                                                      <?php   $sum[$i] = 0 ;
+                                                              $sum1 = NULL;?>
                                                     @endfor
                                                     @else
                                                     @foreach($items1 as $item)
                                                     <th> {{$item->name}}</th>
+                                                    <?php   $sum1[$item->id] = 0;
+                                                            $sum = NULL;?>
                                                     @endforeach
+
                                                     @endif
+                                                    <th>المجموع </th>
                                                    </tr>
                                                </thead>
                                                <tbody>
@@ -224,10 +230,15 @@
                                                     @foreach ($items2 as $item)
                                                        <tr>
                                                         <td>{{$item->name}}</td>
+                                                        <?php $SumH = array();
+                                                        ?>
                                                         @for($i = $fromMonth; $i <= $toMonth; $i++)
                                                             @if($i < 10)
                                                                 @if($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->count() > 0)
                                                                     <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total)}}</td>
+                                                                      <?php array_push($SumH, $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total); ?>
+                                                                      <?php $sum[$i] += $item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total; ?>
+
                                                                     <!-- <td>المصروفات <span style="color: green;">{{$item->payeds->where('ministry_id',$ministrie->id)->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</span> - المعطيات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->given}}</span> </td> -->
                                                                 @else
                                                                     <td>0</td>
@@ -235,49 +246,106 @@
                                                             @else
 
                                                                 @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->count() > 0)
-                                                                    <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total)}} </td>
+                                                                    <td>{{number_format($item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total)}} </td>
+                                                                    <?php array_push($SumH,$item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total); ?>
+                                                                    <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total ?>
+
                                                                 @else
                                                                     <td>0</td>
                                                                 @endif
                                                             @endif
                                                         @endfor
-                                                       </tr>
+                                                        <td>{{ number_format(array_sum ( $SumH ))}}</td>
+                                                      </tr>
                                                     @endforeach
+
 
                                                 @elseif($ministrie == NULL)
                                                   @foreach($ministries2 as $item)
                                                       <tr>
                                                         <td>{{$item->name}} والجهات التابعة لها </td>
+                                                        <?php $SumH = array();
+                                                        ?>
                                                         <?php $x=0; ?>
                                                         <?php $y = $Allministries->where('parent_id',$item->id); ?>
                                                         @foreach($items1 as $i)
                                                         @foreach($y as $r)
+                                                        @if($ministries->where('parent_id',$r->id))
+                                                              <?php $sub = $ministries->where('parent_id',$r->id);
+                                                                      $subsum = 0 ;
+                                                                      ?>
+                                                              @foreach($sub as $s)
+                                                              <?php $subsum += $s->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$s->id)->sum('total'); ?>
+                                                              @endforeach
+                                                              <?php $x = $x + $subsum; ?>
+                                                        @else
                                                         <?php $x = $x + $r->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->sum('total'); ?>
+                                                        @endif
                                                         @endforeach
                                                             @if($x > 0)
                                                                 <td>{{number_format($x)}}</td>
+                                                                <?php array_push($SumH,$x); ?>
+                                                                <?php $sum1[$i->id] += $x ?>
+
                                                                 <?php $x=0; ?>
                                                                 @else
                                                                 <td>0</td>
                                                                 @endif
                                                                 @endforeach
+                                                                <td>{{ number_format(array_sum ( $SumH ))}}</td>
                                                               </tr>
                                                               @endforeach
-                                                @else
+                                                  @else
                                                     @foreach ($ministries2 as $item)
                                                         <tr>
                                                         <td>{{$item->name}}</td>
+                                                        <?php $SumH = array();
+                                                        ?>
                                                         @foreach($items1 as $i)
+                                                        @if($ministries->where('parent_id',$item->id))
+                                                              <?php $sub = $ministries->where('parent_id',$item->id);
+                                                                      $subsum = 0 ;
+                                                                      ?>
+                                                              @foreach($sub as $s)
+                                                              <?php $subsum += $s->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$s->id)->sum('total'); ?>
+                                                              @endforeach
+                                                              <td>{{number_format($subsum)}}</td>
+                                                              <?php array_push($SumH,$subsum); ?>
+                                                              <?php $sum1[$i->id] += $subsum ; ?>
+
+                                                        @else
                                                                @if($item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->count() > 0)
                                                                      <td>{{number_format($item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$item->id)->sum('total'))}}</td>
+                                                                     <?php array_push($SumH,$item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$item->id)->sum('total')); ?>
+                                                                     <?php $sum1[$i->id] += $item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$item->id)->sum('total') ; ?>
                                                                @else
                                                                    <td>0</td>
                                                                @endif
+                                                        @endif
                                                         @endforeach
+                                                        <td>{{ number_format(array_sum ( $SumH ))}}</td>
                                                         </tr>
                                                     @endforeach
                                                 @endif
+                                                @if($sum)
+                                                <tr>
+                                                    <td>المجموع</td>
+                                                    @for($i = $fromMonth; $i <= $toMonth; $i++)
+                                                        <td>{{number_format($sum[$i])}} </td>
+                                                    @endfor
 
+
+                                                   </tr>
+                                                   @endif
+
+                                                   @if($sum1)
+                                                   <tr>
+                                                     <td>المجموع</td>
+                                                   @foreach($items1 as $item)
+                                                   <td> {{number_format($sum1[$item->id])}}</td>
+                                                   @endforeach
+                                                 </tr>
+                                                   @endif
                                                </tbody>
                                            </table>
                                         </div>
