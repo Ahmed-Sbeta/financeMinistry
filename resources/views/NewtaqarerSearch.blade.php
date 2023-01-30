@@ -270,7 +270,7 @@
                                                         <?php $y = $Allministries->where('parent_id',$item->id); ?>
                                                         @foreach($items1 as $i)
                                                         @foreach($y as $r)
-                                                        @if($ministries->where('parent_id',$r->id))
+                                                        @if($ministries->where('parent_id',$r->id)->count() > 0)
                                                               <?php $sub = $ministries->where('parent_id',$r->id);
                                                                       $subsum = 0 ;
                                                                       ?>
@@ -302,7 +302,7 @@
                                                         <?php $SumH = array();
                                                         ?>
                                                         @foreach($items1 as $i)
-                                                        @if($ministries->where('parent_id',$item->id))
+                                                        @if($ministries->where('parent_id',$item->id)->count() > 0)
                                                               <?php $sub = $ministries->where('parent_id',$item->id);
                                                                       $subsum = 0 ;
                                                                       ?>
