@@ -101,7 +101,7 @@ class ReportController extends Controller
             $items1 = Items::whereIn('door',$doors)->get();
           }
             $ministries2 = Ministrie::with('payeds')->where("parent_id",'=',NULL)->get();
-            $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->get();
+            $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->where('id','<',800)->get();
 
             if(request('to')){
               if(request('from') < 10){
@@ -185,6 +185,7 @@ class ReportController extends Controller
       $toMonth = (int)$toMonth;
       $items = Items::all();
       $x=0;
+      $subsum =0 ;
       // dd(Ministrie::with('payeds')->where('parent_id',1)->whereHas('payeds', function ($query) use ($from , $to) {
       //     return $query->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', [1,2,3]);
       //   })->count());
