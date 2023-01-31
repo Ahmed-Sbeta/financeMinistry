@@ -235,7 +235,7 @@
                                                             @else
 
                                                                 @if($item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->count() > 0)
-                                                                    <td>{{number_format($item->payeds->where('date', $year.'-0'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total)}} </td>
+                                                                    <td>{{number_format($item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total)}} </td>
                                                                 @else
                                                                     <td>0</td>
                                                                 @endif
