@@ -78,7 +78,11 @@
                                                     <div class="flex-shrink-0 align-self-center">
                                                         <div class="mini-stat-icon avatar-sm rounded-circle bg-primary">
                                                             <span class="avatar-title">
-                                                              <img src="{{asset('assets/images/white.png')}}" alt="" height="50">
+                                                            @if($mini->image)
+                                                                <img src="{{ asset(Storage::url($mini->image)) }}" alt="" height="50">
+                                                            @else
+                                                                <img src="{{asset('assets/images/white.png')}}" alt="" height="50">
+                                                            @endif
                                                             </span>
                                                         </div>
                                                     </div>

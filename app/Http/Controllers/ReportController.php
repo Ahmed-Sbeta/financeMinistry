@@ -101,7 +101,7 @@ class ReportController extends Controller
             $items1 = Items::whereIn('door',$doors)->get();
           }
             $ministries2 = Ministrie::with('payeds')->where("parent_id",'=',NULL)->get();
-            $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->where('id','<',800)->get();
+            $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->where('id','<',400)->get();
 
             if(request('to')){
               if(request('from') < 10){

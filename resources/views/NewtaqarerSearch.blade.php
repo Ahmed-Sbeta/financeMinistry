@@ -94,6 +94,7 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
+                <?php ini_set('max_execution_time', 300);   ?>
 
               <div class="page-content">
                    <div class="container-fluid">
@@ -271,7 +272,7 @@
                                                         <?php $y = $Allministries->where('parent_id',$item->id); ?>
                                                         @foreach($items1 as $i)
                                                         @foreach($y as $r)
-                                                        @if($Allministries->where('parent_id',$r->id)->count() > 0)
+                                                        @if($ministries->where('parent_id',$r->id)->count() > 0)
                                                               <?php $sub = $ministries->where('parent_id',$r->id);
                                                                       $subsum = 0 ;
                                                                       ?>
