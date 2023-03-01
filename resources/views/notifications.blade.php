@@ -79,7 +79,7 @@
                                             </div>
 
                                             <div class="flex-grow-1 overflow-hidden">
-                                                <h5 class="text-truncate font-size-15"><a href="javascript: void(0);" class="text-dark">{{$notif->title}}</a></h5>
+                                                <h5 class="font-size-15"><a class="text-dark">{{$notif->title}}</a></h5>
                                                 <p class="text-muted mb-4">{{$notif->desc}}</p>
                                             </div>
 
