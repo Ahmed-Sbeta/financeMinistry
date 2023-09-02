@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('items', ItemController::class)->except(['create','store']);
     Route::resource('decisions', DecisionController::class)->except(['show']);
     Route::get('/download/{id}',[DecisionController::class, 'show'])->name('downloadFile');
+    Route::get('/searchDecisions',[DecisionController::class, 'search'])->name('search');
 
     Route::resource('notifications', NotificationController::class);
     Route::resource('users', UserController::class);

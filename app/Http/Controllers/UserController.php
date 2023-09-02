@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role_id', '>', auth()->user()->id)->paginate(15);
+        $users = User::where('role_id', '>', auth()->user()->role_id)->paginate(15);
         return view('employees',compact('users'));
     }
 

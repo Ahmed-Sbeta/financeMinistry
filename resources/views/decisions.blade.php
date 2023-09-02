@@ -61,11 +61,30 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
+                       
                                         <div class="row mb-2">
-                                            <div class="col-sm-4">
-
+                                            <div class="col-sm-9">
+                                            <form action="{{url('/searchDecisions/')}}" method="get" class="p-3">
+                                                  @csrf
+                                                  <div class="form-group m-0">
+                                                      <div class="input-group">
+                                                          <input type="text" class="form-control" name="number" placeholder="البحث عن رقم قرار" aria-label="Recipient's username" oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
+                                                          <div class="input-group-append me-3">
+                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                                          </div>
+                                                          <input type="text" class="form-control" name="title" placeholder="البحث عن عنوان قرار" aria-label="Recipient's username" oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
+                                                          <div class="input-group-append me-3">
+                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                                          </div>
+                                                          <input type="text" class="form-control" name="date" placeholder="البحث عن تاريخ قرار" aria-label="Recipient's username" oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
+                                                          <div class="input-group-append">
+                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </form>
                                             </div>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-3">
                                                 <div class="text-sm-end">
                                                   @if(Auth::user()->role->role == "مدير")
                                                     <a href="{{route('decisions.create')}}" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-plus me-1"></i> إضــافــة قــرار جــديــد</a>

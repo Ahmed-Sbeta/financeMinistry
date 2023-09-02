@@ -123,7 +123,7 @@
 
                                                     <div class="mb-3">
                                                         <label for="productdesc">نتــائــج اللــجــنــة</label>
-                                                        <textarea class="form-control" id="productdesc" rows="6" name="description" placeholder=""></textarea>
+                                                        <textarea class="form-control" name="results" id="productdesc" rows="6" name="description" placeholder=""></textarea>
                                                     </div>
 
                                                 </div>

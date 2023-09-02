@@ -119,8 +119,8 @@
                                                     </div>
 
                                                     <div class="mb-3">
-                                                        <label for="productdesc">الــقــرار بإختصار</label>
-                                                        <textarea class="form-control" id="productdesc" rows="6" name="description" placeholder="نبذه عن القرار">{{$decision->description}}</textarea>
+                                                    <label for="productdesc">نتــائــج اللــجــنــة</label>
+                                                        <textarea class="form-control" id="productdesc" rows="6" name="description" placeholder="">{{$decision->results}}</textarea>
                                                     </div>
 
                                                 </div>

@@ -74,6 +74,7 @@ class DecisionController extends Controller
         $decision->expire = request('expire');
         $decision->subject = request('subject');
         $decision->description = request('description');
+        $decision->results = request('results');
         $newFilePath = request()->file('file')->store('public');
         $decision->file = str_replace('public', '', $newFilePath);
         $decision->save();
@@ -149,6 +150,7 @@ class DecisionController extends Controller
         $decision->date = request('date');
         $decision->subject = request('subject');
         $decision->expire = request('expire');
+        $decision->results = request('results');
         $decision->description = request('description');
         if(request()->file('file')){
             File::delete(public_path('storage/'.$decision->file));
@@ -172,4 +174,20 @@ class DecisionController extends Controller
         $des->delete();
         return redirect()->back()->with('success','تم مــسـح الــقــرار بـنـجـاح');
     }
+
+    public function search(){
+        if(request('number')){
+            $decisions = Decisions::where('decisionsNumber', 'LIKE', '%' . request('number') . '%')->paginate(20);
+        }
+        elseif(request('title')){
+            $decisions = Decisions::where('title', 'LIKE', '%' . request('title') . '%')->paginate(20);
+
+        }elseif(request('date')){
+            $decisions = Decisions::where('date', 'LIKE', '%' . request('date') . '%')->paginate(20);
+        }
+        if($decisions->count() == 0){
+            return redirect()->back()->with('error',' الــذي تبــحث عنــه غيــر موجــود');
+        }
+        return view('decisions',compact('decisions'));
+      }
 }

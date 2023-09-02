@@ -94,7 +94,8 @@
             <!-- Start right Content here -->
             <!-- ============================================================== -->
             <div class="main-content">
-                <?php ini_set('max_execution_time', 300);   ?>
+                <?php ini_set('max_execution_time', 300); 
+                      ini_set('memory_limit', '512M');?>
 
               <div class="page-content">
                    <div class="container-fluid">
@@ -242,7 +243,7 @@
 
                                                                     <!-- <td>المصروفات <span style="color: green;">{{$item->payeds->where('ministry_id',$ministrie->id)->where('date', $year.'-0'.$i.'-'.'01')->first()->total}}</span> - المعطيات <span style="color: green;">{{$item->payeds->where('date', $year.'-0'.$i.'-'.'01')->first()->given}}</span> </td> -->
                                                                 @else
-                                                                    <td>0</td>
+                                                                    <td>x</td>
                                                                 @endif
                                                             @else
 
@@ -253,7 +254,7 @@
                                                                     <?php $sum[$i] += $item->payeds->where('date', $year.'-'.$i.'-'.'01')->where('ministry_id',$ministrie->id)->first()->total ?>
 
                                                                 @else
-                                                                    <td>0</td>
+                                                                    <td>x</td>
                                                                 @endif
                                                             @endif
                                                         @endfor
@@ -291,7 +292,7 @@
 
                                                                 <?php $x=0; ?>
                                                                 @else
-                                                                <td>0</td>
+                                                                <td>x</td>
                                                                 @endif
                                                                 @endforeach
                                                                 <td>{{ number_format(array_sum ( $SumH ))}}</td>
@@ -321,7 +322,7 @@
                                                                      <?php array_push($SumH,$item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$item->id)->sum('total')); ?>
                                                                      <?php $sum1[$i->id] += $item->payeds->whereBetween('date', [$from.'-01',$to.'-01'])->whereIn('item_id', $i->id)->where('ministry_id',$item->id)->sum('total') ; ?>
                                                                @else
-                                                                   <td>0</td>
+                                                                   <td>x</td>
                                                                @endif
                                                         @endif
                                                         @endforeach
