@@ -106,18 +106,18 @@ class MonthPayedController extends Controller
             for ($i=0; $i < count($items); $i++) {
                 // if(!array_key_exists($i, $itemP)){
                 //   $itemP[$i] = "0";
-                //   // array_push($itemP, 0);
+                //   array_push($itemP, 0);
                 // }
                 // if(!array_key_exists($i, $itemP2)){
                 //   $itemP2[$i] = "0";
                 // }
-                if($itemP[$i] || $itemP2[$i]){
+                if($itemP[$i]!=Null || $itemP2[$i]!=Null){
                     $found = MonthllyPayed::where([['ministry_id', $id],['item_id', $items[$i]]])->whereDate('date', request('date').'-1')->first();
                     // if(!$itemP[$i]){
-                    //   $itemP[$i] = "0";
+                    //   $itemP[$i] = 0;
                     // }
                     // if(!$itemP2[$i]){
-                    //   $itemP2[$i] = "0";
+                    //   $itemP2[$i] = 0;
                     // }
 
                     if(!$found){
@@ -133,10 +133,10 @@ class MonthPayedController extends Controller
                         );
                         $counter2++;
                     }else{
-                        if($itemP[$i]){
+                        if($itemP[$i]!=Null){
                           $found->total = $itemP[$i];
                         }
-                        if($itemP2[$i]){
+                        if($itemP2[$i]!=Null){
                           $found->given = $itemP2[$i];
                         }
                         $found->update();
