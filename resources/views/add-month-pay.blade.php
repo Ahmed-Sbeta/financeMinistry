@@ -107,14 +107,14 @@
                                                                     <input type="hidden" name="door_id[]" >
                                                                 {{-- @endif --}}
 
-                                                                @if(!$payeds->where('item_id', $item->id)->first()->given)
+                                                                @if(!$payeds->where('item_id', $item->id)->first()->given )
                                                                     <input id="fullname" style="direction: rtl; margin-top: 6px;" name="price2[]" type="number" min="0" step="0.01" class="form-control border border-success" placeholder="المبلغ المفوض به">
                                                                 @else
                                                                     <p for="fullname" style="padding-top: 10px;"> المفوض به <span style="color: green;">{{number_format($payeds->where('item_id', $item->id)->first()->given)}}</span> </p>
                                                                     <input type="hidden" name="price2[]">
                                                                 @endif
 
-                                                                @if(!$payeds->where('item_id', $item->id)->first()->total)
+                                                                @if(!$payeds->where('item_id', $item->id)->first()->total )
                                                                     <input id="fullname" style="direction: rtl; margin-top: 5px;" name="price[]" type="number" min="0" step="0.01" class="form-control border border-danger" placeholder="المصروفات الفعلية">
                                                                 @else
                                                                     <p for="fullname" class="mt-3"> المصروفة <span style="color: red;">{{number_format($payeds->where('item_id', $item->id)->first()->total)}}</span> </p>

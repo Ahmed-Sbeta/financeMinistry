@@ -233,9 +233,9 @@
                                                 <div class="text-muted">
                                                     <div class="mb-4">
 
-                                                        <p style="color:#b91d47" >اجمالي المصروفات</p>
+                                                        <p style="color:#b91d47" >اجمالي المصروفات الفعلية</p>
                                                         <h4 class="pb-3">{{number_format($total)}} د,ل</h4>
-                                                        <p style="color:#00aba9">اجمالي المعطيات</p>
+                                                        <p style="color:#00aba9">اجمالي المبالغ المفوض بها</p>
                                                         <h4>{{number_format($total2)}} د,ل</h4>
 
                                                         {{-- <div><span class="badge badge-soft-success font-size-12 me-1"> + 0.2% </span> From previous period</div> --}}
