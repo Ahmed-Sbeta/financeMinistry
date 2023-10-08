@@ -258,6 +258,19 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="bx bx-calendar"></i><span class="badge rounded-pill bg-success float-end">New</span>
+                                    <span key="t-dashboards" style="font-size: 130%">الــبــنــود</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                     <li><a href="{{route('items.show',[1])}}" key="t-full-calendar">البــاب الأول</a></li>
+                                     <li><a href="{{route('items.show',[2])}}" key="t-full-calendar">البــاب الــثــاني</a></li>
+                                     <li><a href="{{route('items.show',[3])}}" key="t-full-calendar">البــاب الــثــالــث</a></li>
+                                     <li><a href="{{route('items.show',[4])}}" key="t-full-calendar">البــاب الــرابــع</a></li>
+                                     <li><a href="{{route('items.show',[5])}}" key="t-full-calendar">البــاب الــخــامــس</a></li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="{{route('reports.index')}}" class="waves-effect">
                                     <i class="bx bx-receipt"></i>
                                     <span class="badge rounded-pill bg-info float-end"></span>

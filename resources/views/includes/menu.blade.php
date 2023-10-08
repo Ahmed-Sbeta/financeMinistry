@@ -176,12 +176,16 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="{{route('reports.index')}}" class="waves-effect">
-                                    <i class="bx bx-receipt"></i>
-                                    <span class="badge rounded-pill bg-info float-end"></span>
-                                    <span key="t-file-manager " style="font-size: 130%">تـقــاريــر</span>
+                                <a href="javascript: void(0);" class="waves-effect">
+                                    <i class="bx bx-calendar"></i>
+                                    <span key="t-dashboards" style="font-size: 130%">تــقاريــر</span>
                                 </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                     <li><a href="{{route('reports.index')}}" key="t-full-calendar">تـقاريــر بالأرصدة</a></li>
+                                     <li><a href="{{route('DisissionReport')}}" key="t-full-calendar"> تقـاريــر القـرارات</a></li>
+                                </ul>
                             </li>
+                            
                             @endif
 
                             <li class="menu-title" key="t-apps">الإدارة</li>

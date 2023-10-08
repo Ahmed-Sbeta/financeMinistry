@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('ministries/store/{id}', [MinistrieController::class, 'store'])->name('ministries.store');
     Route::resource('ministries', MinistrieController::class)->except(['create','store']);
     Route::get('/searchMinistry/{id}', [MinistrieController::class, 'search'])->name('searchministry');
-
+    Route::get('/Dicission_report',[MinistrieController::class,'Dis_report'])->name('DisissionReport');
 
     Route::resource('reports', ReportController::class)->except(['store']);
     Route::get('search/reports', [ReportController::class, 'store'])->name('searchReports');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Decisions;
 use File;
 use App\Models\Ministrie;
 use Illuminate\Http\Request;
@@ -128,8 +129,9 @@ class MinistrieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function Dis_report()
     {
-        //
+        $decisions = Decisions::paginate(20);
+        return view('UnderM',compact('decisions'));
     }
 }
