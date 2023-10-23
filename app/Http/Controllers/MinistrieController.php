@@ -132,6 +132,6 @@ class MinistrieController extends Controller
     public function Dis_report()
     {
         $decisions = Decisions::paginate(20);
-        return view('UnderM',compact('decisions'));
+        return view('Dis_report');
     }
 }

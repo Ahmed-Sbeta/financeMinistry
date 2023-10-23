@@ -34,11 +34,7 @@
 
         <!-- Begin page -->
         <div id="layout-wrapper">
-
-
             @include('includes.menu')
-
-
             <!-- ============================================================== -->
             <!-- Start right Content here -->
             <!-- ============================================================== -->
@@ -47,32 +43,32 @@
                 <div class="page-content">
                     <div class="container-fluid">
                         <!-- start page title -->
-                        <form action="{{route('searchReports')}}" method="get" class="pb-4">
+                        <form action="{{route('DecisionsReports')}}" method="get" class="pb-4">
                              @csrf
                                <div class="row">
                                <div class="col-4 ">
                                     <label for="to">رقم القرار</label>
-                                    <input type="number" min="1900" value=""  class="form-control" name="year" required oninvalid="this.setCustomValidity('الرجاء ادخال السنة ')" oninput="this.setCustomValidity('')">
+                                    <input type="text" class="form-control" name="Dis_number" oninvalid="this.setCustomValidity('الرجاء ادخال رقم القرار ')" oninput="this.setCustomValidity('')">
                                 </div>
                                 <div class="col-4 ">
                                     <label for="to">عنوان القرار</label>
-                                    <input type="number" min="1900" value=""  class="form-control" name="year" required oninvalid="this.setCustomValidity('الرجاء ادخال السنة ')" oninput="this.setCustomValidity('')">
+                                    <input type="text" class="form-control" name="Dis_title" oninvalid="this.setCustomValidity('الرجاء ادخال عنوان القرار ')" oninput="this.setCustomValidity('')">
                                 </div>
                                 <div class="col-4 ">
                                     <label for="to">نتائج اللجنة</label>
-                                    <input type="number" min="1900" value=""  class="form-control" name="year" required oninvalid="this.setCustomValidity('الرجاء ادخال السنة ')" oninput="this.setCustomValidity('')">
+                                    <input type="text" class="form-control" name="Dis_res" oninvalid="this.setCustomValidity('الرجاء ادخال نتائج اللجنه ')" oninput="this.setCustomValidity('')">
                                 </div>
                                    <div class="col-4 ">
                                     <label for="to">الســنــة</label>
-                                    <input type="number" min="1900" value=""  class="form-control" name="year" required oninvalid="this.setCustomValidity('الرجاء ادخال السنة ')" oninput="this.setCustomValidity('')">
+                                    <input type="number" min="1900" value="2023"  class="form-control" name="year" oninvalid="this.setCustomValidity('الرجاء ادخال السنه ')" oninput="this.setCustomValidity('')">
                                 </div>
                                    <div class="col-4 pb-2">
                                     <label for="">مــن شــهــر</label>
-                                    <input type="number" min="1" max="12" value="" class="form-control" name="from" required oninvalid="this.setCustomValidity('الرجاء ادخال من الشعر المعين')" oninput="this.setCustomValidity('')">
+                                    <input type="number" min="1" max="12" value="1" class="form-control" name="from" oninvalid="this.setCustomValidity('الرجاء ادخال من الشعر المعين')" oninput="this.setCustomValidity('')">
                                 </div>
                                 <div class="col-4 ">
                                     <label for="to">الي شــهــر</label>
-                                    <input type="number" min="1" max="12" value="" class="form-control" name="to" required oninvalid="this.setCustomValidity('الرجاء ادخال إلي الشهر المعين')" oninput="this.setCustomValidity('')">
+                                    <input type="number" min="1" max="12" value="12" class="form-control" name="to" oninvalid="this.setCustomValidity('الرجاء ادخال إلي الشهر المعين')" oninput="this.setCustomValidity('')">
                                 </div>
 
                                </div>
@@ -95,36 +91,15 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                       
-                                        <div class="row mb-2">
-                                            <div class="col-sm-9">
-                                            <form action="{{url('/searchDecisions/')}}" method="get" class="p-3">
-                                                  @csrf
-                                                  <div class="form-group m-0">
-                                                      <div class="input-group">
-                                                          <input type="text" class="form-control" name="number" placeholder="البحث عن رقم قرار" aria-label="Recipient's username" oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
-                                                          <div class="input-group-append me-3">
-                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
-                                                          </div>
-                                                          <input type="text" class="form-control" name="title" placeholder="البحث عن عنوان قرار" aria-label="Recipient's username" oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
-                                                          <div class="input-group-append me-3">
-                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
-                                                          </div>
-                                                          <input type="text" class="form-control" name="date" placeholder="البحث عن تاريخ قرار" aria-label="Recipient's username" oninvalid="this.setCustomValidity('الرجاء ادخال اسم')" oninput="this.setCustomValidity('')">
-                                                          <div class="input-group-append">
-                                                              <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                              </form>
-                                            </div>
-                                            
+                                        <div class="text-end">    
+                                        <a href="#" onclick="exportData('xlsx',{{json_encode('كل القرارا ت ')}})" type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i class="mdi mdi-file me-1"></i> تــصديــر</a>
+                                        </div>
+                                        <div class="row mb-2">                            
                                             @include('includes.messages')
-
                                         </div>
 
                                         <div class="table-responsive">
-                                            <table class="table align-middle table-nowrap table-check">
+                                            <table class="table align-middle table-nowrap table-check" id="tab1">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th style="width: 20px;" class="align-middle">
@@ -134,13 +109,13 @@
                                                         <th class="align-middle">عـنـوان الـقـرار</th>
                                                         <th class="align-middle">تــاريــخ الــقــرار</th>
                                                         <th class="align-middle">جــهـة صــادرة</th>
-                                                        <th class="align-middle"></th>
                                                         <th class="align-middle">جــهـة مـسـتـلـمـة</th>
+                                                        <th class="align-middle">نتائج اللجنة </th>
                                                         <th class="align-middle">مــلــف</th>
-                                                        <th class="align-middle">تـعـديـل \ مـسـح</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                @isset($decisions)
                                                   @foreach($decisions as $decision)
                                                     <tr>
                                                         <td>
@@ -156,10 +131,12 @@
                                                         <td>
                                                             {{$decision->issuer1->name}}
                                                         </td>
-                                                        <td>
-                                                        </td>
+                                                        
                                                         <td>
                                                             {{$decision->receiver}}
+                                                        </td>
+                                                        <td>
+                                                            {{$decision->results}}
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
@@ -167,28 +144,19 @@
                                                               تــحــمــيــل مــلــف
                                                             </a>
                                                         </td>
-                                                        @if(auth()->user()->role_id == 1)
-                                                        <td>
-                                                            <div class="d-flex gap-3">
-                                                                <a href="{{route('decisions.edit',[$decision->id])}}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                                <form method="post" action="{{ route('decisions.destroy',[$decision->id]) }}">
-                                                                    <!-- here the '1' is the id of the post which you want to delete -->
-                                                                    {{ csrf_field() }}
-                                                                    {{ method_field('DELETE') }}
-                                                                    <button href="#" style="border: none; background: none;" type="submit" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></button>
-                                                                </form>                                                            </div>
-                                                        </td>
-                                                        @endif
+                                                        
                                                     </tr>
                                                     @endforeach
+                                                    @endisset
 
                                                 </tbody>
                                             </table>
                                         </div>
                                         <ul class="pagination pagination-rounded justify-content-center mb-2">
+                                            @isset($decisions)
                                             {{ $decisions->links('pagination::bootstrap-4') }}
+                                            @endisset
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
@@ -198,89 +166,7 @@
                 </div>
                 <!-- End Page-content -->
 
-                <!-- Modal -->
-                <div class="modal fade orderdetailsModal" tabindex="-1" role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="orderdetailsModalLabel">Order Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="table-responsive">
-                                    <table class="table align-middle table-nowrap">
-                                        <thead>
-                                            <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Product Name</th>
-                                            <th scope="col">Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div>
-                                                        <img src="assets/images/product/img-7.png" alt="" class="avatar-sm">
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <div>
-                                                        <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
-                                                        <p class="text-muted mb-0">$ 225 x 1</p>
-                                                    </div>
-                                                </td>
-                                                <td>$ 255</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">
-                                                    <div>
-                                                        <img src="assets/images/product/img-4.png" alt="" class="avatar-sm">
-                                                    </div>
-                                                </th>
-                                                <td>
-                                                    <div>
-                                                        <h5 class="text-truncate font-size-14">Hoodie (Blue)</h5>
-                                                        <p class="text-muted mb-0">$ 145 x 1</p>
-                                                    </div>
-                                                </td>
-                                                <td>$ 145</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Sub Total:</h6>
-                                                </td>
-                                                <td>
-                                                    $ 400
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Shipping:</h6>
-                                                </td>
-                                                <td>
-                                                    Free
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <h6 class="m-0 text-right">Total:</h6>
-                                                </td>
-                                                <td>
-                                                    $ 400
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end modal -->
+                
 
 
                 @include('includes.footer')
@@ -307,6 +193,16 @@
 
         <!-- App js -->
         <script src="{{asset('assets/js/app.js')}}"></script>
+        <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 
+        <script>
+    function exportData(type,name)
+    {
+      var data = document.getElementById('tab1');
+      var file = XLSX.utils.table_to_book(data, {sheet: "المنتجات"});
+      XLSX.write(file, { bookType: type, bookSST: true, type: 'base64' });
+      XLSX.writeFile(file, name+'.'+ type);
+    }
+</script>
     </body>
 </html>

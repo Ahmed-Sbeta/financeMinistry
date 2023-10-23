@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('reports', ReportController::class)->except(['store']);
     Route::get('search/reports', [ReportController::class, 'store'])->name('searchReports');
+    Route::get('search/Decisions', [ReportController::class, 'DecisionsReports'])->name('DecisionsReports');
 
     Route::get('items/create/{id}', [ItemController::class, 'create'])->name('items.create');
     Route::post('items/store/{id}', [ItemController::class, 'store'])->name('items.store');

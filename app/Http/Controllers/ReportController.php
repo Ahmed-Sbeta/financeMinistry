@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Decisions;
 use Illuminate\Http\Request;
 use App\Models\Ministrie;
 use App\Models\Items;
@@ -245,8 +246,27 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function DecisionsReports()
     {
-        //
+        $number = request('Dis_number');
+        $title = request('Dis_title');
+        $resault = request('Dis_res');
+        $year = request('year');
+        $from = request('from');
+        $to = request('to');
+        
+
+        $decisions= Decisions::where('created_at', '>=', $year.'-01-01 00:00:00')
+        ->where('created_at', '<=', $year.'-12-31 23:59:59')
+        ->where(function($query) {
+            $query->where('decisionsNumber', 'like', '%'.request('Dis_number').'%')
+                  ->Where('title', 'like', '%'.request('Dis_title').'%')
+                  ->Where('results', 'like', '%'.request('Dis_res').'%');
+        })
+        ->paginate(20);
+
+        return view('Dis_report',compact('decisions'));
     }
+
+
 }
