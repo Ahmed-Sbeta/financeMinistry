@@ -101,7 +101,7 @@ class ReportController extends Controller
             $items2 = NULL;
             $items1 = Items::whereIn('door',$doors)->get();
           }
-            $ministries2 = Ministrie::with('payeds')->where("parent_id",'=',NULL)->get();
+            $ministries2 = Ministrie::where("parent_id",'=',NULL)->get();
             $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->get();
 
             if(request('to')){
@@ -272,13 +272,13 @@ class ReportController extends Controller
         $year =  now()->format('Y');
       
       $ministries = Ministrie::with('payeds')->where('parent_id','!=',NULL)->get();
-      $payeds = MonthllyPayed::all();
-      return view('welcome',compact('ministries','payeds','year'));
+
+      return view('welcome',compact('ministries','year'));
     }
 
     public function searchspentvsgiven(){
       $ministries = Ministrie::with('payeds')->where('parent_id','!=',NULL)->where('name', 'LIKE', '%' . request('name') . '%')->get();
-      $payeds = MonthllyPayed::all();
+
       if(request('year')){
         $year = request('year');
       }else{

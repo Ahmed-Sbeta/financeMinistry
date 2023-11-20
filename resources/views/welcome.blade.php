@@ -113,170 +113,171 @@
                                                     <td class="col-3">
                                                         {{$ministry->parent->name}}/{{$ministry->name}}
                                                     </td>
-                                                    @isset($payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                    @if($payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                    @isset($ministry->payeds()->where('date', $year.'-'.'01'.'-'.'01')->first()->total)
+                                                    @if($ministry->payeds()->where('date', $year.'-'.'01'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'01'.'-'.'01')->sum('given'))
                                                     <td class="bg-danger">
-                                                        مصروفات : {{number_format($payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                        مخصصات : {{number_format($payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                    
+                                                        مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'01'.'-'.'01')->sum('total'))}} <br>
+                                                        مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'01'.'-'.'01')->sum('given'))}}
                                                     </td>
                                                     @else
-                                                    <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                        مخصصات : {{number_format($payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                    <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'01'.'-'.'01')->sum('total'))}} <br>
+                                                        مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'01'.'-'.'01')->sum('given'))}}
                                                     </td>
                                                     @endif
                                                     @else
                                                     <td>0</td>
                                                     @endisset
-                                                    @isset($payeds->where('date', $year.'-'.'02'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                    <@if($payeds->where('date', $year.'-'.'02'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'02'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                    @isset($ministry->payeds()->where('date', $year.'-'.'02'.'-'.'01')->first()->total)
+                                                    <@if($ministry->payeds()->where('date', $year.'-'.'02'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'02'.'-'.'01')->sum('given'))
                                                         <td class="bg-danger">
-                                                            مصروفات : {{number_format($payeds->where('date', $year.'-'.'02'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'02'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'02'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'02'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @else
-                                                        <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'02'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'02'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                        <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'02'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'02'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @endif
                                                         @else
                                                         <td>0</td>
                                                         @endisset
-                                                        @isset($payeds->where('date', $year.'-'.'03'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                        @if($payeds->where('date', $year.'-'.'03'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'03'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                        @isset($ministry->payeds()->where('date', $year.'-'.'03'.'-'.'01')->first()->total)
+                                                        @if($ministry->payeds()->where('date', $year.'-'.'03'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'03'.'-'.'01')->sum('given'))
                                                         <td class="bg-danger">
-                                                            مصروفات : {{number_format($payeds->where('date', $year.'-'.'03'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'03'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'03'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'03'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @else
-                                                        <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'03'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'03'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                        <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'03'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'03'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @endif
                                                         @else
                                                         <td>0</td>
                                                         @endisset
-                                                        @isset($payeds->where('date', $year.'-'.'04'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                        @if($payeds->where('date', $year.'-'.'01'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'04'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                        @isset($ministry->payeds()->where('date', $year.'-'.'04'.'-'.'01')->first()->total)
+                                                        @if($ministry->payeds()->where('date', $year.'-'.'04'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'04'.'-'.'01')->sum('given'))
                                                         <td class="bg-danger">
-                                                            مصروفات : {{number_format($payeds->where('date', $year.'-'.'04'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'04'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'04'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'04'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @else
-                                                        <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'04'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'04'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                        <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'04'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'04'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @endif
                                                         @else
                                                         <td>0</td>
                                                         @endisset
 
-                                                        @isset($payeds->where('date', $year.'-'.'05'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                        @if($payeds->where('date', $year.'-'.'05'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'05'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                        @isset($ministry->payeds()->where('date', $year.'-'.'05'.'-'.'01')->first()->total)
+                                                        @if($ministry->payeds()->where('date', $year.'-'.'05'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'05'.'-'.'01')->sum('given'))
                                                         <td class="bg-danger">
-                                                            مصروفات : {{number_format($payeds->where('date', $year.'-'.'05'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'05'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'05'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'05'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @else
-                                                        <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'05'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                            مخصصات : {{number_format($payeds->where('date', $year.'-'.'05'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                        <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'05'.'-'.'01')->sum('total'))}} <br>
+                                                            مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'05'.'-'.'01')->sum('given'))}}
                                                         </td>
                                                         @endif
                                                         @else
                                                         <td>0</td>
                                                         @endisset
-                                                        @isset($payeds->where('date', $year.'-'.'06'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                        <@if($payeds->where('date', $year.'-'.'06'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'06'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                        @isset($ministry->payeds()->where('date', $year.'-'.'06'.'-'.'01')->first()->total)
+                                                        <@if($ministry->payeds()->where('date', $year.'-'.'06'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'06'.'-'.'01')->sum('given'))
                                                             <td class="bg-danger">
-                                                                مصروفات : {{number_format($payeds->where('date', $year.'-'.'06'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'06'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                                مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'06'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'06'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @else
-                                                            <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'06'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'06'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'06'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'06'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @endif
                                                             @else
                                                             <td>0</td>
                                                             @endisset
-                                                            @isset($payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                            @if($payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                            @isset($ministry->payeds()->where('date', $year.'-'.'07'.'-'.'01')->first()->total)
+                                                            @if($payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $ministry->payeds()->where('date', $year.'-'.'07'.'-'.'01')->sum('given'))
                                                             <td class="bg-danger">
-                                                                مصروفات : {{number_format($payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                                مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'07'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'07'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @else
-                                                            <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'07'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'07'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'07'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @endif
                                                             @else
                                                             <td>0</td>
                                                             @endisset
-                                                            @isset($payeds->where('date', $year.'-'.'08'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                            @if($payeds->where('date', $year.'-'.'08'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'08'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                            @isset($ministry->payeds()->where('date', $year.'-'.'08'.'-'.'01')->first()->total)
+                                                            @if($ministry->payeds()->where('date', $year.'-'.'08'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'08'.'-'.'01')->sum('given'))
                                                             <td class="bg-danger">
-                                                                مصروفات : {{number_format($payeds->where('date', $year.'-'.'08'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'08'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                                مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'08'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'08'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @else
-                                                            <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'08'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'08'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'08'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'08'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @endif
                                                             @else
                                                             <td>0</td>
                                                             @endisset
-                                                            @isset($payeds->where('date', $year.'-'.'09'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                            @if($payeds->where('date', $year.'-'.'09'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'09'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                            @isset($ministry->payeds()->where('date', $year.'-'.'09'.'-'.'01')->first()->total)
+                                                            @if($ministry->payeds()->where('date', $year.'-'.'09'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'09'.'-'.'01')->sum('given'))
                                                             <td class="bg-danger">
-                                                                مصروفات : {{number_format($payeds->where('date', $year.'-'.'09'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'09'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                                مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'09'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'09'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @else
-                                                            <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'09'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'09'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'09'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'09'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @endif
                                                             @else
                                                             <td>0</td>
                                                             @endisset
-                                                            @isset($payeds->where('date', $year.'-'.'10'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                            @if($payeds->where('date', $year.'-'.'10'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'10'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                            @isset($ministry->payeds()->where('date', $year.'-'.'10'.'-'.'01')->first()->total)
+                                                            @if($ministry->payeds()->where('date', $year.'-'.'10'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'10'.'-'.'01')->sum('given'))
                                                             <td class="bg-danger">
-                                                                مصروفات : {{number_format($payeds->where('date', $year.'-'.'10'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'10'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                                مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'10'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'10'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @else
-                                                            <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'10'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'10'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'10'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'10'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @endif
                                                             @else
                                                             <td>0</td>
                                                             @endisset
-                                                            @isset($payeds->where('date', $year.'-'.'11'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                            @if($payeds->where('date', $year.'-'.'11'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'11'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                            @isset($ministry->payeds()->where('date', $year.'-'.'11'.'-'.'01')->first()->total)
+                                                            @if($ministry->payeds()->where('date', $year.'-'.'11'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'11'.'-'.'01')->sum('given'))
                                                             <td class="bg-danger">
-                                                                مصروفات : {{number_format($payeds->where('date', $year.'-'.'11'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'11'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                                مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'11'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'11'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @else
-                                                            <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'11'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'11'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'11'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'11'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @endif
                                                             @else
                                                             <td>0</td>
                                                             @endisset
-                                                            @isset($payeds->where('date', $year.'-'.'12'.'-'.'01')->where('ministry_id',$ministry->id)->first()->total)
-                                                            @if($payeds->where('date', $year.'-'.'12'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total') > $payeds->where('date', $year.'-'.'12'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))
+                                                            @isset($ministry->payeds()->where('date', $year.'-'.'12'.'-'.'01')->first()->total)
+                                                            @if($ministry->payeds()->where('date', $year.'-'.'12'.'-'.'01')->sum('total') > $ministry->payeds()->where('date', $year.'-'.'12'.'-'.'01')->sum('given'))
                                                             <td class="bg-danger">
-                                                                مصروفات : {{number_format($payeds->where('date', $year.'-'.'12'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'12'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                                مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'12'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'12'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @else
-                                                            <td>مصروفات : {{number_format($payeds->where('date', $year.'-'.'12'.'-'.'01')->where('ministry_id',$ministry->id)->sum('total'))}} <br>
-                                                                مخصصات : {{number_format($payeds->where('date', $year.'-'.'12'.'-'.'01')->where('ministry_id',$ministry->id)->sum('given'))}}
+                                                            <td>مصروفات : {{number_format($ministry->payeds()->where('date', $year.'-'.'12'.'-'.'01')->sum('total'))}} <br>
+                                                                مخصصات : {{number_format($ministry->payeds()->where('date', $year.'-'.'12'.'-'.'01')->sum('given'))}}
                                                             </td>
                                                             @endif
                                                             @else

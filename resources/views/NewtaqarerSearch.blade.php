@@ -95,7 +95,7 @@
             <!-- ============================================================== -->
             <div class="main-content">
                 <?php ini_set('max_execution_time', 300); 
-                      ini_set('memory_limit', '512M');?>
+                      ini_set('memory_limit', '1024M');?>
 
               <div class="page-content">
                    <div class="container-fluid">
