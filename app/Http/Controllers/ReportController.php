@@ -269,9 +269,11 @@ class ReportController extends Controller
 
     public function givenVSspent(){
       
+        $year =  now()->format('Y');
+      
       $ministries = Ministrie::with('payeds')->where('parent_id','!=',NULL)->get();
       $payeds = MonthllyPayed::all();
-      return view('welcome',compact('ministries','payeds'));
+      return view('welcome',compact('ministries','payeds','year'));
     }
 
     public function searchspentvsgiven(){
