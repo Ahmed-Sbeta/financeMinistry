@@ -102,7 +102,7 @@ class ReportController extends Controller
             $items1 = Items::whereIn('door',$doors)->get();
           }
             $ministries2 = Ministrie::with('payeds')->where("parent_id",'=',NULL)->get();
-            $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->where('id','<',400)->get();
+            $Allministries = Ministrie::with('payeds')->where("parent_id",'!=',NULL)->get();
 
             if(request('to')){
               if(request('from') < 10){
@@ -260,13 +260,35 @@ class ReportController extends Controller
         ->where('created_at', '<=', $year.'-12-31 23:59:59')
         ->where(function($query) {
             $query->where('decisionsNumber', 'like', '%'.request('Dis_number').'%')
-                  ->Where('title', 'like', '%'.request('Dis_title').'%')
-                  ->Where('results', 'like', '%'.request('Dis_res').'%');
+                  ->Where('title', 'like', '%'.request('Dis_title').'%');
         })
         ->paginate(20);
-
         return view('Dis_report',compact('decisions'));
     }
 
 
+    public function givenVSspent(){
+      
+      $ministries = Ministrie::with('payeds')->where('parent_id','!=',NULL)->get();
+      $payeds = MonthllyPayed::all();
+      return view('welcome',compact('ministries','payeds'));
+    }
+
+    public function searchspentvsgiven(){
+      $ministries = Ministrie::with('payeds')->where('parent_id','!=',NULL)->where('name', 'LIKE', '%' . request('name') . '%')->get();
+      $payeds = MonthllyPayed::all();
+      if(request('year')){
+        $year = request('year');
+      }else{
+        $year =  now()->format('Y');
+      }
+      return view('welcome',compact('ministries','payeds','year'));
+    }
+
+    public function moreDetails($id){
+      $ministry = Ministrie::with('payeds')->find($id);
+      $year = now();
+      return view('more_details_report',compact('ministry','year'));
+    }
 }
+

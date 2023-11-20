@@ -61,4 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('monthPayeds/backTo/{date}/{id}/{num}', [MonthPayedController::class, 'backTo'])->name('monthPayeds.backTo');
     Route::resource('monthPayeds', MonthPayedController::class)->except(['create','store','edit']);
 
+    Route::get('GivenVsspentReport',[ReportController::class,'givenVSspent'])->name('GivenVSspentReport');
+    Route::get('moreDetails/{id}',[ReportController::class,'moreDetails'])->name('moreDetailsReport');
+    Route::get('searchspentvsgiven',[ReportController::class,'searchspentvsgiven'])->name('searchspentvsgiven');
 });

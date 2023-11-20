@@ -182,6 +182,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                      <li><a href="{{route('reports.index')}}" key="t-full-calendar">تـقاريــر بالأرصدة</a></li>
+                                     <li><a href="{{route('GivenVSspentReport')}}" key="t-full-calendar"> تقـاريــر المصروفات و المخصصات</a></li>
                                      <li><a href="{{route('DisissionReport')}}" key="t-full-calendar"> تقـاريــر القـرارات</a></li>
                                 </ul>
                             </li>

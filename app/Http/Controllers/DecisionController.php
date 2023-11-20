@@ -75,8 +75,10 @@ class DecisionController extends Controller
         $decision->subject = request('subject');
         $decision->description = request('description');
         $decision->results = request('results');
-        $newFilePath = request()->file('file')->store('public');
-        $decision->file = str_replace('public', '', $newFilePath);
+        if(request('file')){
+         $newFilePath = request()->file('file')->store('public');
+         $decision->file = str_replace('public', '', $newFilePath);
+        }
         $decision->save();
         return redirect()->route('decisions.index')->with('success','تـم إضـــافــة قــرار بــنــجــاح');
 

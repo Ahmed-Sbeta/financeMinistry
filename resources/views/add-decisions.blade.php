@@ -144,7 +144,7 @@
                                         <h4 class="card-title mb-3">الـــقــرار</h4>
 
                                             <div class="fallback">
-                                                <input name="file" type="file" multiple  required oninvalid="this.setCustomValidity('الرجاء تحميل ملف القرار')" oninput="this.setCustomValidity('')"/>
+                                                <input name="file" type="file" multiple required oninvalid="this.setCustomValidity('الرجاء تحميل ملف القرار')" oninput="this.setCustomValidity('')"/>
                                             </div>
 
                                             <div class="dz-message needsclick">

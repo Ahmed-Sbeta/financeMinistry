@@ -23,11 +23,11 @@ class HomeController extends Controller
         $items = Items::count();
         $decisions = Decisions::take(10)->get();
         $users = User::where('role_id', '!=', 1)->count();
-        $door1 = MonthllyPayed::where('door_id', 1)->sum('total');
-        $door2 = MonthllyPayed::where('door_id', 2)->sum('total');
-        $door3 = MonthllyPayed::where('door_id', 3)->sum('total');
-        $door4 = MonthllyPayed::where('door_id', 4)->sum('total');
-        $door5 = MonthllyPayed::where('door_id', 5)->sum('total');
+        $door1 = MonthllyPayed::where('door_id', 1)->whereYear('date', date('Y'))->sum('total');
+        $door2 = MonthllyPayed::where('door_id', 2)->whereYear('date', date('Y'))->sum('total');
+        $door3 = MonthllyPayed::where('door_id', 3)->whereYear('date', date('Y'))->sum('total');
+        $door4 = MonthllyPayed::where('door_id', 4)->whereYear('date', date('Y'))->sum('total');
+        $door5 = MonthllyPayed::where('door_id', 5)->whereYear('date', date('Y'))->sum('total');
         // $total = [];
         // $total2 = [];
         // $total[0] = MonthllyPayed::whereYear('created_at', date('Y'))->sum('total');
